@@ -7,13 +7,13 @@ import {
     ModelBuilder,
     DataObject,
     Absolute3DPosition,
-    PropagationModel,
     MultilaterationNode
 } from '@openhps/core';
 import {
     RelativeRSSI,
     RFTransmitterObject,
     RelativeRSSIProcessing,
+    PropagationModel,
 } from '../../../src';
 import { CSVDataSource } from '@openhps/csv';
 import { EvaluationDataFrame } from '../../mock/EvaluationDataFrame';

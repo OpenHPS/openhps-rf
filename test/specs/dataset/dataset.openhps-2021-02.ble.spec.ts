@@ -4,7 +4,6 @@ import {
     CallbackSinkNode,
     ModelBuilder,
     DataObject,
-    PropagationModel,
     MultilaterationNode,
     Absolute2DPosition,
     Orientation,
@@ -15,6 +14,7 @@ import {
     RelativeRSSI,
     RFTransmitterObject,
     RelativeRSSIProcessing,
+    PropagationModel,
 } from '../../../src';
 import { CSVDataSource } from '@openhps/csv';
 import { expect } from "chai";
