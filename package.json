@@ -47,17 +47,20 @@
     "openhps",
     "rf"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "ml-levenberg-marquardt": "^3.1.1"
+  },
   "peerDependencies": {
-    "@openhps/core": ">=0.3.2-alpha.3",
+    "@openhps/core": ">=0.3.9-alpha.2",
     "reflect-metadata": ">=0.1.13"
   },
   "devDependencies": {
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
-    "@openhps/core": ">=0.3.2-alpha.3",
+    "@openhps/core": "^0.3.9-alpha.2",
     "@openhps/csv": "0.1.0-alpha.61",
     "@types/chai": "^4.2.22",
+    "@types/ml-levenberg-marquardt": "^3.1.0",
     "@types/mocha": "^9.0.0",
     "@types/node": "^16.9.6",
     "@typescript-eslint/eslint-plugin": "^4.31.2",
