@@ -35,8 +35,7 @@ export class RelativeRSSIProcessing<InOut extends DataFrame> extends RelativePos
     }
 
     protected convertToDistance(rel: RelativeRSSI, transmitter: RFTransmitterObject): RelativeDistance {
-        const environmentFactor =
-            this.options.environmentFactor || transmitter.environmentFactor || this.options.defaultEnvironmentFactor;
+        const environmentFactor = this.options.environmentFactor || transmitter.environmentFactor;
         const calibratedRSSI = transmitter.calibratedRSSI || this.options.defaultCalibratedRSSI;
         switch (this.options.propagationModel) {
             case PropagationModel.LOG_DISTANCE:
@@ -65,12 +64,6 @@ export interface RelativeRSSIOptions extends ObjectProcessingNodeOptions {
      * Environment factor to override transmitter environment factor
      */
     environmentFactor?: number;
-    /**
-     * Default environment factor
-     *
-     * @default undefined
-     */
-    defaultEnvironmentFactor?: number;
     /**
      * Default calibrated RSSI value at 1 meter distance
      *
