@@ -29,7 +29,7 @@ export class RFTransmitterObject extends DataObject implements RFObject {
      */
     @SerializableMember()
     public get calibratedRSSI(): number {
-        return this._calibratedRSSI;
+        return this._calibratedRSSI ?? this.txPower;
     }
 
     /**

@@ -1,4 +1,4 @@
-import { SerializableMember, SerializableObject } from '@openhps/core';
+import { SerializableArrayMember, SerializableMember, SerializableObject } from '@openhps/core';
 import { RFTransmitterObject } from './RFTransmitterObject';
 
 @SerializableObject()
@@ -8,4 +8,10 @@ export class BLEObject extends RFTransmitterObject {
 
     @SerializableMember()
     mtu: number;
+
+    /**
+     * Service UUIDs
+     */
+    @SerializableArrayMember(String)
+    services: string[];
 }
