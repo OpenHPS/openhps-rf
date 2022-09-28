@@ -2,7 +2,14 @@ import { SerializableMember, SerializableObject } from '@openhps/core';
 
 @SerializableObject()
 export class BLEUUID {
-    @SerializableMember()
+    @SerializableMember({
+        serializer: (buffer: Buffer) => {
+            return buffer.toString('hex');
+        },
+        deserializer: (bufferString: string) => {
+            return Buffer.from(bufferString, 'hex');
+        }
+    })
     private _raw: Buffer;
 
     private constructor(buffer?: Buffer) {
