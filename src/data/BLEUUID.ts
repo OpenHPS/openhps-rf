@@ -8,7 +8,7 @@ export class BLEUUID {
         },
         deserializer: (bufferString: string) => {
             return Buffer.from(bufferString, 'hex');
-        }
+        },
     })
     private _raw: Buffer;
 
