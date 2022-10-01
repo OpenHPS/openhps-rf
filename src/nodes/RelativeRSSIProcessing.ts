@@ -5,6 +5,7 @@ import {
     RelativeDistance,
     RelativePositionProcessing,
     ObjectProcessingNodeOptions,
+    LengthUnit,
 } from '@openhps/core';
 
 /**
@@ -45,6 +46,7 @@ export class RelativeRSSIProcessing<InOut extends DataFrame> extends RelativePos
                         Math.pow(10, (calibratedRSSI - rel.rssi) / (10 * environmentFactor)),
                     );
                     relDistance.timestamp = rel.timestamp;
+                    relDistance.distanceUnit = LengthUnit.CENTIMETER;
                     return relDistance;
                 } else {
                     return undefined;
