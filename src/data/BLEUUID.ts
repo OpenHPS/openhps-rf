@@ -1,5 +1,10 @@
 import { SerializableMember, SerializableObject } from '@openhps/core';
 
+const BLE_UUID_PADDING = '-0000-1000-8000-00805f9b34fb';
+
+/**
+ * BLE UUID
+ */
 @SerializableObject()
 export class BLEUUID {
     @SerializableMember({
@@ -24,8 +29,11 @@ export class BLEUUID {
         return new this(
             Buffer.from(
                 uuid
-                    .replace('-', '')
+                    .replace(BLE_UUID_PADDING, '')
+                    .replace(/^0000/, '')
+                    .replace(/-/g, '')
                     .split(/(..)/)
+                    .reverse()
                     .filter((a) => {
                         return a !== '';
                     })
@@ -45,7 +53,6 @@ export class BLEUUID {
         for (const [, value] of this._raw.entries()) {
             bytes.unshift(value);
         }
-        const padding = '-0000-1000-8000-00805f9b34fb';
         if (this._raw.length === 2) {
             // 16 bit
             return (
@@ -55,11 +62,17 @@ export class BLEUUID {
                         return byte.toString(16).padStart(2, '0');
                     })
                     .join('') +
-                padding
+                BLE_UUID_PADDING
             );
         } else if (this._raw.length === 4) {
             // 32 bit
-            return padding;
+            return (
+                bytes
+                    .map((byte: number) => {
+                        return byte.toString(16).padStart(2, '0');
+                    })
+                    .join('') + BLE_UUID_PADDING
+            );
         } else {
             // 128 bit
             const hex = bytes.map((byte: number) => {

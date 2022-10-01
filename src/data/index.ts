@@ -6,3 +6,4 @@ export * from './position';
 export * from './BLEObject';
 export * from './RFDataFrame';
 export * from './BLEUUID';
+export * from './MACAddress';
