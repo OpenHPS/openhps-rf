@@ -9,9 +9,15 @@ const BLE_UUID_PADDING = '-0000-1000-8000-00805f9b34fb';
 export class BLEUUID {
     @SerializableMember({
         serializer: (buffer: Buffer) => {
+            if (!buffer) {
+                return undefined;
+            }
             return buffer.toString('hex');
         },
         deserializer: (bufferString: string) => {
+            if (!bufferString) {
+                return undefined;
+            }
             return Buffer.from(bufferString, 'hex');
         },
     })

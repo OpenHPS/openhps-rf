@@ -6,9 +6,15 @@ import { RFTransmitterObject } from './RFTransmitterObject';
 export class BLEObject extends RFTransmitterObject {
     @SerializableMember({
         serializer: (buffer: Buffer) => {
+            if (!buffer) {
+                return undefined;
+            }
             return buffer.toString('hex');
         },
         deserializer: (bufferString: string) => {
+            if (!bufferString) {
+                return undefined;
+            }
             return Buffer.from(bufferString, 'hex');
         },
     })
