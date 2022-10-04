@@ -4,8 +4,15 @@ import { RFTransmitterObject } from './RFTransmitterObject';
 
 @SerializableObject()
 export class BLEObject extends RFTransmitterObject {
-    @SerializableMember()
-    manufacturerId?: string;
+    @SerializableMember({
+        serializer: (buffer: Buffer) => {
+            return buffer.toString('hex');
+        },
+        deserializer: (bufferString: string) => {
+            return Buffer.from(bufferString, 'hex');
+        },
+    })
+    manufacturerData?: Buffer;
 
     @SerializableMember()
     mtu?: number;
