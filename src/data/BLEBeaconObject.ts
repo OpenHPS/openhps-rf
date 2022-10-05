@@ -1,6 +1,7 @@
 import { SerializableMember, SerializableObject } from '@openhps/core';
 import { BLEUUID } from './BLEUUID';
 import { BLEObject } from './BLEObject';
+import { MACAddress } from './MACAddress';
 
 /**
  * BLE iBeacon Data Object
@@ -18,30 +19,36 @@ export class BLEBeaconObject extends BLEObject {
     @SerializableMember()
     proximityUUID: BLEUUID;
 
-    static isValid(payload: Buffer): boolean {
+    constructor(address?: MACAddress, manufacturerData?: Buffer) {
+        super(address);
+        if (manufacturerData) {
+            this.parseManufacturerData(manufacturerData);
+        }
+    }
+
+    static isValid(manufacturerData: Buffer): boolean {
         if (
-            payload.length === 30 &&
-            payload.subarray(0, 9).equals(Buffer.from([0x02, 0x01, 0x06, 0x1a, 0xff, 0x4c, 0x00, 0x02, 0x15]))
+            manufacturerData.length === 25 &&
+            manufacturerData.subarray(0, 4).equals(Buffer.from([0x4c, 0x00, 0x02, 0x15]))
         ) {
             return true;
         }
         return false;
     }
 
-    parseAdvertisement(payload: Buffer): this {
-        if (BLEBeaconObject.isValid(payload)) {
-            this.txPower = payload.readInt8(29);
-            this.major = payload.readUint16BE(25);
-            this.minor = payload.readUint16BE(27);
-            this.proximityUUID = BLEUUID.fromBuffer(payload.subarray(9, 25));
-            this.uid = Buffer.concat([
-                this.proximityUUID.toBuffer(),
-                Buffer.from([this.major]),
-                Buffer.from([this.minor]),
-            ]).toString('hex');
+    parseManufacturerData(manufacturerData: Buffer): this {
+        if (!BLEBeaconObject.isValid(manufacturerData)) {
             return this;
-        } else {
-            throw new Error(`Payload is not a valid iBeacon packet!`);
         }
+        this.proximityUUID = BLEUUID.fromBuffer(manufacturerData.subarray(4, 20));
+        this.major = manufacturerData.readUint16BE(20);
+        this.minor = manufacturerData.readUint16BE(22);
+        this.txPower = manufacturerData.readInt8(24);
+        this.uid = Buffer.concat([
+            this.proximityUUID.toBuffer(),
+            Buffer.from([this.major]),
+            Buffer.from([this.minor]),
+        ]).toString('hex');
+        return this;
     }
 }

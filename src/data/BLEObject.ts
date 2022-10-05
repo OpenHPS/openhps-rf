@@ -123,6 +123,7 @@ export class BLEObject extends RFTransmitterObject {
                         break;
                     // See CSS Part A 1.4 Manufacturer Specific Data
                     case AdvertisementType.BLE_AD_MANUFACTURER_SPECIFIC_TYPE:
+                        this.parseManufacturerData(payload.subarray(i, i + length));
                         break;
                     case AdvertisementType.BLE_AD_TYPE_SERVICE_DATA:
                         break;
@@ -136,6 +137,11 @@ export class BLEObject extends RFTransmitterObject {
                 i += length - 1;
             }
         }
+        return this;
+    }
+
+    parseManufacturerData(manufacturerData: Buffer): this {
+        this.manufacturerData = manufacturerData;
         return this;
     }
 }
