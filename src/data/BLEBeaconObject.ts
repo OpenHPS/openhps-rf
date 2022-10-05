@@ -6,6 +6,8 @@ export class BLEBeaconObject extends BLEObject {
     constructor(manufacturerData?: Buffer) {
         super(undefined);
         this.manufacturerData = manufacturerData;
-        this.setUID(this.manufacturerData.toString('hex'));
+        if (this.manufacturerData) {
+            this.setUID(this.manufacturerData.toString('hex'));
+        }
     }
 }

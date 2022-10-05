@@ -46,7 +46,7 @@ export class BLEObject extends RFTransmitterObject {
     services?: BLEUUID[];
 
     constructor(address?: MACAddress) {
-        super(address.toString());
+        super(address ? address.toString() : undefined);
         this.address = address;
         if (!this.knownAddresses.includes(address)) {
             this.knownAddresses.push(address);
