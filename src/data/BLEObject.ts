@@ -1,5 +1,6 @@
 import { SerializableArrayMember, SerializableMember, SerializableObject } from '@openhps/core';
 import { BLEUUID } from './BLEUUID';
+import { MACAddress } from './MACAddress';
 import { RFTransmitterObject } from './RFTransmitterObject';
 
 @SerializableObject()
@@ -20,6 +21,18 @@ export class BLEObject extends RFTransmitterObject {
     })
     manufacturerData?: Buffer;
 
+    /**
+     * Current mac address
+     */
+    @SerializableMember()
+    address: MACAddress;
+
+    /**
+     * A list of known mac address
+     */
+    @SerializableArrayMember(MACAddress)
+    knownAddresses: MACAddress[] = [];
+
     @SerializableMember()
     mtu?: number;
 
@@ -31,4 +44,12 @@ export class BLEObject extends RFTransmitterObject {
      */
     @SerializableArrayMember(BLEUUID)
     services?: BLEUUID[];
+
+    constructor(address?: MACAddress) {
+        super(address.toString());
+        this.address = address;
+        if (!this.knownAddresses.includes(address)) {
+            this.knownAddresses.push(address);
+        }
+    }
 }

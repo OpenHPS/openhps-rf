@@ -7,14 +7,14 @@ export class RFTransmitterObject extends DataObject implements RFObject {
      * RF transmission power
      */
     @SerializableMember()
-    public txPower: number;
+    txPower: number;
     private _calibratedRSSI: number;
     private _environmentFactor: number;
     /**
      * RF transmission frequency
      */
     @SerializableMember()
-    public frequency: number;
+    frequency: number;
 
     constructor(uid?: string, calibratedRSSI?: number, txPower?: number) {
         super(uid);
@@ -28,7 +28,7 @@ export class RFTransmitterObject extends DataObject implements RFObject {
      * @returns {number} Calibrated RSSI
      */
     @SerializableMember()
-    public get calibratedRSSI(): number {
+    get calibratedRSSI(): number {
         return this._calibratedRSSI ?? this.txPower;
     }
 
@@ -37,7 +37,7 @@ export class RFTransmitterObject extends DataObject implements RFObject {
      *
      * @param {number} calibratedRSSI Calibrated RSSI > 0
      */
-    public set calibratedRSSI(calibratedRSSI: number) {
+    set calibratedRSSI(calibratedRSSI: number) {
         if (calibratedRSSI > 0) {
             throw new RangeError('Calibrated RSSI should be a number below 0');
         }
@@ -51,11 +51,11 @@ export class RFTransmitterObject extends DataObject implements RFObject {
      * @returns {number} environment factor
      */
     @SerializableMember()
-    public get environmentFactor(): number {
+    get environmentFactor(): number {
         return this._environmentFactor;
     }
 
-    public set environmentFactor(environmentFactor: number) {
+    set environmentFactor(environmentFactor: number) {
         this._environmentFactor = environmentFactor;
     }
 }
