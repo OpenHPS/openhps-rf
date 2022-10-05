@@ -7,5 +7,4 @@ export * from './BLEObject';
 export * from './RFDataFrame';
 export * from './BLEUUID';
 export * from './MACAddress';
-export * from './iBeaconObject';
 export * from './BLEBeaconObject';

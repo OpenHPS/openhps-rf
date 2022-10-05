@@ -39,7 +39,6 @@ export class BLEUUID {
                     .replace(/^0000/, '')
                     .replace(/-/g, '')
                     .split(/(..)/)
-                    .reverse()
                     .filter((a) => {
                         return a !== '';
                     })
@@ -57,7 +56,7 @@ export class BLEUUID {
     toString(): string {
         const bytes = [];
         for (const [, value] of this._raw.entries()) {
-            bytes.unshift(value);
+            bytes.push(value);
         }
         if (this._raw.length === 2) {
             // 16 bit
