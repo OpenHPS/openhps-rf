@@ -1,4 +1,5 @@
 import { SerializableArrayMember, SerializableMember, SerializableObject } from '@openhps/core';
+import { BLEService } from './BLEService';
 import { BLEUUID } from './BLEUUID';
 import { MACAddress } from './MACAddress';
 import { RFTransmitterObject } from './RFTransmitterObject';
@@ -79,10 +80,10 @@ export class BLEObject extends RFTransmitterObject {
     appearance?: number;
 
     /**
-     * Service UUIDs
+     * Services
      */
-    @SerializableArrayMember(BLEUUID)
-    services?: BLEUUID[];
+    @SerializableArrayMember(BLEService)
+    services?: BLEService[];
 
     constructor(address?: MACAddress) {
         super(address ? address.toString() : undefined);
@@ -92,7 +93,7 @@ export class BLEObject extends RFTransmitterObject {
         }
     }
 
-    parseAdvertisement(payload: Buffer): this {
+    parseScanData(payload: Buffer): this {
         for (let i = 0; i < payload.length; i++) {
             let length = payload.readUint8(i++); // Data length
             if (length != 0) {
@@ -126,6 +127,8 @@ export class BLEObject extends RFTransmitterObject {
                         this.parseManufacturerData(payload.subarray(i, i + length));
                         break;
                     case AdvertisementType.BLE_AD_TYPE_SERVICE_DATA:
+                        let uuid: BLEUUID = BLEUUID.fromBuffer(payload.subarray(i, i + 2));
+                        this.services.push(new BLEService(uuid, payload.subarray(i + 2, i + 2 + length)));
                         break;
                     case AdvertisementType.BLE_AD_TYPE_32SERVICE_DATA:
                         break;

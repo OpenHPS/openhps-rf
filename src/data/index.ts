@@ -8,3 +8,6 @@ export * from './RFDataFrame';
 export * from './BLEUUID';
 export * from './MACAddress';
 export * from './BLEBeaconObject';
+export * from './BLEAltBeacon';
+export * from './BLEiBeacon';
+export * from './BLEService';

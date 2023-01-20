@@ -12,7 +12,7 @@ describe('BLEObject', () => {
         0x73, 0x02, 0x0A, 0xF6]);
 
     const object = new BLEObject();
-    object.parseAdvertisement(payload);
+    object.parseScanData(payload);
 
     console.log(object);
 });
