@@ -126,10 +126,11 @@ export class BLEObject extends RFTransmitterObject {
                     case AdvertisementType.BLE_AD_MANUFACTURER_SPECIFIC_TYPE:
                         this.parseManufacturerData(payload.subarray(i, i + length));
                         break;
-                    case AdvertisementType.BLE_AD_TYPE_SERVICE_DATA:
-                        let uuid: BLEUUID = BLEUUID.fromBuffer(payload.subarray(i, i + 2));
+                    case AdvertisementType.BLE_AD_TYPE_SERVICE_DATA: {
+                        const uuid: BLEUUID = BLEUUID.fromBuffer(payload.subarray(i, i + 2));
                         this.services.push(new BLEService(uuid, payload.subarray(i + 2, i + 2 + length)));
                         break;
+                    }
                     case AdvertisementType.BLE_AD_TYPE_32SERVICE_DATA:
                         break;
                     case AdvertisementType.BLE_AD_TYPE_128SERVICE_DATA:

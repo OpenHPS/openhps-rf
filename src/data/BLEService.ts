@@ -1,5 +1,5 @@
-import { SerializableMember, SerializableObject } from "@openhps/core";
-import { BLEUUID } from "./BLEUUID";
+import { SerializableMember, SerializableObject } from '@openhps/core';
+import { BLEUUID } from './BLEUUID';
 
 @SerializableObject()
 export class BLEService {

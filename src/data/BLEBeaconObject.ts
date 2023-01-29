@@ -1,4 +1,4 @@
-/// <reference types="@openhps/rdf" /> 
+/// <reference types="@openhps/rdf" />
 
 import { SerializableObject } from '@openhps/core';
 import { BLEObject } from './BLEObject';
@@ -9,7 +9,6 @@ import { MACAddress } from './MACAddress';
  */
 @SerializableObject()
 export abstract class BLEBeaconObject extends BLEObject {
-
     constructor(address?: MACAddress, scanData?: Buffer) {
         super(address);
         if (scanData) {

@@ -1,6 +1,6 @@
-import { SerializableMember, SerializableObject } from "@openhps/core";
-import { BLEUUID } from "./BLEUUID";
-import { BLEBeaconObject } from "./BLEBeaconObject";
+import { SerializableMember, SerializableObject } from '@openhps/core';
+import { BLEUUID } from './BLEUUID';
+import { BLEBeaconObject } from './BLEBeaconObject';
 
 @SerializableObject()
 export class BLEAltBeacon extends BLEBeaconObject {
@@ -8,10 +8,12 @@ export class BLEAltBeacon extends BLEBeaconObject {
     proximityUUID: BLEUUID;
 
     parseManufacturerData(manufacturerData: Buffer): this {
-        if (!(
-            manufacturerData.length === 26 &&
-            manufacturerData.subarray(0, 4).equals(Buffer.from([0x4c, 0x00, 0x02, 0x15]))
-        )) {
+        if (
+            !(
+                manufacturerData.length === 26 &&
+                manufacturerData.subarray(0, 4).equals(Buffer.from([0x4c, 0x00, 0x02, 0x15]))
+            )
+        ) {
             return this;
         }
         this.proximityUUID = BLEUUID.fromBuffer(manufacturerData.subarray(4, 20));
@@ -25,5 +27,4 @@ export class BLEAltBeacon extends BLEBeaconObject {
         ]).toString('hex');
         return this;
     }
-
 }
