@@ -1,28 +1,25 @@
 import { SerializableMember, SerializableObject } from '@openhps/core';
+import { fromHexString, toHexString } from '../utils/BufferUtils';
 
 @SerializableObject()
 export class MACAddress {
     @SerializableMember({
-        serializer: (buffer: Buffer) => {
-            return buffer.toString('hex');
-        },
-        deserializer: (bufferString: string) => {
-            return Buffer.from(bufferString, 'hex');
-        },
+        serializer: toHexString,
+        deserializer: fromHexString,
     })
-    private _raw: Buffer;
+    private _raw: Uint8Array;
 
-    private constructor(buffer?: Buffer) {
+    private constructor(buffer?: Uint8Array) {
         this._raw = buffer;
     }
 
-    static fromBuffer(buffer: Buffer): MACAddress {
+    static fromBuffer(buffer: Uint8Array): MACAddress {
         return new this(buffer);
     }
 
     static fromString(address: string): MACAddress {
         return new this(
-            Buffer.from(
+            Uint8Array.from(
                 address
                     .replace(/:/g, '')
                     .split(/(..)/)
@@ -36,7 +33,7 @@ export class MACAddress {
         );
     }
 
-    toBuffer(): Buffer {
+    toBuffer(): Uint8Array {
         return this._raw;
     }
 

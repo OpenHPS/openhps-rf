@@ -1,4 +1,5 @@
 import { SerializableMember, SerializableObject } from '@openhps/core';
+import { fromHexString, toHexString } from '../utils/BufferUtils';
 import { BLEUUID } from './BLEUUID';
 
 @SerializableObject()
@@ -7,22 +8,12 @@ export class BLEService {
     uuid: BLEUUID;
 
     @SerializableMember({
-        serializer: (buffer: Buffer) => {
-            if (!buffer) {
-                return undefined;
-            }
-            return buffer.toString('hex');
-        },
-        deserializer: (bufferString: string) => {
-            if (!bufferString) {
-                return undefined;
-            }
-            return Buffer.from(bufferString, 'hex');
-        },
+        serializer: toHexString,
+        deserializer: fromHexString,
     })
-    data: Buffer;
+    data: Uint8Array;
 
-    constructor(uuid?: BLEUUID, data?: Buffer) {
+    constructor(uuid?: BLEUUID, data?: Uint8Array) {
         this.uuid = uuid;
         this.data = data;
     }

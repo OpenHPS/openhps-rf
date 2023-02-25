@@ -1,4 +1,5 @@
 import { SerializableMember, SerializableObject } from '@openhps/core';
+import { fromHexString, toHexString } from '../utils/BufferUtils';
 
 const BLE_UUID_PADDING = '-0000-1000-8000-00805f9b34fb';
 
@@ -8,32 +9,22 @@ const BLE_UUID_PADDING = '-0000-1000-8000-00805f9b34fb';
 @SerializableObject()
 export class BLEUUID {
     @SerializableMember({
-        serializer: (buffer: Buffer) => {
-            if (!buffer) {
-                return undefined;
-            }
-            return buffer.toString('hex');
-        },
-        deserializer: (bufferString: string) => {
-            if (!bufferString) {
-                return undefined;
-            }
-            return Buffer.from(bufferString, 'hex');
-        },
+        serializer: toHexString,
+        deserializer: fromHexString,
     })
-    private _raw: Buffer;
+    private _raw: Uint8Array;
 
-    private constructor(buffer?: Buffer) {
+    private constructor(buffer?: Uint8Array) {
         this._raw = buffer;
     }
 
-    static fromBuffer(buffer: Buffer): BLEUUID {
+    static fromBuffer(buffer: Uint8Array): BLEUUID {
         return new this(buffer);
     }
 
     static fromString(uuid: string): BLEUUID {
         return new this(
-            Buffer.from(
+            Uint8Array.from(
                 uuid
                     .replace(BLE_UUID_PADDING, '')
                     .replace(/^0000/, '')
@@ -49,7 +40,7 @@ export class BLEUUID {
         );
     }
 
-    toBuffer(): Buffer {
+    toBuffer(): Uint8Array {
         return this._raw;
     }
 
@@ -58,7 +49,7 @@ export class BLEUUID {
         for (const [, value] of this._raw.entries()) {
             bytes.push(value);
         }
-        if (this._raw.length === 2) {
+        if (this._raw.byteLength === 2) {
             // 16 bit
             return (
                 '0000' +
@@ -69,7 +60,7 @@ export class BLEUUID {
                     .join('') +
                 BLE_UUID_PADDING
             );
-        } else if (this._raw.length === 4) {
+        } else if (this._raw.byteLength === 4) {
             // 32 bit
             return (
                 bytes

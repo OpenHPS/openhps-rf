@@ -1,17 +1,22 @@
 import { SerializableMember, SerializableObject } from '@openhps/core';
 import { BLEUUID } from './BLEUUID';
 import { BLEBeaconObject } from './BLEBeaconObject';
+import { arrayBuffersAreEqual } from '../utils/BufferUtils';
 
 @SerializableObject()
 export class BLEAltBeacon extends BLEBeaconObject {
     @SerializableMember()
     proximityUUID: BLEUUID;
 
-    parseManufacturerData(manufacturerData: Buffer): this {
+    parseManufacturerData(manufacturerData: Uint8Array): this {
+        const view = new DataView(manufacturerData.buffer, 0);
         if (
             !(
-                manufacturerData.length === 26 &&
-                manufacturerData.subarray(0, 4).equals(Buffer.from([0x4c, 0x00, 0x02, 0x15]))
+                manufacturerData.byteLength === 26 &&
+                arrayBuffersAreEqual(
+                    manufacturerData.buffer.slice(0, 4),
+                    Uint8Array.from([0x4c, 0x00, 0x02, 0x15]).buffer,
+                )
             )
         ) {
             return this;
@@ -19,7 +24,7 @@ export class BLEAltBeacon extends BLEBeaconObject {
         this.proximityUUID = BLEUUID.fromBuffer(manufacturerData.subarray(4, 20));
         // this.major = manufacturerData.readUint16BE(20);
         // this.minor = manufacturerData.readUint16BE(22);
-        this.txPower = manufacturerData.readInt8(24);
+        this.txPower = view.getInt8(24);
         this.uid = Buffer.concat([
             this.proximityUUID.toBuffer(),
             // Buffer.from([this.major]),

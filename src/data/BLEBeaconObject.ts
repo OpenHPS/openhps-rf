@@ -9,7 +9,7 @@ import { MACAddress } from './MACAddress';
  */
 @SerializableObject()
 export abstract class BLEBeaconObject extends BLEObject {
-    constructor(address?: MACAddress, scanData?: Buffer) {
+    constructor(address?: MACAddress, scanData?: Uint8Array) {
         super(address);
         if (scanData) {
             this.parseScanData(scanData);

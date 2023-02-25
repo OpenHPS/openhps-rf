@@ -73,9 +73,6 @@ const bundle = (env, module) => ({
   },
   devtool: 'source-map',
   plugins: [
-    new webpack.ProvidePlugin({
-        Buffer: [require.resolve("buffer/"), "Buffer"],
-    }),
   ],
   ...defaultConfig(env)
 });

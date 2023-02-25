@@ -1,4 +1,5 @@
 import { SerializableArrayMember, SerializableMember, SerializableObject } from '@openhps/core';
+import { fromHexString, toHexString } from '../utils/BufferUtils';
 import { BLEService } from './BLEService';
 import { BLEUUID } from './BLEUUID';
 import { MACAddress } from './MACAddress';
@@ -46,20 +47,10 @@ enum AdvertisementType {
 @SerializableObject()
 export class BLEObject extends RFTransmitterObject {
     @SerializableMember({
-        serializer: (buffer: Buffer) => {
-            if (!buffer) {
-                return undefined;
-            }
-            return buffer.toString('hex');
-        },
-        deserializer: (bufferString: string) => {
-            if (!bufferString) {
-                return undefined;
-            }
-            return Buffer.from(bufferString, 'hex');
-        },
+        serializer: toHexString,
+        deserializer: fromHexString,
     })
-    manufacturerData?: Buffer;
+    manufacturerData?: Uint8Array;
 
     /**
      * Current mac address
@@ -93,21 +84,22 @@ export class BLEObject extends RFTransmitterObject {
         }
     }
 
-    parseScanData(payload: Buffer): this {
-        for (let i = 0; i < payload.length; i++) {
-            let length = payload.readUint8(i++); // Data length
+    parseScanData(payload: Uint8Array): this {
+        const view = new DataView(payload.buffer, 0);
+        for (let i = 0; i < payload.byteLength; i++) {
+            let length = view.getUint8(i++); // Data length
             if (length != 0) {
-                const ad_type = payload.readUint8(i++); // Data type
+                const ad_type = view.getUint8(i++); // Data type
                 length--;
                 switch (ad_type) {
                     case AdvertisementType.BLE_AD_TYPE_NAME_CMPL:
-                        this.displayName = payload.subarray(i, i + length).toString('utf-8');
+                        this.displayName = new TextDecoder().decode(payload.buffer.slice(i, i + length));
                         break;
                     case AdvertisementType.BLE_AD_TYPE_TX_PWR:
-                        this.txPower = payload.readInt8(i);
+                        this.txPower = view.getInt8(i);
                         break;
                     case AdvertisementType.BLE_AD_TYPE_APPEARANCE:
-                        this.appearance = payload.readUint16BE(i);
+                        this.appearance = view.getUint16(i, false);
                         break;
                     case AdvertisementType.BLE_AD_TYPE_FLAG:
                         // TODO
@@ -124,11 +116,13 @@ export class BLEObject extends RFTransmitterObject {
                         break;
                     // See CSS Part A 1.4 Manufacturer Specific Data
                     case AdvertisementType.BLE_AD_MANUFACTURER_SPECIFIC_TYPE:
-                        this.parseManufacturerData(payload.subarray(i, i + length));
+                        this.parseManufacturerData(new Uint8Array(payload.buffer.slice(i, i + length)));
                         break;
                     case AdvertisementType.BLE_AD_TYPE_SERVICE_DATA: {
-                        const uuid: BLEUUID = BLEUUID.fromBuffer(payload.subarray(i, i + 2));
-                        this.services.push(new BLEService(uuid, payload.subarray(i + 2, i + 2 + length)));
+                        const uuid: BLEUUID = BLEUUID.fromBuffer(new Uint8Array(payload.buffer.slice(i, i + 2)));
+                        this.services.push(
+                            new BLEService(uuid, new Uint8Array(payload.buffer.slice(i + 2, i + 2 + length))),
+                        );
                         break;
                     }
                     case AdvertisementType.BLE_AD_TYPE_32SERVICE_DATA:
@@ -144,7 +138,7 @@ export class BLEObject extends RFTransmitterObject {
         return this;
     }
 
-    parseManufacturerData(manufacturerData: Buffer): this {
+    parseManufacturerData(manufacturerData: Uint8Array): this {
         this.manufacturerData = manufacturerData;
         return this;
     }
