@@ -1,6 +1,7 @@
 const TerserPlugin = require('terser-webpack-plugin');
 const path = require('path');
 const pkg = require("./package.json");
+const webpack = require('webpack');
 
 const LIBRARY_NAME = pkg.name;
 const PROJECT_NAME = pkg.name.replace("@", "").replace("/", "-");
@@ -71,7 +72,11 @@ const bundle = (env, module) => ({
     }
   },
   devtool: 'source-map',
-  plugins: [],
+  plugins: [
+    new webpack.ProvidePlugin({
+        Buffer: [require.resolve("buffer/"), "Buffer"],
+    }),
+  ],
   ...defaultConfig(env)
 });
 
