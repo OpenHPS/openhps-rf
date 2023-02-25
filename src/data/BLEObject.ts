@@ -76,11 +76,15 @@ export class BLEObject extends RFTransmitterObject {
     @SerializableArrayMember(BLEService)
     services?: BLEService[];
 
-    constructor(address?: MACAddress) {
-        super(address ? address.toString() : undefined);
-        this.address = address;
-        if (!this.knownAddresses.includes(address)) {
-            this.knownAddresses.push(address);
+    constructor(address?: string);
+    constructor(address?: MACAddress);
+    constructor(address?: MACAddress | string) {
+        super(address ? (address instanceof MACAddress ? address.toString() : address) : undefined);
+        if (address instanceof MACAddress) {
+            this.address = address;
+            if (!this.knownAddresses.includes(address) && address !== undefined) {
+                this.knownAddresses.push(address);
+            }
         }
     }
 
