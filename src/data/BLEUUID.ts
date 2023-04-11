@@ -1,5 +1,4 @@
 import { SerializableMember, SerializableObject } from '@openhps/core';
-import { fromHexString, toHexString } from '../utils/BufferUtils';
 
 const BLE_UUID_PADDING = '-0000-1000-8000-00805f9b34fb';
 
@@ -8,10 +7,7 @@ const BLE_UUID_PADDING = '-0000-1000-8000-00805f9b34fb';
  */
 @SerializableObject()
 export class BLEUUID {
-    @SerializableMember({
-        serializer: toHexString,
-        deserializer: fromHexString,
-    })
+    @SerializableMember()
     private _raw: Uint8Array;
 
     private constructor(buffer?: Uint8Array) {

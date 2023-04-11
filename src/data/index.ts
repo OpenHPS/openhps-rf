@@ -1,3 +1,11 @@
+import { DataSerializer } from '@openhps/core';
+import { fromHexString, toHexString } from '../utils/BufferUtils';
+
+DataSerializer.registerType(Uint8Array, {
+    serializer: toHexString,
+    deserializer: fromHexString,
+});
+
 export * from './RFObject';
 export * from './RFReceiverObject';
 export * from './RFTransmitterObject';

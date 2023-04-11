@@ -1,12 +1,8 @@
 import { SerializableMember, SerializableObject } from '@openhps/core';
-import { fromHexString, toHexString } from '../utils/BufferUtils';
 
 @SerializableObject()
 export class MACAddress {
-    @SerializableMember({
-        serializer: toHexString,
-        deserializer: fromHexString,
-    })
+    @SerializableMember()
     private _raw: Uint8Array;
 
     private constructor(buffer?: Uint8Array) {

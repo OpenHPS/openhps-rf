@@ -1,5 +1,4 @@
-import { SerializableArrayMember, SerializableMember, SerializableObject } from '@openhps/core';
-import { fromHexString, toHexString } from '../utils/BufferUtils';
+import { SerializableArrayMember, SerializableMapMember, SerializableMember, SerializableObject } from '@openhps/core';
 import { BLEService } from './BLEService';
 import { BLEUUID } from './BLEUUID';
 import { MACAddress } from './MACAddress';
@@ -46,11 +45,11 @@ enum AdvertisementType {
 
 @SerializableObject()
 export class BLEObject extends RFTransmitterObject {
-    @SerializableMember({
-        serializer: toHexString,
-        deserializer: fromHexString,
-    })
-    manufacturerData?: Uint8Array;
+    @SerializableMember()
+    rawAdvertisement?: Uint8Array;
+
+    @SerializableMapMember(Number, Uint8Array)
+    manufacturerData?: Map<number, Uint8Array> = new Map();
 
     /**
      * Current mac address
@@ -88,7 +87,8 @@ export class BLEObject extends RFTransmitterObject {
         }
     }
 
-    parseScanData(payload: Uint8Array): this {
+    parseAdvertisement(payload: Uint8Array): this {
+        this.rawAdvertisement = payload;
         const view = new DataView(payload.buffer, 0);
         for (let i = 0; i < payload.byteLength; i++) {
             let length = view.getUint8(i++); // Data length
@@ -143,7 +143,10 @@ export class BLEObject extends RFTransmitterObject {
     }
 
     parseManufacturerData(manufacturerData: Uint8Array): this {
-        this.manufacturerData = manufacturerData;
+        // Get the manufacturer
+        const view = new DataView(manufacturerData.buffer, 0);
+        const manufacturer = view.getInt32(0);
+        this.manufacturerData.set(manufacturer, manufacturerData);
         return this;
     }
 }

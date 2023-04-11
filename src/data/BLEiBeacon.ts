@@ -1,5 +1,3 @@
-/// <reference types="@openhps/rdf" />
-
 import { SerializableMember, SerializableObject } from '@openhps/core';
 import { BLEUUID } from './BLEUUID';
 import { MACAddress } from './MACAddress';
@@ -25,11 +23,12 @@ export class BLEiBeacon extends BLEBeaconObject {
     constructor(address?: MACAddress, scanData?: Uint8Array) {
         super(address);
         if (scanData) {
-            this.parseScanData(scanData);
+            this.parseAdvertisement(scanData);
         }
     }
 
     parseManufacturerData(manufacturerData: Uint8Array): this {
+        super.parseManufacturerData(manufacturerData);
         const view = new DataView(manufacturerData.buffer, 0);
         if (
             !(
