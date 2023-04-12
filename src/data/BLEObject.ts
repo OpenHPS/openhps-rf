@@ -87,6 +87,33 @@ export class BLEObject extends RFTransmitterObject {
         }
     }
 
+    /**
+     * Create object from advertisement data
+     *
+     * @param {Uint8Array} payload Advertisement data
+     * @returns {BLEObject} BLE Object
+     */
+    static fromAdvertisementData<T extends BLEObject>(payload: Uint8Array): T {
+        return new BLEObject().parseAdvertisement(payload) as T;
+    }
+
+    /**
+     * Parse advertisement data
+     * 
+     * @deprecated Use [parseAdvertisement] instead
+     * @param {Uint8Array} payload Advertisement data
+     * @returns {BLEObject} Instance
+     */
+    parseScanData(payload: Uint8Array): this {
+        return this.parseAdvertisement(payload);
+    }
+
+    /**
+     * Parse advertisement data
+     * 
+     * @param {Uint8Array} payload Advertisement data
+     * @returns {BLEObject} Instance
+     */
     parseAdvertisement(payload: Uint8Array): this {
         this.rawAdvertisement = payload;
         const view = new DataView(payload.buffer, 0);

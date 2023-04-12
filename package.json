@@ -61,7 +61,7 @@
     "rf"
   ],
   "dependencies": {
-    "ml-levenberg-marquardt": "^4.1.0"
+    "ml-levenberg-marquardt": "^4.1.2"
   },
   "peerDependencies": {
     "@openhps/core": ">=0.3.33",
@@ -83,7 +83,7 @@
     "eslint": "^8.38.0",
     "eslint-config-prettier": ">=8.8.0",
     "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-jsdoc": "^40.3.0",
+    "eslint-plugin-jsdoc": "^41.1.1",
     "eslint-plugin-prettier": ">=4.2.1",
     "husky": "^8.0.3",
     "mocha": "^10.2.0",
