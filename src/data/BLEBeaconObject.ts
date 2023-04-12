@@ -13,4 +13,6 @@ export abstract class BLEBeaconObject extends BLEObject {
             this.parseAdvertisement(rawAdvertisement);
         }
     }
+
+    abstract isValid(): boolean;
 }
