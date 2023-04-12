@@ -24,7 +24,7 @@
 <ul class="tsd-hierarchy">
 <li><a href="BLEBeaconObject.html" class="tsd-signature-type" data-tsd-kind="Class">BLEBeaconObject</a></li></ul></li></ul></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/d9e579f/src/data/BLEObject.ts#L47">src/data/BLEObject.ts:47</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/6cde8fa/src/data/BLEObject.ts#L48">src/data/BLEObject.ts:48</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -65,13 +65,16 @@
 <a href="BLEObject.html#getPosition" class="tsd-index-link tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>get<wbr/>Position</span></a>
 <a href="BLEObject.html#getRelativePosition" class="tsd-index-link tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>get<wbr/>Relative<wbr/>Position</span></a>
 <a href="BLEObject.html#getRelativePositions" class="tsd-index-link tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>get<wbr/>Relative<wbr/>Positions</span></a>
+<a href="BLEObject.html#getServiceByUUID" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>get<wbr/>Service<wbr/>ByUUID</span></a>
 <a href="BLEObject.html#hasRelativePosition" class="tsd-index-link tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>has<wbr/>Relative<wbr/>Position</span></a>
 <a href="BLEObject.html#parseAdvertisement" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>parse<wbr/>Advertisement</span></a>
 <a href="BLEObject.html#parseManufacturerData" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>parse<wbr/>Manufacturer<wbr/>Data</span></a>
+<a href="BLEObject.html#parseScanData" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>parse<wbr/>Scan<wbr/>Data</span></a>
 <a href="BLEObject.html#removeRelativePositions" class="tsd-index-link tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>remove<wbr/>Relative<wbr/>Positions</span></a>
 <a href="BLEObject.html#setParent" class="tsd-index-link tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>set<wbr/>Parent</span></a>
 <a href="BLEObject.html#setPosition" class="tsd-index-link tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>set<wbr/>Position</span></a>
 <a href="BLEObject.html#setUID" class="tsd-index-link tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>setUID</span></a>
+<a href="BLEObject.html#fromAdvertisementData" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>from<wbr/>Advertisement<wbr/>Data</span></a>
 </div></section></div></details></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Constructors</h2>
@@ -88,7 +91,7 @@
 <h4 class="tsd-returns-title">Returns <a href="BLEObject.html" class="tsd-signature-type" data-tsd-kind="Class">BLEObject</a></h4><aside class="tsd-sources">
 <p>Overrides <a href="RFTransmitterObject.html">RFTransmitterObject</a>.<a href="RFTransmitterObject.html#constructor">constructor</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/d9e579f/src/data/BLEObject.ts#L78">src/data/BLEObject.ts:78</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/6cde8fa/src/data/BLEObject.ts#L79">src/data/BLEObject.ts:79</a></li></ul></aside></li>
 <li class="tsd-signature tsd-anchor-link" id="constructor.new_BLEObject-1">new BLEObject<span class="tsd-signature-symbol">(</span>address<span class="tsd-signature-symbol">?: </span><a href="MACAddress.html" class="tsd-signature-type" data-tsd-kind="Class">MACAddress</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="BLEObject.html" class="tsd-signature-type" data-tsd-kind="Class">BLEObject</a><a href="#constructor.new_BLEObject-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-parameters">
@@ -99,7 +102,7 @@
 <h4 class="tsd-returns-title">Returns <a href="BLEObject.html" class="tsd-signature-type" data-tsd-kind="Class">BLEObject</a></h4><aside class="tsd-sources">
 <p>Overrides RFTransmitterObject.constructor</p>
 <ul>
-<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/d9e579f/src/data/BLEObject.ts#L79">src/data/BLEObject.ts:79</a></li></ul></aside></li></ul></section></section>
+<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/6cde8fa/src/data/BLEObject.ts#L80">src/data/BLEObject.ts:80</a></li></ul></aside></li></ul></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Properties</h2>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="address" class="tsd-anchor"></a>
@@ -108,12 +111,12 @@
 <div class="tsd-comment tsd-typography"><p>Current mac address</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/d9e579f/src/data/BLEObject.ts#L58">src/data/BLEObject.ts:58</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/6cde8fa/src/data/BLEObject.ts#L59">src/data/BLEObject.ts:59</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="appearance" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>appearance</span><a href="#appearance" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">appearance<span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/d9e579f/src/data/BLEObject.ts#L70">src/data/BLEObject.ts:70</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/6cde8fa/src/data/BLEObject.ts#L71">src/data/BLEObject.ts:71</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a id="createdTimestamp" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>created<wbr/>Timestamp</span><a href="#createdTimestamp" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">created<wbr/>Timestamp<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
@@ -137,24 +140,24 @@
 </div><aside class="tsd-sources">
 <p>Inherited from <a href="RFTransmitterObject.html">RFTransmitterObject</a>.<a href="RFTransmitterObject.html#frequency">frequency</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/d9e579f/src/data/RFTransmitterObject.ts#L17">src/data/RFTransmitterObject.ts:17</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/6cde8fa/src/data/RFTransmitterObject.ts#L17">src/data/RFTransmitterObject.ts:17</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="knownAddresses" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>known<wbr/>Addresses</span><a href="#knownAddresses" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">known<wbr/>Addresses<span class="tsd-signature-symbol">:</span> <a href="MACAddress.html" class="tsd-signature-type" data-tsd-kind="Class">MACAddress</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div>
 <div class="tsd-comment tsd-typography"><p>A list of known mac address</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/d9e579f/src/data/BLEObject.ts#L64">src/data/BLEObject.ts:64</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/6cde8fa/src/data/BLEObject.ts#L65">src/data/BLEObject.ts:65</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="manufacturerData" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>manufacturer<wbr/>Data</span><a href="#manufacturerData" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">manufacturer<wbr/>Data<span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Uint8Array</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/d9e579f/src/data/BLEObject.ts#L52">src/data/BLEObject.ts:52</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/6cde8fa/src/data/BLEObject.ts#L53">src/data/BLEObject.ts:53</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="mtu" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>mtu</span><a href="#mtu" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">mtu<span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/d9e579f/src/data/BLEObject.ts#L67">src/data/BLEObject.ts:67</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/6cde8fa/src/data/BLEObject.ts#L68">src/data/BLEObject.ts:68</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a id="parentUID" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>parentUID</span><a href="#parentUID" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">parentUID<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div><aside class="tsd-sources">
@@ -165,14 +168,14 @@
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>raw<wbr/>Advertisement</span><a href="#rawAdvertisement" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">raw<wbr/>Advertisement<span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">Uint8Array</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/d9e579f/src/data/BLEObject.ts#L49">src/data/BLEObject.ts:49</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/6cde8fa/src/data/BLEObject.ts#L50">src/data/BLEObject.ts:50</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="services" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>services</span><a href="#services" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<div class="tsd-signature">services<span class="tsd-signature-symbol">?:</span> <a href="BLEService.html" class="tsd-signature-type" data-tsd-kind="Class">BLEService</a><span class="tsd-signature-symbol">[]</span></div>
+<div class="tsd-signature">services<span class="tsd-signature-symbol">?:</span> <a href="BLEService.html" class="tsd-signature-type" data-tsd-kind="Class">BLEService</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div>
 <div class="tsd-comment tsd-typography"><p>Services</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/d9e579f/src/data/BLEObject.ts#L76">src/data/BLEObject.ts:76</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/6cde8fa/src/data/BLEObject.ts#L77">src/data/BLEObject.ts:77</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="txPower" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>tx<wbr/>Power</span><a href="#txPower" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">tx<wbr/>Power<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
@@ -180,7 +183,7 @@
 </div><aside class="tsd-sources">
 <p>Inherited from <a href="RFTransmitterObject.html">RFTransmitterObject</a>.<a href="RFTransmitterObject.html#txPower">txPower</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/d9e579f/src/data/RFTransmitterObject.ts#L10">src/data/RFTransmitterObject.ts:10</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/6cde8fa/src/data/RFTransmitterObject.ts#L10">src/data/RFTransmitterObject.ts:10</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a id="uid" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>uid</span><a href="#uid" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">uid<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
@@ -205,7 +208,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
 <p>Inherited from RFTransmitterObject.calibratedRSSI</p>
 <ul>
-<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/d9e579f/src/data/RFTransmitterObject.ts#L30">src/data/RFTransmitterObject.ts:30</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/6cde8fa/src/data/RFTransmitterObject.ts#L30">src/data/RFTransmitterObject.ts:30</a></li></ul></aside></li>
 <li class="tsd-signature" id="calibratedRSSI.calibratedRSSI-2"><span class="tsd-signature-symbol">set</span> calibratedRSSI<span class="tsd-signature-symbol">(</span>calibratedRSSI<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Set the calibrated rssi at 1 meter</p>
@@ -220,7 +223,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from RFTransmitterObject.calibratedRSSI</p>
 <ul>
-<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/d9e579f/src/data/RFTransmitterObject.ts#L40">src/data/RFTransmitterObject.ts:40</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/6cde8fa/src/data/RFTransmitterObject.ts#L40">src/data/RFTransmitterObject.ts:40</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><a id="environmentFactor" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>environment<wbr/>Factor</span><a href="#environmentFactor" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
@@ -234,7 +237,7 @@ Nodes such as [[RelativeRSSIProcessing]] can override this.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
 <p>Inherited from RFTransmitterObject.environmentFactor</p>
 <ul>
-<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/d9e579f/src/data/RFTransmitterObject.ts#L53">src/data/RFTransmitterObject.ts:53</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/6cde8fa/src/data/RFTransmitterObject.ts#L53">src/data/RFTransmitterObject.ts:53</a></li></ul></aside></li>
 <li class="tsd-signature" id="environmentFactor.environmentFactor-2"><span class="tsd-signature-symbol">set</span> environmentFactor<span class="tsd-signature-symbol">(</span>environmentFactor<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 <li class="tsd-description">
 <div class="tsd-parameters">
@@ -245,7 +248,7 @@ Nodes such as [[RelativeRSSIProcessing]] can override this.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from RFTransmitterObject.environmentFactor</p>
 <ul>
-<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/d9e579f/src/data/RFTransmitterObject.ts#L58">src/data/RFTransmitterObject.ts:58</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/6cde8fa/src/data/RFTransmitterObject.ts#L58">src/data/RFTransmitterObject.ts:58</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a id="position" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>position</span><a href="#position" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited tsd-is-external">
@@ -417,6 +420,25 @@ relative to the global reference space</p>
 <p>Inherited from <a href="RFTransmitterObject.html">RFTransmitterObject</a>.<a href="RFTransmitterObject.html#getRelativePositions">getRelativePositions</a></p>
 <ul>
 <li>Defined in node_modules/@openhps/core/dist/types/data/object/DataObject.d.ts:115</li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="getServiceByUUID" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>get<wbr/>Service<wbr/>ByUUID</span><a href="#getServiceByUUID" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-anchor-link" id="getServiceByUUID.getServiceByUUID-1">get<wbr/>Service<wbr/>ByUUID<span class="tsd-signature-symbol">(</span>uuid<span class="tsd-signature-symbol">: </span><a href="BLEUUID.html" class="tsd-signature-type" data-tsd-kind="Class">BLEUUID</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="BLEService.html" class="tsd-signature-type" data-tsd-kind="Class">BLEService</a><a href="#getServiceByUUID.getServiceByUUID-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Get service by UUID</p>
+
+<h3>Returns</h3><p>BLE Service</p>
+</div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5>uuid: <a href="BLEUUID.html" class="tsd-signature-type" data-tsd-kind="Class">BLEUUID</a></h5>
+<div class="tsd-comment tsd-typography"><p>Service UUID</p>
+</div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <a href="BLEService.html" class="tsd-signature-type" data-tsd-kind="Class">BLEService</a></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/6cde8fa/src/data/BLEObject.ts#L97">src/data/BLEObject.ts:97</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a id="hasRelativePosition" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>has<wbr/>Relative<wbr/>Position</span><a href="#hasRelativePosition" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
@@ -436,14 +458,20 @@ relative to the global reference space</p>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 <li class="tsd-signature tsd-anchor-link" id="parseAdvertisement.parseAdvertisement-1">parse<wbr/>Advertisement<span class="tsd-signature-symbol">(</span>payload<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Uint8Array</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="BLEObject.html" class="tsd-signature-type" data-tsd-kind="Class">BLEObject</a><a href="#parseAdvertisement.parseAdvertisement-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Parse advertisement data</p>
+
+<h3>Returns</h3><p>Instance</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5>payload: <span class="tsd-signature-type">Uint8Array</span></h5></li></ul></div>
+<h5>payload: <span class="tsd-signature-type">Uint8Array</span></h5>
+<div class="tsd-comment tsd-typography"><p>Advertisement data</p>
+</div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="BLEObject.html" class="tsd-signature-type" data-tsd-kind="Class">BLEObject</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/d9e579f/src/data/BLEObject.ts#L90">src/data/BLEObject.ts:90</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/6cde8fa/src/data/BLEObject.ts#L130">src/data/BLEObject.ts:130</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="parseManufacturerData" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>parse<wbr/>Manufacturer<wbr/>Data</span><a href="#parseManufacturerData" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -456,7 +484,28 @@ relative to the global reference space</p>
 <h5>manufacturerData: <span class="tsd-signature-type">Uint8Array</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="BLEObject.html" class="tsd-signature-type" data-tsd-kind="Class">BLEObject</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/d9e579f/src/data/BLEObject.ts#L145">src/data/BLEObject.ts:145</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/6cde8fa/src/data/BLEObject.ts#L197">src/data/BLEObject.ts:197</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="parseScanData" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>parse<wbr/>Scan<wbr/>Data</span><a href="#parseScanData" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-anchor-link" id="parseScanData.parseScanData-1">parse<wbr/>Scan<wbr/>Data<span class="tsd-signature-symbol">(</span>payload<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Uint8Array</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="BLEObject.html" class="tsd-signature-type" data-tsd-kind="Class">BLEObject</a><a href="#parseScanData.parseScanData-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Parse advertisement data</p>
+
+<h3>Deprecated</h3><p>Use [parseAdvertisement] instead</p>
+
+<h3>Returns</h3><p>Instance</p>
+</div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5>payload: <span class="tsd-signature-type">Uint8Array</span></h5>
+<div class="tsd-comment tsd-typography"><p>Advertisement data</p>
+</div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <a href="BLEObject.html" class="tsd-signature-type" data-tsd-kind="Class">BLEObject</a></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/6cde8fa/src/data/BLEObject.ts#L120">src/data/BLEObject.ts:120</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a id="removeRelativePositions" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>remove<wbr/>Relative<wbr/>Positions</span><a href="#removeRelativePositions" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
@@ -534,7 +583,31 @@ relative to the global reference space</p>
 <h4 class="tsd-returns-title">Returns <a href="BLEObject.html" class="tsd-signature-type" data-tsd-kind="Class">BLEObject</a></h4><aside class="tsd-sources">
 <p>Inherited from <a href="RFTransmitterObject.html">RFTransmitterObject</a>.<a href="RFTransmitterObject.html#setUID">setUID</a></p>
 <ul>
-<li>Defined in node_modules/@openhps/core/dist/types/data/object/DataObject.d.ts:86</li></ul></aside></li></ul></section></section></div>
+<li>Defined in node_modules/@openhps/core/dist/types/data/object/DataObject.d.ts:86</li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="fromAdvertisementData" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagStatic">Static</code> <span>from<wbr/>Advertisement<wbr/>Data</span><a href="#fromAdvertisementData" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-anchor-link" id="fromAdvertisementData.fromAdvertisementData-1">from<wbr/>Advertisement<wbr/>Data<span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span>payload<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Uint8Array</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><a href="#fromAdvertisementData.fromAdvertisementData-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Create object from advertisement data</p>
+
+<h3>Returns</h3><p>BLE Object</p>
+</div>
+<section class="tsd-panel tsd-type-parameters">
+<h4>Type Parameters</h4>
+<ul class="tsd-type-parameters">
+<li>
+<h4>T<span class="tsd-signature-symbol"> extends </span><a href="BLEObject.html" class="tsd-signature-type" data-tsd-kind="Class">BLEObject</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4></li></ul></section>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5>payload: <span class="tsd-signature-type">Uint8Array</span></h5>
+<div class="tsd-comment tsd-typography"><p>Advertisement data</p>
+</div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/6cde8fa/src/data/BLEObject.ts#L109">src/data/BLEObject.ts:109</a></li></ul></aside></li></ul></section></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
@@ -577,19 +650,25 @@ relative to the global reference space</p>
 <li><a href="#getPosition" class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>get<wbr/>Position</span></a></li>
 <li><a href="#getRelativePosition" class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>get<wbr/>Relative<wbr/>Position</span></a></li>
 <li><a href="#getRelativePositions" class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>get<wbr/>Relative<wbr/>Positions</span></a></li>
+<li><a href="#getServiceByUUID" class="tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>get<wbr/>Service<wbr/>ByUUID</span></a></li>
 <li><a href="#hasRelativePosition" class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>has<wbr/>Relative<wbr/>Position</span></a></li>
 <li><a href="#parseAdvertisement" class="tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>parse<wbr/>Advertisement</span></a></li>
 <li><a href="#parseManufacturerData" class="tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>parse<wbr/>Manufacturer<wbr/>Data</span></a></li>
+<li><a href="#parseScanData" class="tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>parse<wbr/>Scan<wbr/>Data</span></a></li>
 <li><a href="#removeRelativePositions" class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>remove<wbr/>Relative<wbr/>Positions</span></a></li>
 <li><a href="#setParent" class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>set<wbr/>Parent</span></a></li>
 <li><a href="#setPosition" class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>set<wbr/>Position</span></a></li>
-<li><a href="#setUID" class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>setUID</span></a></li></ul></div></details></div>
+<li><a href="#setUID" class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>setUID</span></a></li>
+<li><a href="#fromAdvertisementData" class="tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>from<wbr/>Advertisement<wbr/>Data</span></a></li></ul></div></details></div>
 <div class="site-menu">
 <nav class="tsd-navigation"><a href="../modules.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-namespace)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6" id="icon-4-path"></rect><path d="M9.33 16V7.24H10.77L13.446 14.74C13.43 14.54 13.41 14.296 13.386 14.008C13.37 13.712 13.354 13.404 13.338 13.084C13.33 12.756 13.326 12.448 13.326 12.16V7.24H14.37V16H12.93L10.266 8.5C10.282 8.692 10.298 8.936 10.314 9.232C10.33 9.52 10.342 9.828 10.35 10.156C10.366 10.476 10.374 10.784 10.374 11.08V16H9.33Z" fill="var(--color-text)" id="icon-4-text"></path></svg><span>@openhps/rf</span></a>
 <ul class="tsd-small-nested-navigation">
 <li><a href="../enums/PropagationModel.html" class="tsd-kind-enum"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-enum)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6" id="icon-8-path"></rect><path d="M9.45 16V7.24H14.49V8.224H10.518V10.936H14.07V11.908H10.518V15.016H14.49V16H9.45Z" fill="var(--color-text)" id="icon-8-text"></path></svg><span>Propagation<wbr/>Model</span></a></li>
 <li><a href="BLEAltBeacon.html" class="tsd-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-class)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6" id="icon-128-path"></rect><path d="M11.898 16.1201C11.098 16.1201 10.466 15.8961 10.002 15.4481C9.53803 15.0001 9.30603 14.3841 9.30603 13.6001V9.64012C9.30603 8.85612 9.53803 8.24012 10.002 7.79212C10.466 7.34412 11.098 7.12012 11.898 7.12012C12.682 7.12012 13.306 7.34812 13.77 7.80412C14.234 8.25212 14.466 8.86412 14.466 9.64012H13.386C13.386 9.14412 13.254 8.76412 12.99 8.50012C12.734 8.22812 12.37 8.09212 11.898 8.09212C11.426 8.09212 11.054 8.22412 10.782 8.48812C10.518 8.75212 10.386 9.13212 10.386 9.62812V13.6001C10.386 14.0961 10.518 14.4801 10.782 14.7521C11.054 15.0161 11.426 15.1481 11.898 15.1481C12.37 15.1481 12.734 15.0161 12.99 14.7521C13.254 14.4801 13.386 14.0961 13.386 13.6001H14.466C14.466 14.3761 14.234 14.9921 13.77 15.4481C13.306 15.8961 12.682 16.1201 11.898 16.1201Z" fill="var(--color-text)" id="icon-128-text"></path></svg><span>BLEAlt<wbr/>Beacon</span></a></li>
 <li><a href="BLEBeaconObject.html" class="tsd-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-128-path"></use><use href="#icon-128-text"></use></svg><span>BLEBeacon<wbr/>Object</span></a></li>
+<li><a href="BLEEddystone.html" class="tsd-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-128-path"></use><use href="#icon-128-text"></use></svg><span>BLEEddystone</span></a></li>
+<li><a href="BLEEddystoneUID.html" class="tsd-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-128-path"></use><use href="#icon-128-text"></use></svg><span>BLEEddystoneUID</span></a></li>
+<li><a href="BLEEddystoneURL.html" class="tsd-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-128-path"></use><use href="#icon-128-text"></use></svg><span>BLEEddystoneURL</span></a></li>
 <li><a href="BLEObject.html" class="current tsd-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-128-path"></use><use href="#icon-128-text"></use></svg><span>BLEObject</span></a></li>
 <li><a href="BLEService.html" class="tsd-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-128-path"></use><use href="#icon-128-text"></use></svg><span>BLEService</span></a></li>
 <li><a href="BLEUUID.html" class="tsd-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-128-path"></use><use href="#icon-128-text"></use></svg><span>BLEUUID</span></a></li>
