@@ -1,4 +1,5 @@
 import { SerializableArrayMember, SerializableMapMember, SerializableMember, SerializableObject } from '@openhps/core';
+import { arrayBuffersAreEqual } from '../utils/BufferUtils';
 import { BLEService } from './BLEService';
 import { BLEUUID } from './BLEUUID';
 import { MACAddress } from './MACAddress';
@@ -73,7 +74,7 @@ export class BLEObject extends RFTransmitterObject {
      * Services
      */
     @SerializableArrayMember(BLEService)
-    services?: BLEService[];
+    services?: BLEService[] = [];
 
     constructor(address?: string);
     constructor(address?: MACAddress);
@@ -88,6 +89,18 @@ export class BLEObject extends RFTransmitterObject {
     }
 
     /**
+     * Get service by UUID
+     *
+     * @param {BLEUUID} uuid Service UUID
+     * @returns {BLEService} BLE Service
+     */
+    getServiceByUUID(uuid: BLEUUID): BLEService {
+        return this.services.find((service) =>
+            arrayBuffersAreEqual(service.uuid.toBuffer().buffer, uuid.toBuffer().buffer),
+        );
+    }
+
+    /**
      * Create object from advertisement data
      *
      * @param {Uint8Array} payload Advertisement data
@@ -99,7 +112,7 @@ export class BLEObject extends RFTransmitterObject {
 
     /**
      * Parse advertisement data
-     * 
+     *
      * @deprecated Use [parseAdvertisement] instead
      * @param {Uint8Array} payload Advertisement data
      * @returns {BLEObject} Instance
@@ -110,7 +123,7 @@ export class BLEObject extends RFTransmitterObject {
 
     /**
      * Parse advertisement data
-     * 
+     *
      * @param {Uint8Array} payload Advertisement data
      * @returns {BLEObject} Instance
      */
@@ -137,13 +150,15 @@ export class BLEObject extends RFTransmitterObject {
                         break;
                     case AdvertisementType.BLE_AD_TYPE_16SRV_CMPL:
                     case AdvertisementType.BLE_AD_TYPE_16SRV_PART:
+                        // 16-bit service UUID
                         break;
                     case AdvertisementType.BLE_AD_TYPE_32SRV_CMPL:
                     case AdvertisementType.BLE_AD_TYPE_32SRV_PART:
+                        // 32-bit service UUID
                         break;
                     case AdvertisementType.BLE_AD_TYPE_128SRV_CMPL:
-                        break;
                     case AdvertisementType.BLE_AD_TYPE_128SRV_PART:
+                        // 128-bit service UUID
                         break;
                     // See CSS Part A 1.4 Manufacturer Specific Data
                     case AdvertisementType.BLE_AD_MANUFACTURER_SPECIFIC_TYPE:
@@ -156,10 +171,20 @@ export class BLEObject extends RFTransmitterObject {
                         );
                         break;
                     }
-                    case AdvertisementType.BLE_AD_TYPE_32SERVICE_DATA:
+                    case AdvertisementType.BLE_AD_TYPE_32SERVICE_DATA: {
+                        const uuid: BLEUUID = BLEUUID.fromBuffer(new Uint8Array(payload.buffer.slice(i, i + 4)));
+                        this.services.push(
+                            new BLEService(uuid, new Uint8Array(payload.buffer.slice(i + 4, i + 4 + length))),
+                        );
                         break;
-                    case AdvertisementType.BLE_AD_TYPE_128SERVICE_DATA:
+                    }
+                    case AdvertisementType.BLE_AD_TYPE_128SERVICE_DATA: {
+                        const uuid: BLEUUID = BLEUUID.fromBuffer(new Uint8Array(payload.buffer.slice(i, i + 16)));
+                        this.services.push(
+                            new BLEService(uuid, new Uint8Array(payload.buffer.slice(i + 16, i + 16 + length))),
+                        );
                         break;
+                    }
                     default:
                         break;
                 }

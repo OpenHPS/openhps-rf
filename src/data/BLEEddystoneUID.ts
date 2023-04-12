@@ -1,7 +1,5 @@
-import { SerializableObject } from "@openhps/core";
-import { BLEEddystone } from "./BLEEddystone";
+import { SerializableObject } from '@openhps/core';
+import { BLEEddystone } from './BLEEddystone';
 
 @SerializableObject()
-export class BLEEddystoneUID extends BLEEddystone {
-
-}
+export class BLEEddystoneUID extends BLEEddystone {}

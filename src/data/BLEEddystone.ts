@@ -1,7 +1,8 @@
 import { SerializableMember, SerializableObject } from '@openhps/core';
 import { MACAddress } from './MACAddress';
 import { BLEBeaconObject } from './BLEBeaconObject';
-import { arrayBuffersAreEqual } from '../utils/BufferUtils';
+import { BLEUUID } from './BLEUUID';
+import { BLEService } from './BLEService';
 
 @SerializableObject()
 export class BLEEddystone extends BLEBeaconObject {
@@ -16,12 +17,21 @@ export class BLEEddystone extends BLEBeaconObject {
     }
 
     isValid(): boolean {
-        return false;
+        return this.service !== undefined;
     }
 
-    parseManufacturerData(manufacturerData: Uint8Array): this {
-        super.parseManufacturerData(manufacturerData);
-        
+    parseAdvertisement(payload: Uint8Array): this {
+        super.parseAdvertisement(payload);
+        const service = this.service;
+        if (service) {
+            const view = new DataView(service.data.buffer, 0);
+            this.frame = view.getInt8(0);
+            this.txPower = view.getInt8(1);
+        }
         return this;
+    }
+
+    protected get service(): BLEService {
+        return this.getServiceByUUID(BLEUUID.fromString('AAFE'));
     }
 }

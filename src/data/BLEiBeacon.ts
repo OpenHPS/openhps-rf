@@ -28,19 +28,21 @@ export class BLEiBeacon extends BLEBeaconObject {
     }
 
     isValid(): boolean {
-        return this.proximityUUID &&
-            this.major !== undefined && 
-            this.minor !== undefined;
+        return this.proximityUUID && this.major !== undefined && this.minor !== undefined;
     }
 
     parseManufacturerData(manufacturerData: Uint8Array): this {
         super.parseManufacturerData(manufacturerData);
         const view = new DataView(manufacturerData.buffer, 0);
-        if (!(manufacturerData.byteLength === 25 &&
-            arrayBuffersAreEqual(
-                manufacturerData.buffer.slice(0, 4),
-                Uint8Array.from([0x4c, 0x00, 0x02, 0x15]).buffer,
-            ))) {
+        if (
+            !(
+                manufacturerData.byteLength === 25 &&
+                arrayBuffersAreEqual(
+                    manufacturerData.buffer.slice(0, 4),
+                    Uint8Array.from([0x4c, 0x00, 0x02, 0x15]).buffer,
+                )
+            )
+        ) {
             return this;
         }
         this.proximityUUID = BLEUUID.fromBuffer(manufacturerData.subarray(4, 20));

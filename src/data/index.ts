@@ -19,3 +19,6 @@ export * from './BLEBeaconObject';
 export * from './BLEAltBeacon';
 export * from './BLEiBeacon';
 export * from './BLEService';
+export * from './BLEEddystone';
+export * from './BLEEddystoneUID';
+export * from './BLEEddystoneURL';
