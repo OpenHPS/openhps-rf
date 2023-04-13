@@ -28,7 +28,7 @@ export class BLEiBeacon extends BLEBeaconObject {
     }
 
     isValid(): boolean {
-        return this.proximityUUID && this.major !== undefined && this.minor !== undefined;
+        return this.proximityUUID !== undefined && this.major !== undefined && this.minor !== undefined;
     }
 
     parseManufacturerData(manufacturerData: Uint8Array): this {
@@ -49,10 +49,16 @@ export class BLEiBeacon extends BLEBeaconObject {
         this.major = view.getUint16(20, false);
         this.minor = view.getUint16(22, false);
         this.txPower = view.getInt8(24);
-        this.uid = new TextDecoder().decode(this.proximityUUID.toBuffer());
-        this.uid = toHexString(
-            concatBuffer(this.proximityUUID.toBuffer(), Uint8Array.from([this.major]), Uint8Array.from([this.minor])),
-        );
+        if (this.uid === undefined) {
+            this.uid = new TextDecoder().decode(this.proximityUUID.toBuffer());
+            this.uid = toHexString(
+                concatBuffer(
+                    this.proximityUUID.toBuffer(),
+                    Uint8Array.from([this.major]),
+                    Uint8Array.from([this.minor]),
+                ),
+            );
+        }
         return this;
     }
 }

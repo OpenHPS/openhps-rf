@@ -1,15 +1,18 @@
 import { SerializableMember, SerializableObject } from '@openhps/core';
 import { BLEUUID } from './BLEUUID';
 import { BLEBeaconObject } from './BLEBeaconObject';
-import { arrayBuffersAreEqual } from '../utils/BufferUtils';
+import { arrayBuffersAreEqual, toHexString } from '../utils/BufferUtils';
 
 @SerializableObject()
 export class BLEAltBeacon extends BLEBeaconObject {
     @SerializableMember()
-    proximityUUID: BLEUUID;
+    beaconId: BLEUUID;
+
+    @SerializableMember()
+    msb: number;
 
     isValid(): boolean {
-        return this.proximityUUID !== undefined;
+        return this.beaconId !== undefined;
     }
 
     parseManufacturerData(manufacturerData: Uint8Array): this {
@@ -17,23 +20,18 @@ export class BLEAltBeacon extends BLEBeaconObject {
         if (
             !(
                 manufacturerData.byteLength === 26 &&
-                arrayBuffersAreEqual(
-                    manufacturerData.buffer.slice(0, 4),
-                    Uint8Array.from([0x4c, 0x00, 0x02, 0x15]).buffer,
-                )
+                arrayBuffersAreEqual(manufacturerData.buffer.slice(2, 4), Uint8Array.from([0xac, 0xbe]).buffer)
             )
         ) {
             return this;
         }
-        this.proximityUUID = BLEUUID.fromBuffer(manufacturerData.subarray(4, 20));
-        // this.major = manufacturerData.readUint16BE(20);
-        // this.minor = manufacturerData.readUint16BE(22);
+        this.beaconId = BLEUUID.fromBuffer(manufacturerData.subarray(4, 24));
         this.txPower = view.getInt8(24);
-        this.uid = Buffer.concat([
-            this.proximityUUID.toBuffer(),
-            // Buffer.from([this.major]),
-            // Buffer.from([this.minor]),
-        ]).toString('hex');
+        this.msb = view.getInt8(25);
+        if (this.uid === undefined) {
+            this.uid = new TextDecoder().decode(this.beaconId.toBuffer());
+            this.uid = toHexString(this.beaconId.toBuffer());
+        }
         return this;
     }
 }

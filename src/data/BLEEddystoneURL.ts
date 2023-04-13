@@ -25,7 +25,7 @@ export class BLEEddystoneURL extends BLEEddystone {
     url: string;
 
     isValid(): boolean {
-        return super.isValid() && this.frame === 0x10;
+        return super.isValid() && this.frame === 0x10 && this.url !== undefined;
     }
 
     parseAdvertisement(payload: Uint8Array): this {
@@ -37,7 +37,7 @@ export class BLEEddystoneURL extends BLEEddystone {
 
             const prefix = view.getUint8(0);
             if (prefix > BLEEddystoneURL.PREFIXES.length) {
-                throw new Error('"data" does not seem to be an encoded Eddystone URL');
+                return this;
             }
 
             this.url = BLEEddystoneURL.PREFIXES[prefix];
