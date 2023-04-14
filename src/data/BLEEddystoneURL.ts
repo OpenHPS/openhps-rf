@@ -47,6 +47,10 @@ export class BLEEddystoneURL extends BLEEddystone {
                         ? BLEEddystoneURL.SUFFIXES[view.getUint8(i)]
                         : String.fromCharCode(view.getUint8(i));
             }
+
+            if (this.uid === undefined) {
+                this.uid = this.url;
+            }
         }
         return this;
     }

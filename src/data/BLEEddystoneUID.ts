@@ -1,4 +1,5 @@
 import { SerializableMember, SerializableObject } from '@openhps/core';
+import { concatBuffer, toHexString } from '../utils/BufferUtils';
 import { BLEEddystone } from './BLEEddystone';
 import { BLEUUID } from './BLEUUID';
 
@@ -22,6 +23,10 @@ export class BLEEddystoneUID extends BLEEddystone {
         if (service) {
             this.namespaceId = BLEUUID.fromBuffer(service.data.subarray(2, 12));
             this.instanceId = BLEUUID.fromBuffer(service.data.subarray(12, 18));
+            if (this.uid === undefined) {
+                this.uid = new TextDecoder().decode(this.namespaceId.toBuffer());
+                this.uid = toHexString(concatBuffer(this.namespaceId.toBuffer(), this.instanceId.toBuffer()));
+            }
         }
         return this;
     }
