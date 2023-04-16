@@ -31,24 +31,22 @@ export class BLEiBeacon extends BLEBeaconObject {
         return this.proximityUUID !== undefined && this.major !== undefined && this.minor !== undefined;
     }
 
-    parseManufacturerData(manufacturerData: Uint8Array): this {
-        super.parseManufacturerData(manufacturerData);
+    parseManufacturerData(manufacturer: number, manufacturerData: Uint8Array): this {
+        super.parseManufacturerData(manufacturer, manufacturerData);
         const view = new DataView(manufacturerData.buffer, 0);
         if (
+            manufacturer === 0x4c00 &&
             !(
-                manufacturerData.byteLength === 25 &&
-                arrayBuffersAreEqual(
-                    manufacturerData.buffer.slice(0, 4),
-                    Uint8Array.from([0x4c, 0x00, 0x02, 0x15]).buffer,
-                )
+                manufacturerData.byteLength === 23 &&
+                arrayBuffersAreEqual(manufacturerData.buffer.slice(0, 2), Uint8Array.from([0x02, 0x15]).buffer)
             )
         ) {
             return this;
         }
-        this.proximityUUID = BLEUUID.fromBuffer(manufacturerData.subarray(4, 20));
-        this.major = view.getUint16(20, false);
-        this.minor = view.getUint16(22, false);
-        this.txPower = view.getInt8(24);
+        this.proximityUUID = BLEUUID.fromBuffer(manufacturerData.subarray(2, 18));
+        this.major = view.getUint16(18, false);
+        this.minor = view.getUint16(20, false);
+        this.txPower = view.getInt8(22);
         if (this.uid === undefined) {
             this.uid = new TextDecoder().decode(this.proximityUUID.toBuffer());
             this.uid = toHexString(

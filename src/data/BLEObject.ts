@@ -73,8 +73,10 @@ export class BLEObject extends RFTransmitterObject {
     /**
      * Services
      */
-    @SerializableArrayMember(BLEService)
-    services?: BLEService[] = [];
+    @SerializableMapMember(String, BLEService, {
+        name: 'services',
+    })
+    private _services?: Map<string, BLEService> = new Map();
 
     constructor(address?: string);
     constructor(address?: MACAddress);
@@ -86,6 +88,20 @@ export class BLEObject extends RFTransmitterObject {
                 this.knownAddresses.push(address);
             }
         }
+    }
+
+    /**
+     * Get BLE sercices
+     *
+     * @returns {BLEService[]} BLE services
+     */
+    get services(): BLEService[] {
+        return Array.from(this._services.values());
+    }
+
+    addService(service: BLEService): this {
+        this._services.set(service.uuid.toString(), service);
+        return this;
     }
 
     /**
@@ -128,6 +144,9 @@ export class BLEObject extends RFTransmitterObject {
      * @returns {BLEObject} Instance
      */
     parseAdvertisement(payload: Uint8Array): this {
+        if (!payload) {
+            return this;
+        }
         this.rawAdvertisement = payload;
         const view = new DataView(payload.buffer, 0);
         for (let i = 0; i < payload.byteLength; i++) {
@@ -161,28 +180,26 @@ export class BLEObject extends RFTransmitterObject {
                         // 128-bit service UUID
                         break;
                     // See CSS Part A 1.4 Manufacturer Specific Data
-                    case AdvertisementType.BLE_AD_MANUFACTURER_SPECIFIC_TYPE:
-                        this.parseManufacturerData(new Uint8Array(payload.buffer.slice(i, i + length)));
+                    case AdvertisementType.BLE_AD_MANUFACTURER_SPECIFIC_TYPE: {
+                        // Get the manufacturer
+                        const data = new Uint8Array(payload.buffer.slice(i + 2, i + 2 + length));
+                        const manufacturer = view.getInt16(i);
+                        this.parseManufacturerData(manufacturer, data);
                         break;
+                    }
                     case AdvertisementType.BLE_AD_TYPE_SERVICE_DATA: {
                         const uuid: BLEUUID = BLEUUID.fromBuffer(new Uint8Array(payload.buffer.slice(i, i + 2)));
-                        this.services.push(
-                            new BLEService(uuid, new Uint8Array(payload.buffer.slice(i + 2, i + 2 + length))),
-                        );
+                        this.parseServiceData(uuid, new Uint8Array(payload.buffer.slice(i + 2, i + 2 + length)));
                         break;
                     }
                     case AdvertisementType.BLE_AD_TYPE_32SERVICE_DATA: {
                         const uuid: BLEUUID = BLEUUID.fromBuffer(new Uint8Array(payload.buffer.slice(i, i + 4)));
-                        this.services.push(
-                            new BLEService(uuid, new Uint8Array(payload.buffer.slice(i + 4, i + 4 + length))),
-                        );
+                        this.parseServiceData(uuid, new Uint8Array(payload.buffer.slice(i + 4, i + 4 + length)));
                         break;
                     }
                     case AdvertisementType.BLE_AD_TYPE_128SERVICE_DATA: {
                         const uuid: BLEUUID = BLEUUID.fromBuffer(new Uint8Array(payload.buffer.slice(i, i + 16)));
-                        this.services.push(
-                            new BLEService(uuid, new Uint8Array(payload.buffer.slice(i + 16, i + 16 + length))),
-                        );
+                        this.parseServiceData(uuid, new Uint8Array(payload.buffer.slice(i + 16, i + 16 + length)));
                         break;
                     }
                     default:
@@ -194,10 +211,12 @@ export class BLEObject extends RFTransmitterObject {
         return this;
     }
 
-    parseManufacturerData(manufacturerData: Uint8Array): this {
-        // Get the manufacturer
-        const view = new DataView(manufacturerData.buffer, 0);
-        const manufacturer = view.getInt32(0);
+    parseServiceData(uuid: BLEUUID, serviceData: Uint8Array): this {
+        this._services.set(uuid.toString(), new BLEService(uuid, serviceData));
+        return this;
+    }
+
+    parseManufacturerData(manufacturer: number, manufacturerData: Uint8Array): this {
         this.manufacturerData.set(manufacturer, manufacturerData);
         return this;
     }

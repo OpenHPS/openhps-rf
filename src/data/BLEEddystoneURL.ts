@@ -1,5 +1,7 @@
 import { SerializableMember, SerializableObject } from '@openhps/core';
+import { arrayBuffersAreEqual } from '../utils/BufferUtils';
 import { BLEEddystone } from './BLEEddystone';
+import { BLEUUID } from './BLEUUID';
 
 @SerializableObject()
 export class BLEEddystoneURL extends BLEEddystone {
@@ -28,29 +30,30 @@ export class BLEEddystoneURL extends BLEEddystone {
         return super.isValid() && this.frame === 0x10 && this.url !== undefined;
     }
 
-    parseAdvertisement(payload: Uint8Array): this {
-        super.parseAdvertisement(payload);
-        const service = this.service;
-        if (service) {
-            const urlData = new Uint8Array(service.data.slice(2, service.data.byteLength));
-            const view = new DataView(urlData.buffer, 0);
+    parseServiceData(uuid: BLEUUID, serviceData: Uint8Array): this {
+        super.parseServiceData(uuid, serviceData);
+        if (!arrayBuffersAreEqual(uuid.toBuffer().buffer, this.service.uuid.toBuffer().buffer)) {
+            return this;
+        }
 
-            const prefix = view.getUint8(0);
-            if (prefix > BLEEddystoneURL.PREFIXES.length) {
-                return this;
-            }
+        const urlData = new Uint8Array(serviceData.slice(2, serviceData.byteLength));
+        const view = new DataView(urlData.buffer, 0);
 
-            this.url = BLEEddystoneURL.PREFIXES[prefix];
-            for (let i = 1; i < view.byteLength; i++) {
-                this.url +=
-                    view.getUint8(i) < BLEEddystoneURL.SUFFIXES.length
-                        ? BLEEddystoneURL.SUFFIXES[view.getUint8(i)]
-                        : String.fromCharCode(view.getUint8(i));
-            }
+        const prefix = view.getUint8(0);
+        if (prefix > BLEEddystoneURL.PREFIXES.length) {
+            return this;
+        }
 
-            if (this.uid === undefined) {
-                this.uid = this.url;
-            }
+        this.url = BLEEddystoneURL.PREFIXES[prefix];
+        for (let i = 1; i < view.byteLength; i++) {
+            this.url +=
+                view.getUint8(i) < BLEEddystoneURL.SUFFIXES.length
+                    ? BLEEddystoneURL.SUFFIXES[view.getUint8(i)]
+                    : String.fromCharCode(view.getUint8(i));
+        }
+
+        if (this.uid === undefined) {
+            this.uid = this.url;
         }
         return this;
     }

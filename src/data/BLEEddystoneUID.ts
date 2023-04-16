@@ -1,5 +1,5 @@
 import { SerializableMember, SerializableObject } from '@openhps/core';
-import { concatBuffer, toHexString } from '../utils/BufferUtils';
+import { arrayBuffersAreEqual, concatBuffer, toHexString } from '../utils/BufferUtils';
 import { BLEEddystone } from './BLEEddystone';
 import { BLEUUID } from './BLEUUID';
 
@@ -17,16 +17,16 @@ export class BLEEddystoneUID extends BLEEddystone {
         );
     }
 
-    parseAdvertisement(payload: Uint8Array): this {
-        super.parseAdvertisement(payload);
-        const service = this.service;
-        if (service) {
-            this.namespaceId = BLEUUID.fromBuffer(service.data.subarray(2, 12));
-            this.instanceId = BLEUUID.fromBuffer(service.data.subarray(12, 18));
-            if (this.uid === undefined) {
-                this.uid = new TextDecoder().decode(this.namespaceId.toBuffer());
-                this.uid = toHexString(concatBuffer(this.namespaceId.toBuffer(), this.instanceId.toBuffer()));
-            }
+    parseServiceData(uuid: BLEUUID, serviceData: Uint8Array): this {
+        super.parseServiceData(uuid, serviceData);
+        if (!arrayBuffersAreEqual(uuid.toBuffer().buffer, this.service.uuid.toBuffer().buffer)) {
+            return this;
+        }
+        this.namespaceId = BLEUUID.fromBuffer(serviceData.subarray(2, 12));
+        this.instanceId = BLEUUID.fromBuffer(serviceData.subarray(12, 18));
+        if (this.uid === undefined) {
+            this.uid = new TextDecoder().decode(this.namespaceId.toBuffer());
+            this.uid = toHexString(concatBuffer(this.namespaceId.toBuffer(), this.instanceId.toBuffer()));
         }
         return this;
     }

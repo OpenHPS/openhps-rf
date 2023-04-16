@@ -19,8 +19,23 @@ export class BLEBeaconClassifierNode<InOut extends DataFrame> extends ObjectProc
                 if (this.options.resetUID) {
                     beaconObject.setUID(undefined);
                 }
-                // Parse advertisement
-                beaconObject.parseAdvertisement(beaconObject.rawAdvertisement);
+                // Parse advertisement if raw available
+                if (beaconObject.rawAdvertisement) {
+                    beaconObject.parseAdvertisement(beaconObject.rawAdvertisement);
+                } else {
+                    // Parse manufacturer data
+                    if (beaconObject.manufacturerData && beaconObject.manufacturerData.size > 0) {
+                        beaconObject.manufacturerData.forEach((data, manufacturer) => {
+                            beaconObject.parseManufacturerData(manufacturer, data);
+                        });
+                    }
+                    // Parse service data
+                    if (beaconObject.services && beaconObject.services.length > 0) {
+                        beaconObject.services.forEach((service) => {
+                            beaconObject.parseServiceData(service.uuid, service.data);
+                        });
+                    }
+                }
                 if (beaconObject.isValid()) {
                     // Accept beacon and replace
                     output = beaconObject;
