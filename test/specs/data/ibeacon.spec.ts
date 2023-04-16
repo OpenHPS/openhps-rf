@@ -11,6 +11,10 @@ describe('BLEiBeacon', () => {
             0xc4, 0x42, 0xf3, 0x05, 0x10, 0xb4, 0x08, 0x27, 0x11, 0x32, 0x1f, 0xb5]);
         beacon.parseAdvertisement(payload);
 
+        it('should support cloning', () => {
+            beacon.clone();
+        });
+
         it('should extract the major', () => {
             expect(beacon.major).to.equal(10001);
         });
