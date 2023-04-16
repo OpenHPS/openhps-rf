@@ -32,6 +32,10 @@ export class BLEEddystoneURL extends BLEEddystone {
 
     parseServiceData(uuid: BLEUUID, serviceData: Uint8Array): this {
         super.parseServiceData(uuid, serviceData);
+        if (uuid === undefined && serviceData === undefined) {
+            return this;
+        }
+
         if (!arrayBuffersAreEqual(uuid.toBuffer().buffer, this.service.uuid.toBuffer().buffer)) {
             return this;
         }

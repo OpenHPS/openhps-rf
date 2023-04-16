@@ -16,12 +16,14 @@ export class BLEAltBeacon extends BLEBeaconObject {
     }
 
     parseManufacturerData(_: number, manufacturerData: Uint8Array): this {
+        if (!manufacturerData) {
+            return this;
+        }
+
         const view = new DataView(manufacturerData.buffer, 0);
         if (
-            !(
-                manufacturerData.byteLength === 24 &&
-                arrayBuffersAreEqual(manufacturerData.buffer.slice(0, 2), Uint8Array.from([0xac, 0xbe]).buffer)
-            )
+            manufacturerData.byteLength !== 24 ||
+            !arrayBuffersAreEqual(manufacturerData.buffer.slice(0, 2), Uint8Array.from([0xac, 0xbe]).buffer)
         ) {
             return this;
         }
