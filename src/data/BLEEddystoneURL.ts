@@ -36,7 +36,7 @@ export class BLEEddystoneURL extends BLEEddystone {
             return this;
         }
 
-        if (!arrayBuffersAreEqual(uuid.toBuffer().buffer, this.service.uuid.toBuffer().buffer)) {
+        if (!arrayBuffersAreEqual(uuid.toBuffer().buffer, uuid.toBuffer().buffer)) {
             return this;
         }
 
