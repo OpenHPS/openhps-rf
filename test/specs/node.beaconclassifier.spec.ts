@@ -21,6 +21,36 @@ import {
 } from '../../src';
 
 describe('BLEBeaconClassifierNode', () => {
+    it('should use the types list as priority', (done) => {
+        ModelBuilder.create()
+            .from()
+            .via(new BLEBeaconClassifierNode({
+                types: [
+                    BLEAltBeacon,
+                    BLEEddystoneURL,
+                ]
+            }))
+            .to(new CallbackSinkNode(frame => {
+                expect(frame.source).to.be.instanceOf(BLEAltBeacon);
+                done();
+            })).build().then(model => {
+                model.on('error', done);
+                const beacon = new BLEObject();
+                const payload = new Uint8Array([
+                    2, 1, 6, 27, 255, 76, 0, 190, 172, 253,
+                    165, 6, 147, 164, 226, 79, 177, 175, 207,
+                    198, 235, 7, 100, 120, 37, 139, 29, 11,
+                    60, 200, 0, 22, 22, 170, 254, 16, 241,
+                    3, 116, 105, 110, 121, 117, 114, 108,
+                    0, 53, 55, 109, 98, 98, 120, 50, 119,
+                    0, 0, 0, 0, 0, 0, 0, 0 
+                ]);
+                beacon.parseAdvertisement(payload);
+                const frame = new DataFrame(beacon);
+                return model.push(frame);
+            }).catch(done);
+    });
+
     it('should detect iBeacon', (done) => {
         ModelBuilder.create()
             .from()

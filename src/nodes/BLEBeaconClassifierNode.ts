@@ -14,7 +14,8 @@ export class BLEBeaconClassifierNode<InOut extends DataFrame> extends ObjectProc
     processObject(object: BLEObject): Promise<BLEObject> {
         return new Promise((resolve) => {
             let output = object;
-            this.options.types.forEach((BeaconType) => {
+            for (let i = 0; i < this.options.types.length; i++) {
+                const BeaconType = this.options.types[i];
                 const beaconObject = object.clone(BeaconType);
                 if (this.options.resetUID) {
                     beaconObject.setUID(undefined);
@@ -39,9 +40,9 @@ export class BLEBeaconClassifierNode<InOut extends DataFrame> extends ObjectProc
                 if (beaconObject.isValid()) {
                     // Accept beacon and replace
                     output = beaconObject;
-                    return;
+                    break;
                 }
-            });
+            }
             resolve(output);
         });
     }
