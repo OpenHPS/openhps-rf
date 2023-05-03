@@ -53,7 +53,6 @@ export interface BLEBeaconClassifierOptions extends ObjectProcessingNodeOptions 
      * Reset UIDs of detected beacons to the identifying information of the beacon.
      * BLE beacons can change MAC addresses, which could result in data loss when
      * not identifying beacons using the correct information.
-     *
      * @default false
      */
     resetUID?: boolean;

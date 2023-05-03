@@ -4,6 +4,7 @@ import {
     BLEEddystoneUID,
     BLEEddystoneURL, BLEUUID
 } from '../../../src';
+import { concatBuffer } from '../../../src/utils/BufferUtils';
 
 describe('BLEEddystoneURL', () => {
     describe('from advertisement data', () => {
@@ -47,6 +48,15 @@ describe('BLEEddystoneURL', () => {
         });
 
         it('should have an url', () => {
+            expect(beacon.url).to.eql("https://goo.gl/a0mnsS");
+        });
+
+        it('should parse even with padding', () => {
+            const newPayload = concatBuffer(
+                payload,
+                new Uint8Array([0, 0, 0])
+            );
+            beacon.parseAdvertisement(newPayload);
             expect(beacon.url).to.eql("https://goo.gl/a0mnsS");
         });
     });

@@ -58,7 +58,6 @@ export class RelativeRSSIProcessing<InOut extends DataFrame> extends RelativePos
 export interface RelativeRSSIOptions extends ObjectProcessingNodeOptions {
     /**
      * RSSI distance propagation model
-     *
      * @default PropagationModel.LOG_DISTANCE
      */
     propagationModel?: PropagationModel;
@@ -68,7 +67,6 @@ export interface RelativeRSSIOptions extends ObjectProcessingNodeOptions {
     environmentFactor?: number;
     /**
      * Default calibrated RSSI value at 1 meter distance
-     *
      * @default undefined
      */
     defaultCalibratedRSSI?: number;
@@ -77,7 +75,6 @@ export interface RelativeRSSIOptions extends ObjectProcessingNodeOptions {
 export enum PropagationModel {
     /**
      * Log distance path loss
-     *
      * @see {@link https://en.wikipedia.org/wiki/Log-distance_path_loss_model}
      */
     LOG_DISTANCE,

@@ -1,6 +1,5 @@
 /**
  * Buffer to Hex string
- *
  * @param {Uint8Array} buffer Buffer
  * @returns {string} Hex string
  */
@@ -13,7 +12,6 @@ export function toHexString(buffer: Uint8Array): string {
 
 /**
  * Hex string to Buffer
- *
  * @param {string} bufferString Hex string
  * @returns {Uint8Array} Buffer
  */

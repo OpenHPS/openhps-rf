@@ -6,7 +6,6 @@ import { arrayBuffersAreEqual, concatBuffer, toHexString } from '../utils/Buffer
 
 /**
  * BLE iBeacon Data Object
- *
  * @see {@link https://wiki.aprbrother.com/en/iBeacon_Packet.html}
  */
 @SerializableObject()

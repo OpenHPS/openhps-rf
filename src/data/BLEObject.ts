@@ -92,7 +92,6 @@ export class BLEObject extends RFTransmitterObject {
 
     /**
      * Get BLE sercices
-     *
      * @returns {BLEService[]} BLE services
      */
     get services(): BLEService[] {
@@ -106,7 +105,6 @@ export class BLEObject extends RFTransmitterObject {
 
     /**
      * Get service by UUID
-     *
      * @param {BLEUUID} uuid Service UUID
      * @returns {BLEService} BLE Service
      */
@@ -118,7 +116,6 @@ export class BLEObject extends RFTransmitterObject {
 
     /**
      * Create object from advertisement data
-     *
      * @param {Uint8Array} payload Advertisement data
      * @returns {BLEObject} BLE Object
      */
@@ -128,7 +125,6 @@ export class BLEObject extends RFTransmitterObject {
 
     /**
      * Parse advertisement data
-     *
      * @deprecated Use [parseAdvertisement] instead
      * @param {Uint8Array} payload Advertisement data
      * @returns {BLEObject} Instance
@@ -139,7 +135,6 @@ export class BLEObject extends RFTransmitterObject {
 
     /**
      * Parse advertisement data
-     *
      * @param {Uint8Array} payload Advertisement data
      * @returns {BLEObject} Instance
      */
@@ -189,17 +184,17 @@ export class BLEObject extends RFTransmitterObject {
                     }
                     case AdvertisementType.BLE_AD_TYPE_SERVICE_DATA: {
                         const uuid: BLEUUID = BLEUUID.fromBuffer(new Uint8Array(payload.buffer.slice(i, i + 2)));
-                        this.parseServiceData(uuid, new Uint8Array(payload.buffer.slice(i + 2, i + 2 + length)));
+                        this.parseServiceData(uuid, new Uint8Array(payload.buffer.slice(i + 2, i + length)));
                         break;
                     }
                     case AdvertisementType.BLE_AD_TYPE_32SERVICE_DATA: {
                         const uuid: BLEUUID = BLEUUID.fromBuffer(new Uint8Array(payload.buffer.slice(i, i + 4)));
-                        this.parseServiceData(uuid, new Uint8Array(payload.buffer.slice(i + 4, i + 4 + length)));
+                        this.parseServiceData(uuid, new Uint8Array(payload.buffer.slice(i + 4, i + length)));
                         break;
                     }
                     case AdvertisementType.BLE_AD_TYPE_128SERVICE_DATA: {
                         const uuid: BLEUUID = BLEUUID.fromBuffer(new Uint8Array(payload.buffer.slice(i, i + 16)));
-                        this.parseServiceData(uuid, new Uint8Array(payload.buffer.slice(i + 16, i + 16 + length)));
+                        this.parseServiceData(uuid, new Uint8Array(payload.buffer.slice(i + 16, i + length)));
                         break;
                     }
                     default:

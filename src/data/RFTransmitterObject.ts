@@ -24,7 +24,6 @@ export class RFTransmitterObject extends DataObject implements RFObject {
 
     /**
      * Get the calibrated rssi at 1 meter
-     *
      * @returns {number} Calibrated RSSI
      */
     @SerializableMember()
@@ -34,7 +33,6 @@ export class RFTransmitterObject extends DataObject implements RFObject {
 
     /**
      * Set the calibrated rssi at 1 meter
-     *
      * @param {number} calibratedRSSI Calibrated RSSI > 0
      */
     set calibratedRSSI(calibratedRSSI: number) {
@@ -46,7 +44,6 @@ export class RFTransmitterObject extends DataObject implements RFObject {
     /**
      * Set the environment factor of the beacon.
      * Nodes such as [[RelativeRSSIProcessing]] can override this.
-     *
      * @returns {number} environment factor
      */
     @SerializableMember()
