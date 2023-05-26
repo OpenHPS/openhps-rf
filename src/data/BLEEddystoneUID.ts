@@ -26,6 +26,11 @@ export class BLEEddystoneUID extends BLEEddystone {
         if (!arrayBuffersAreEqual(uuid.toBuffer().buffer, uuid.toBuffer().buffer)) {
             return this;
         }
+
+        if (this.frame !== 0x00) {
+            return this; // Do not attempt to parse
+        }
+
         this.namespaceId = BLEUUID.fromBuffer(serviceData.subarray(2, 12));
         this.instanceId = BLEUUID.fromBuffer(serviceData.subarray(12, 18));
         if (this.uid === undefined) {

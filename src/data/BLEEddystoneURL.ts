@@ -40,8 +40,16 @@ export class BLEEddystoneURL extends BLEEddystone {
             return this;
         }
 
+        if (this.frame !== 0x10) {
+            return this; // Do not attempt to parse
+        }
+
         const urlData = new Uint8Array(serviceData.slice(2, serviceData.byteLength));
         const view = new DataView(urlData.buffer, 0);
+
+        if (view.buffer.byteLength === 0) {
+            return this;
+        }
 
         const prefix = view.getUint8(0);
         if (prefix > BLEEddystoneURL.PREFIXES.length) {
