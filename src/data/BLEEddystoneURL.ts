@@ -1,5 +1,4 @@
 import { SerializableMember, SerializableObject } from '@openhps/core';
-import { arrayBuffersAreEqual } from '../utils/BufferUtils';
 import { BLEEddystone } from './BLEEddystone';
 import { BLEUUID } from './BLEUUID';
 
@@ -36,7 +35,7 @@ export class BLEEddystoneURL extends BLEEddystone {
             return this;
         }
 
-        if (!arrayBuffersAreEqual(uuid.toBuffer().buffer, uuid.toBuffer().buffer)) {
+        if (!this.service) {
             return this;
         }
 
