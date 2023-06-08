@@ -15,4 +15,8 @@ export abstract class BLEBeaconObject extends BLEObject {
     }
 
     abstract isValid(): boolean;
+
+    computeUID(): string {
+        return this.uid;
+    }
 }

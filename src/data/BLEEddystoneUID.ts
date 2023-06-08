@@ -17,6 +17,12 @@ export class BLEEddystoneUID extends BLEEddystone {
         );
     }
 
+    computeUID(): string {
+        let uid = new TextDecoder().decode(this.namespaceId.toBuffer());
+        uid = toHexString(concatBuffer(this.namespaceId.toBuffer(), this.instanceId.toBuffer()));
+        return uid;
+    }
+
     parseServiceData(uuid: BLEUUID, serviceData: Uint8Array): this {
         super.parseServiceData(uuid, serviceData);
         if (uuid === undefined && serviceData === undefined) {
@@ -34,8 +40,7 @@ export class BLEEddystoneUID extends BLEEddystone {
         this.namespaceId = BLEUUID.fromBuffer(serviceData.subarray(2, 12));
         this.instanceId = BLEUUID.fromBuffer(serviceData.subarray(12, 18));
         if (this.uid === undefined) {
-            this.uid = new TextDecoder().decode(this.namespaceId.toBuffer());
-            this.uid = toHexString(concatBuffer(this.namespaceId.toBuffer(), this.instanceId.toBuffer()));
+            this.uid = this.computeUID();
         }
         return this;
     }

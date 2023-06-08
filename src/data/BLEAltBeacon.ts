@@ -15,6 +15,12 @@ export class BLEAltBeacon extends BLEBeaconObject {
         return this.beaconId !== undefined;
     }
 
+    computeUID(): string {
+        let uid = new TextDecoder().decode(this.beaconId.toBuffer());
+        uid = toHexString(this.beaconId.toBuffer());
+        return uid;
+    }
+
     parseManufacturerData(_: number, manufacturerData: Uint8Array): this {
         super.parseManufacturerData(_, manufacturerData);
         if (!manufacturerData) {
@@ -32,8 +38,7 @@ export class BLEAltBeacon extends BLEBeaconObject {
         this.txPower = view.getInt8(22);
         this.msb = view.getInt8(23);
         if (this.uid === undefined) {
-            this.uid = new TextDecoder().decode(this.beaconId.toBuffer());
-            this.uid = toHexString(this.beaconId.toBuffer());
+            this.uid = this.computeUID();
         }
         return this;
     }

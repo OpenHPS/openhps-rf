@@ -29,6 +29,10 @@ export class BLEEddystoneURL extends BLEEddystone {
         return super.isValid() && this.frame === 0x10 && this.url !== undefined;
     }
 
+    computeUID(): string {
+        return this.url;
+    }
+
     parseServiceData(uuid: BLEUUID, serviceData: Uint8Array): this {
         super.parseServiceData(uuid, serviceData);
         if (uuid === undefined && serviceData === undefined) {

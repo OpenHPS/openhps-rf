@@ -26,6 +26,14 @@ export class BLEiBeacon extends BLEBeaconObject {
         }
     }
 
+    computeUID(): string {
+        let uid = new TextDecoder().decode(this.proximityUUID.toBuffer());
+        uid = toHexString(
+            concatBuffer(this.proximityUUID.toBuffer(), Uint8Array.from([this.major]), Uint8Array.from([this.minor])),
+        );
+        return uid;
+    }
+
     isValid(): boolean {
         return this.proximityUUID !== undefined && this.major !== undefined && this.minor !== undefined;
     }
@@ -49,14 +57,7 @@ export class BLEiBeacon extends BLEBeaconObject {
         this.minor = view.getUint16(20, false);
         this.txPower = view.getInt8(22);
         if (this.uid === undefined) {
-            this.uid = new TextDecoder().decode(this.proximityUUID.toBuffer());
-            this.uid = toHexString(
-                concatBuffer(
-                    this.proximityUUID.toBuffer(),
-                    Uint8Array.from([this.major]),
-                    Uint8Array.from([this.minor]),
-                ),
-            );
+            this.uid = this.computeUID();
         }
         return this;
     }
