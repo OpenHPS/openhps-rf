@@ -39,6 +39,7 @@ export class BLEBeaconClassifierNode<InOut extends DataFrame> extends ObjectProc
                 }
                 if (beaconObject.isValid()) {
                     // Accept beacon and replace
+                    beaconObject.computeUID();
                     output = beaconObject;
                     break;
                 }
