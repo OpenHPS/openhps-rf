@@ -30,7 +30,10 @@ describe('BLEUUID', () => {
             const buffer = Buffer.from([
                 0xf8, 0xff
             ]);
-            const uuid = BLEUUID.fromString('0000f8ff-0000-1000-8000-00805f9b34fb');
+            const uuidStr = '0000f8ff-0000-1000-8000-00805f9b34fb';
+            const uuid = BLEUUID.fromString(uuidStr);
+            expect(uuid.toString()).to.eql(uuidStr);
+            console.log(buffer, uuid.toBuffer())
             expect(uuid.toBuffer()).to.eql(buffer);
         });
     });

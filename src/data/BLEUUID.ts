@@ -19,21 +19,22 @@ export class BLEUUID {
     }
 
     static fromString(uuid: string): BLEUUID {
-        return new this(
-            Uint8Array.from(
-                uuid
-                    .replace(BLE_UUID_PADDING, '')
-                    .replace(/^0000/, '')
-                    .replace(/-/g, '')
-                    .split(/(..)/)
-                    .filter((a) => {
-                        return a !== '';
-                    })
-                    .map((hex) => {
-                        return Number(`0x${hex}`);
-                    }),
-            ),
+        let array = Uint8Array.from(
+            uuid
+                .replace(BLE_UUID_PADDING, '')
+                .replace(/-/g, '')
+                .split(/(..)/)
+                .filter((a) => {
+                    return a !== '';
+                })
+                .map((hex) => {
+                    return Number(`0x${hex}`);
+                }),
         );
+        if (uuid.startsWith('0000')) {
+            array = array.slice(2);
+        }
+        return new this(array);
     }
 
     toBuffer(): Uint8Array {
