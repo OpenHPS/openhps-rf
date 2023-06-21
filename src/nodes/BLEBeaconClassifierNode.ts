@@ -11,7 +11,7 @@ export class BLEBeaconClassifierNode<InOut extends DataFrame> extends ObjectProc
             ((object) => object instanceof BLEObject && object.rawAdvertisement !== undefined);
     }
 
-    processObject(object: BLEObject): Promise<BLEObject> {
+    processObject(object: BLEObject, frame: DataFrame): Promise<BLEObject> {
         return new Promise((resolve) => {
             let output = object;
             for (let i = 0; i < this.options.types.length; i++) {
@@ -39,7 +39,18 @@ export class BLEBeaconClassifierNode<InOut extends DataFrame> extends ObjectProc
                 }
                 if (beaconObject.isValid()) {
                     // Accept beacon and replace
+                    const prevUID = beaconObject.uid;
                     beaconObject.computeUID();
+                    // Rename relative uids
+                    if (frame.source) {
+                        const positions = frame.source.getRelativePositions(prevUID);
+                        positions.forEach((relPos) => {
+                            relPos.referenceObjectUID = beaconObject.uid;
+                            frame.source.addRelativePosition(relPos);
+                        });
+                        frame.source.removeRelativePositions(prevUID);
+                    }
+
                     output = beaconObject;
                     break;
                 }
