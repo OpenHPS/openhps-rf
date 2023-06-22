@@ -71,6 +71,31 @@ describe('BLEBeaconClassifierNode', () => {
             }).catch(done);
     });
 
+    
+    it('should detect iBeacon with scan response', (done) => {
+        ModelBuilder.create()
+            .from()
+            .via(new BLEBeaconClassifierNode({
+                types: [
+                    BLEEddystoneUID,
+                    BLEEddystoneURL,
+                    BLEiBeacon
+                ]
+            }))
+            .to(new CallbackSinkNode(frame => {
+                expect(frame.source).to.be.instanceOf(BLEiBeacon);
+                done();
+            })).build().then(model => {
+                model.on('error', done);
+                const beacon = new BLEObject();
+                const payload = Uint8Array.from([
+2,1,6,26,255,76,0,2,21,119,243,64,219,172,13,32,232,170,58,246,86,162,159,35,108,38,59,23,159,200,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,                ]);
+                beacon.parseAdvertisement(payload);
+                const frame = new DataFrame(beacon);
+                return model.push(frame);
+            }).catch(done);
+    });
+
     it('should detect iBeacon from manufacturer data', (done) => {
         ModelBuilder.create()
             .from()
@@ -187,6 +212,33 @@ describe('BLEBeaconClassifierNode', () => {
                 frame.addObject(beacon);
                 frame.source = new DataObject("source");
                 frame.source.addRelativePosition(new RelativeRSSI(beacon, -56));
+                return model.push(frame);
+            }).catch(done);
+    });
+
+    it('should not classify non-beacons', (done) => {
+        ModelBuilder.create()
+            .from()
+            .via(new BLEBeaconClassifierNode({
+                types: [
+                    BLEEddystoneUID,
+                    BLEEddystoneURL,
+                    BLEiBeacon
+                ]
+            }))
+            .to(new CallbackSinkNode(frame => {
+                expect(frame.source).to.not.be.undefined;
+                expect(frame.getObjects().length).to.eql(2);
+                done();
+            })).build().then(model => {
+                model.on('error', done);
+                const beacon = new BLEObject();
+                const payload = Uint8Array.from([
+                ]);
+                beacon.parseAdvertisement(payload);
+                const frame = new DataFrame();
+                frame.addObject(beacon);
+                frame.source = new DataObject("source");
                 return model.push(frame);
             }).catch(done);
     });
