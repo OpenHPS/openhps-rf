@@ -7,16 +7,12 @@ import {
     CallbackSinkNode,
 } from '@openhps/core';
 import {
-    RelativeRSSIProcessing,
     RelativeRSSI,
-    RFTransmitterObject,
     BLEBeaconClassifierNode,
     BLEAltBeacon,
-    BLEEddystone,
     BLEEddystoneUID,
     BLEEddystoneURL,
     BLEiBeacon,
-    BLEBeaconObject,
     BLEObject
 } from '../../src';
 
@@ -156,6 +152,8 @@ describe('BLEBeaconClassifierNode', () => {
                 ]
             }))
             .to(new CallbackSinkNode(frame => {
+                expect(frame.source).to.not.be.undefined;
+                expect(frame.getObjects().length).to.eql(2);
                 done();
             })).build().then(model => {
                 model.on('error', done);
@@ -187,7 +185,7 @@ describe('BLEBeaconClassifierNode', () => {
                 beacon.parseAdvertisement(payload);
                 const frame = new DataFrame();
                 frame.addObject(beacon);
-                frame.source = new DataObject();
+                frame.source = new DataObject("source");
                 frame.source.addRelativePosition(new RelativeRSSI(beacon, -56));
                 return model.push(frame);
             }).catch(done);

@@ -17,9 +17,6 @@ export class BLEBeaconClassifierNode<InOut extends DataFrame> extends ObjectProc
             for (let i = 0; i < this.options.types.length; i++) {
                 const BeaconType = this.options.types[i];
                 const beaconObject = object.clone(BeaconType);
-                if (this.options.resetUID) {
-                    beaconObject.setUID(undefined);
-                }
                 // Parse advertisement if raw available
                 if (beaconObject.rawAdvertisement) {
                     beaconObject.parseAdvertisement(beaconObject.rawAdvertisement);
@@ -40,7 +37,9 @@ export class BLEBeaconClassifierNode<InOut extends DataFrame> extends ObjectProc
                 if (beaconObject.isValid()) {
                     // Accept beacon and replace
                     const prevUID = beaconObject.uid;
-                    beaconObject.uid = beaconObject.computeUID();
+                    if (this.options.resetUID) {
+                        beaconObject.uid = beaconObject.computeUID();
+                    }
                     // Rename relative uids
                     if (frame.source) {
                         const positions = frame.source.getRelativePositions(prevUID);
