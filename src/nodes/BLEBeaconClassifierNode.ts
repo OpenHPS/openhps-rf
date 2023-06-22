@@ -40,7 +40,7 @@ export class BLEBeaconClassifierNode<InOut extends DataFrame> extends ObjectProc
                 if (beaconObject.isValid()) {
                     // Accept beacon and replace
                     const prevUID = beaconObject.uid;
-                    beaconObject.computeUID();
+                    beaconObject.uid = beaconObject.computeUID();
                     // Rename relative uids
                     if (frame.source) {
                         const positions = frame.source.getRelativePositions(prevUID);
