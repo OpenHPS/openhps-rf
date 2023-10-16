@@ -49,7 +49,7 @@ export class BLEObject extends RFTransmitterObject {
     @SerializableMember()
     rawAdvertisement?: Uint8Array;
 
-    @SerializableMapMember(Number, Uint8Array)
+    @SerializableMapMember(Number, Uint8Array, {})
     manufacturerData?: Map<number, Uint8Array> = new Map();
 
     /**

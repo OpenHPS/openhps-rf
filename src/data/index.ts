@@ -22,3 +22,4 @@ export * from './BLEService';
 export * from './BLEEddystone';
 export * from './BLEEddystoneUID';
 export * from './BLEEddystoneURL';
+export * from './BLEEddystoneTLM';

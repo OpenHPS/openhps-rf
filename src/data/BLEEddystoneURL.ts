@@ -30,7 +30,7 @@ export class BLEEddystoneURL extends BLEEddystone {
     }
 
     computeUID(): string {
-        return this.url;
+        return this.address ? this.address.toString() : this.url;
     }
 
     parseServiceData(uuid: BLEUUID, serviceData: Uint8Array): this {

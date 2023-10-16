@@ -1,5 +1,5 @@
 import { RFObject } from './RFObject';
-import { SerializableObject, SerializableMember, DataObject } from '@openhps/core';
+import { SerializableObject, SerializableMember, DataObject, LengthUnit } from '@openhps/core';
 
 @SerializableObject()
 export class RFTransmitterObject extends DataObject implements RFObject {
@@ -39,6 +39,30 @@ export class RFTransmitterObject extends DataObject implements RFObject {
         if (calibratedRSSI < 0) {
             this._calibratedRSSI = calibratedRSSI;
         }
+    }
+
+    /**
+     * Get the calibrated RSSI at a specific distance
+     * @param {number} distance Distance
+     * @param {LengthUnit} unit Length Unit
+     * @returns {number} RSSI at distance
+     */
+    getCalibratedRSSI(distance: number, unit: LengthUnit): number {
+        const distanceInMeter = unit.convert(distance, LengthUnit.METER); // eslint-disable-line
+        return this.calibratedRSSI;
+    }
+
+    /**
+     * Set the calibrated RSSI at a specific distance
+     * @param {number} rssi Received signal strength indicator
+     * @param {number} distance Distance
+     * @param {LengthUnit} unit Length Unit
+     * @returns {RFTransmitterObject} This instance
+     */
+    setCalibratedRSSI(rssi: number, distance: number, unit: LengthUnit): this {
+        const distanceInMeter = unit.convert(distance, LengthUnit.METER); // eslint-disable-line
+        this.calibratedRSSI = rssi;
+        return this;
     }
 
     /**
