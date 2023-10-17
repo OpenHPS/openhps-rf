@@ -68,7 +68,7 @@ export class BLEEddystoneURL extends BLEEddystone {
         }
 
         if (this.uid === undefined) {
-            this.uid = this.url;
+            this.uid = this.computeUID();
         }
         return this;
     }
