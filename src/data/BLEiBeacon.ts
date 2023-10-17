@@ -55,7 +55,7 @@ export class BLEiBeacon extends BLEBeaconObject {
         this.proximityUUID = BLEUUID.fromBuffer(manufacturerData.subarray(2, 18));
         this.major = view.getUint16(18, false);
         this.minor = view.getUint16(20, false);
-        this.txPower = view.getInt8(22);
+        this.calibratedRSSI = view.getInt8(22);
         if (this.uid === undefined) {
             this.uid = this.computeUID();
         }

@@ -1,4 +1,4 @@
-import { SerializableMember, SerializableObject } from '@openhps/core';
+import { LengthUnit, SerializableMember, SerializableObject } from '@openhps/core';
 import { MACAddress } from './MACAddress';
 import { BLEBeaconObject } from './BLEBeaconObject';
 import { BLEUUID } from './BLEUUID';
@@ -40,7 +40,9 @@ export class BLEEddystone extends BLEBeaconObject {
 
         const view = new DataView(serviceData.buffer, 0);
         this.frame = view.getInt8(0);
-        this.txPower = view.getInt8(1);
+        if (this.frame !== 0x20) {
+            this.setCalibratedRSSI(view.getInt8(1), 0, LengthUnit.METER);
+        }
         return this;
     }
 

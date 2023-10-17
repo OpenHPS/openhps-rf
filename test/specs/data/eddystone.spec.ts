@@ -1,8 +1,10 @@
+import { LengthUnit } from '@openhps/core';
 import { expect } from 'chai';
 import 'mocha';
 import {
+    BLEEddystoneTLM,
     BLEEddystoneUID,
-    BLEEddystoneURL, BLEUUID
+    BLEEddystoneURL,
 } from '../../../src';
 import { concatBuffer } from '../../../src/utils/BufferUtils';
 
@@ -44,7 +46,7 @@ describe('BLEEddystoneURL', () => {
         });
 
         it('should have a tx power', () => {
-            expect(beacon.txPower).to.eql(-8);
+            expect(beacon.getCalibratedRSSI(0, LengthUnit.METER)).to.eql(-8);
         });
 
         it('should have an url', () => {
@@ -89,7 +91,7 @@ describe('BLEEddystoneUID', () => {
         });
 
         it('should have a tx power', () => {
-            expect(beacon.txPower).to.eql(-8);
+            expect(beacon.getCalibratedRSSI(0, LengthUnit.METER)).to.eql(-8);
         });
 
         it('should have a namespace id', () => {
@@ -98,6 +100,56 @@ describe('BLEEddystoneUID', () => {
 
         it('should have an instance id', () => {
             expect(beacon.instanceId).to.not.be.undefined;
+        });
+    });
+});
+
+
+describe('BLEEddystoneTLM', () => {
+    describe('from advertisement data', () => {
+        const beacon = new BLEEddystoneTLM();
+        const payload = Uint8Array.from([
+            0x03,  // Length of Service List
+            0x03,  // Param: Service List
+            0xAA, 0xFE,  // Eddystone ID
+            0x11,  // Length of Service Data
+            0x16,  // Service Data
+            0xAA, 0xFE, // Eddystone ID
+            0x20,  // Frame type: TLM
+            0x00, // Version
+            0x0c, 0x80, // Voltage
+            0x0f, 0x00, // Temperature
+            0x00, 0x00, 0x00, 0x0a, // Adv count
+            0x00, 0x00, 0x00, 0x14, // Adv time
+        ]);
+        beacon.parseAdvertisement(payload);
+
+        it('should be valid', () => {
+            expect(beacon.isValid()).to.be.true;
+        });
+
+        it('should have 0x20 as the frame', () => {
+            expect(beacon.frame).to.eql(0x20);
+        });
+
+        it('should have 0x00 as the version', () => {
+            expect(beacon.version).to.eql(0x00);
+        });
+
+        it('should have 15 deg C as the temperature', () => {
+            expect(beacon.temperature.value).to.eql(15);
+        });
+
+        it('should have 2 sec as the uptime', () => {
+            expect(beacon.uptime).to.eql(2);
+        });
+
+        it('should have adv count of 10', () => {
+            expect(beacon.advertiseCount).to.eql(10);
+        });
+
+        it('should have 3200mV', () => {
+            expect(beacon.voltage).to.eql(3200);
         });
     });
 });

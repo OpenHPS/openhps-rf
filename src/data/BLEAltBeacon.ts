@@ -35,7 +35,7 @@ export class BLEAltBeacon extends BLEBeaconObject {
             return this;
         }
         this.beaconId = BLEUUID.fromBuffer(manufacturerData.subarray(2, 22));
-        this.txPower = view.getInt8(22);
+        this.calibratedRSSI = view.getInt8(22);
         this.msb = view.getInt8(23);
         if (this.uid === undefined) {
             this.uid = this.computeUID();
