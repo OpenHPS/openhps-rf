@@ -56,11 +56,11 @@ export class BLEEddystoneTLM extends BLEEddystone {
         } else {
             // Unencrypted
             this.voltage = view.getUint16(2);
-            const tempDec = view.getInt8(4);
-            const tempFloat = view.getUint8(5);
-            const temperatureCelcius = tempDec + tempFloat * 0.1;
-            if (temperatureCelcius !== -128) {
-                this.temperature = new Temperature(temperatureCelcius, TemperatureUnit.CELCIUS);
+            const temperatureRaw = view.getInt16(4);
+            if (temperatureRaw !== 0x8000) {
+                const temperatureSigned = (temperatureRaw & 0x8000) > 0 ? -1 : 1;
+                const temperature = (temperatureSigned * temperatureRaw) / Math.pow(2, 8);
+                this.temperature = new Temperature(temperature, TemperatureUnit.CELCIUS);
             }
             this.advertiseCount = view.getUint32(6);
             this.uptime = view.getUint32(10) * 0.1;

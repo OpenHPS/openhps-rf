@@ -179,6 +179,7 @@ describe('BLEBeaconClassifierNode', () => {
             .to(new CallbackSinkNode(frame => {
                 expect(frame.source).to.not.be.undefined;
                 expect(frame.getObjects().length).to.eql(2);
+                expect(frame.source.getRelativePositions().length).greaterThan(0);
                 done();
             })).build().then(model => {
                 model.on('error', done);

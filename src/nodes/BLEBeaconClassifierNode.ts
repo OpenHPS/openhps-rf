@@ -41,7 +41,7 @@ export class BLEBeaconClassifierNode<InOut extends DataFrame> extends ObjectProc
                         beaconObject.uid = beaconObject.computeUID();
                     }
                     // Rename relative uids
-                    if (frame.source) {
+                    if (frame.source && beaconObject.uid !== prevUID) {
                         const positions = frame.source.getRelativePositions(prevUID);
                         positions.forEach((relPos) => {
                             relPos.referenceObjectUID = beaconObject.uid;
