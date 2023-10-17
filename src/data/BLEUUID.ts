@@ -66,6 +66,12 @@ export class BLEUUID {
                     })
                     .join('') + BLE_UUID_PADDING
             );
+        } else if (this._raw.byteLength === 6) {
+            // Strange
+            const hex = bytes.map((byte: number) => {
+                return byte.toString(16).padStart(2, '0');
+            });
+            return hex.toString();
         } else {
             // 128 bit
             const hex = bytes.map((byte: number) => {
