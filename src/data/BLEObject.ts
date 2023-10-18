@@ -1,5 +1,4 @@
 import { SerializableArrayMember, SerializableMapMember, SerializableMember, SerializableObject } from '@openhps/core';
-import { arrayBuffersAreEqual } from '../utils/BufferUtils';
 import { BLEService } from './BLEService';
 import { BLEUUID } from './BLEUUID';
 import { MACAddress } from './MACAddress';
@@ -109,9 +108,7 @@ export class BLEObject extends RFTransmitterObject {
      * @returns {BLEService} BLE Service
      */
     getServiceByUUID(uuid: BLEUUID): BLEService {
-        return this.services.find((service) =>
-            arrayBuffersAreEqual(service.uuid.toBuffer().buffer, uuid.toBuffer().buffer),
-        );
+        return this.services.find((service) => service.uuid.to128bit().toString() === uuid.to128bit().toString());
     }
 
     /**

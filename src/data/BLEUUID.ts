@@ -41,12 +41,17 @@ export class BLEUUID {
         return this._raw;
     }
 
-    toString(): string {
+    to128bit(): BLEUUID {
+        return BLEUUID.fromString(this.toString(8));
+    }
+
+    toString(byteLength?: number): string {
+        byteLength = byteLength ?? this._raw.byteLength;
         const bytes = [];
         for (const [, value] of this._raw.entries()) {
             bytes.push(value);
         }
-        if (this._raw.byteLength === 2) {
+        if (byteLength === 2) {
             // 16 bit
             return (
                 '0000' +
@@ -57,7 +62,7 @@ export class BLEUUID {
                     .join('') +
                 BLE_UUID_PADDING
             );
-        } else if (this._raw.byteLength === 4) {
+        } else if (byteLength === 4) {
             // 32 bit
             return (
                 bytes
@@ -66,7 +71,7 @@ export class BLEUUID {
                     })
                     .join('') + BLE_UUID_PADDING
             );
-        } else if (this._raw.byteLength === 6) {
+        } else if (byteLength === 6) {
             // Strange
             const hex = bytes.map((byte: number) => {
                 return byte.toString(16).padStart(2, '0');

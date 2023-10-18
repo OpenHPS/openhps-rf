@@ -3,7 +3,6 @@ import { MACAddress } from './MACAddress';
 import { BLEBeaconObject } from './BLEBeaconObject';
 import { BLEUUID } from './BLEUUID';
 import { BLEService } from './BLEService';
-import { arrayBuffersAreEqual } from '../utils/BufferUtils';
 
 @SerializableObject()
 export class BLEEddystone extends BLEBeaconObject {
@@ -34,7 +33,7 @@ export class BLEEddystone extends BLEBeaconObject {
 
     parseServiceData(uuid: BLEUUID, serviceData: Uint8Array): this {
         super.parseServiceData(uuid, serviceData);
-        if (!arrayBuffersAreEqual(uuid.toBuffer().buffer, BLEUUID.fromString('AAFE').toBuffer().buffer)) {
+        if (uuid.to128bit().toString() !== BLEUUID.fromString('AAFE').to128bit().toString()) {
             return this;
         }
 
