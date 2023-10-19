@@ -34,7 +34,7 @@ export class BLEEddystone extends BLEBeaconObject {
 
     parseServiceData(uuid: BLEUUID, serviceData: Uint8Array): this {
         super.parseServiceData(uuid, serviceData);
-        if (!arrayBuffersAreEqual(uuid.toBuffer().buffer, BLEUUID.fromString('AAFE').toBuffer().buffer)) {
+        if (!arrayBuffersAreEqual(uuid.toBuffer().buffer, BLEUUID.fromString('FEAA').toBuffer().buffer)) {
             return this;
         }
 
@@ -47,6 +47,6 @@ export class BLEEddystone extends BLEBeaconObject {
     }
 
     protected get service(): BLEService {
-        return this.getServiceByUUID(BLEUUID.fromString('AAFE'));
+        return this.getServiceByUUID(BLEUUID.fromString('FEAA'));
     }
 }

@@ -1,4 +1,4 @@
-import { SerializableMember, SerializableObject } from '@openhps/core';
+import { BufferUtils, SerializableMember, SerializableObject } from '@openhps/core';
 
 const BLE_UUID_PADDING = '-0000-1000-8000-00805f9b34fb';
 
@@ -14,8 +14,16 @@ export class BLEUUID {
         this._raw = buffer;
     }
 
-    static fromBuffer(buffer: Uint8Array): BLEUUID {
-        return new this(buffer);
+    static fromBuffer(buffer: Uint8Array, littleEndian?: boolean): BLEUUID {
+        if (littleEndian) {
+            let swappedBuffer = new Uint8Array();
+            for (let i = buffer.length - 1; i >= 0; i--) {
+                swappedBuffer = BufferUtils.concatBuffer(swappedBuffer, new Uint8Array([buffer[i]]));
+            }
+            return new this(swappedBuffer);
+        } else {
+            return new this(buffer);
+        }
     }
 
     static fromString(uuid: string): BLEUUID {

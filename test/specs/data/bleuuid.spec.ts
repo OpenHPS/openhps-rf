@@ -23,6 +23,11 @@ describe('BLEUUID', () => {
             const uuid = BLEUUID.fromBuffer(buffer);
             expect(uuid.toString()).to.equal('0000f8ff-0000-1000-8000-00805f9b34fb');
         });
+
+        it('should convert to a correct 128 bit uuid', () => {
+            const uuid = BLEUUID.fromString("FEAA");
+            expect(uuid.to128bit().toString()).to.eql("0000feaa-0000-1000-8000-00805f9b34fb");
+        });
     });
 
     describe('fromString()', () => {

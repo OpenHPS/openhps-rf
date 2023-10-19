@@ -183,17 +183,17 @@ export class BLEObject extends RFTransmitterObject {
                         break;
                     }
                     case AdvertisementType.BLE_AD_TYPE_SERVICE_DATA: {
-                        const uuid: BLEUUID = BLEUUID.fromBuffer(new Uint8Array(payload.buffer.slice(i, i + 2)));
+                        const uuid: BLEUUID = BLEUUID.fromBuffer(new Uint8Array(payload.buffer.slice(i, i + 2)), true);
                         this.parseServiceData(uuid, new Uint8Array(payload.buffer.slice(i + 2, i + length)));
                         break;
                     }
                     case AdvertisementType.BLE_AD_TYPE_32SERVICE_DATA: {
-                        const uuid: BLEUUID = BLEUUID.fromBuffer(new Uint8Array(payload.buffer.slice(i, i + 4)));
+                        const uuid: BLEUUID = BLEUUID.fromBuffer(new Uint8Array(payload.buffer.slice(i, i + 4)), true);
                         this.parseServiceData(uuid, new Uint8Array(payload.buffer.slice(i + 4, i + length)));
                         break;
                     }
                     case AdvertisementType.BLE_AD_TYPE_128SERVICE_DATA: {
-                        const uuid: BLEUUID = BLEUUID.fromBuffer(new Uint8Array(payload.buffer.slice(i, i + 16)));
+                        const uuid: BLEUUID = BLEUUID.fromBuffer(new Uint8Array(payload.buffer.slice(i, i + 16)), true);
                         this.parseServiceData(uuid, new Uint8Array(payload.buffer.slice(i + 16, i + length)));
                         break;
                     }
