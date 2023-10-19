@@ -15,6 +15,10 @@ describe('BLEiBeacon', () => {
             beacon.clone();
         });
 
+        it('should have 0x004c as the manufacturer id', () => {
+            expect(beacon.manufacturerData.get(0x004c)).to.not.be.undefined;
+        });
+
         it('should extract the major', () => {
             expect(beacon.major).to.equal(10001);
         });

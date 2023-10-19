@@ -46,7 +46,7 @@ export class BLEiBeacon extends BLEBeaconObject {
 
         const view = new DataView(manufacturerData.buffer, 0);
         if (
-            manufacturer !== 0x4c00 ||
+            manufacturer !== 0x004c ||
             manufacturerData.byteLength < 23 ||
             !arrayBuffersAreEqual(manufacturerData.buffer.slice(0, 2), Uint8Array.from([0x02, 0x15]).buffer)
         ) {

@@ -178,7 +178,7 @@ export class BLEObject extends RFTransmitterObject {
                     case AdvertisementType.BLE_AD_MANUFACTURER_SPECIFIC_TYPE: {
                         // Get the manufacturer
                         const data = new Uint8Array(payload.buffer.slice(i + 2, i + 2 + length));
-                        const manufacturer = view.getInt16(i);
+                        const manufacturer = view.getUint16(i, true);
                         this.parseManufacturerData(manufacturer, data);
                         break;
                     }
