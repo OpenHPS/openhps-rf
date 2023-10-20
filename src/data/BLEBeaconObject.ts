@@ -20,3 +20,17 @@ export abstract class BLEBeaconObject extends BLEObject {
         return this.uid;
     }
 }
+
+/**
+ * BLE beacon builder
+ */
+export abstract class BLEBeaconBuilder<B extends BLEBeaconObject> {
+    protected beacon: B;
+
+    calibratedRSSI(rssi: number): this {
+        this.beacon.calibratedRSSI = rssi;
+        return this;
+    }
+
+    abstract build(): Promise<B>;
+}

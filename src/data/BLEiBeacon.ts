@@ -1,7 +1,7 @@
 import { SerializableMember, SerializableObject } from '@openhps/core';
 import { BLEUUID } from './BLEUUID';
 import { MACAddress } from './MACAddress';
-import { BLEBeaconObject } from './BLEBeaconObject';
+import { BLEBeaconBuilder, BLEBeaconObject } from './BLEBeaconObject';
 import { arrayBuffersAreEqual, concatBuffer, toHexString } from '../utils/BufferUtils';
 
 /**
@@ -60,5 +60,56 @@ export class BLEiBeacon extends BLEBeaconObject {
             this.uid = this.computeUID();
         }
         return this;
+    }
+}
+
+/**
+ * BLE iBeacon builder
+ */
+export class BLEiBeaconBuilder extends BLEBeaconBuilder<BLEiBeacon> {
+    protected constructor() {
+        super();
+        this.beacon = new BLEiBeacon();
+    }
+
+    static create(): BLEiBeaconBuilder {
+        return new BLEiBeaconBuilder();
+    }
+
+    proximityUUID(uuid: BLEUUID): this {
+        this.beacon.proximityUUID = uuid;
+        return this;
+    }
+
+    major(major: number): this {
+        this.beacon.major = major;
+        return this;
+    }
+
+    minor(minor: number): this {
+        this.beacon.minor = minor;
+        return this;
+    }
+
+    build(): Promise<BLEiBeacon> {
+        return new Promise((resolve) => {
+            // Compute manufacturer data
+            const manufacturerData = new DataView(new ArrayBuffer(23), 0);
+            // Advertisement data
+            manufacturerData.setUint8(0, 0x02); // Beacon code
+            manufacturerData.setUint8(1, 0x15);
+            // Proximity UUID
+            const proximityUUID = new DataView(this.beacon.proximityUUID.toBuffer().buffer, 0);
+            for (let i = 2; i < 2 + 16; i++) {
+                manufacturerData.setUint8(i, proximityUUID.getUint8(i - 2));
+            }
+            manufacturerData.setUint8(20, this.beacon.major);
+            manufacturerData.setUint8(21, this.beacon.minor);
+
+            manufacturerData.setInt8(22, this.beacon.calibratedRSSI); // Calibrated RSSI
+
+            this.beacon.manufacturerData.set(0x004c, new Uint8Array(manufacturerData.buffer));
+            resolve(this.beacon);
+        });
     }
 }
