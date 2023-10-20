@@ -27,6 +27,22 @@ export abstract class BLEBeaconObject extends BLEObject {
 export abstract class BLEBeaconBuilder<B extends BLEBeaconObject> {
     protected beacon: B;
 
+    displayName(name: string): this {
+        this.beacon.displayName = name;
+        return this;
+    }
+
+    macAddress(address: string): this;
+    macAddress(address: MACAddress): this;
+    macAddress(address: MACAddress | string): this {
+        if (typeof address === 'string') {
+            this.beacon.address = MACAddress.fromString(address);
+        } else {
+            this.beacon.address = address;
+        }
+        return this;
+    }
+
     calibratedRSSI(rssi: number): this {
         this.beacon.calibratedRSSI = rssi;
         return this;
