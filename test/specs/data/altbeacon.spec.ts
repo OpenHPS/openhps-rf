@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import 'mocha';
 import {
-    BLEAltBeacon,
+    BLEAltBeacon, BLEAltBeaconBuilder, BLEUUID,
 } from '../../../src';
 
 describe('BLEAltBeacon', () => {
@@ -20,6 +20,30 @@ describe('BLEAltBeacon', () => {
 
         it('should support cloning', () => {
             beacon.clone();
+        });
+
+        it('should be valid', () => {
+            expect(beacon.isValid()).to.be.true;
+        });
+
+        it('should extract the calibrated rssi', () => {
+            expect(beacon.calibratedRSSI).to.equal(-56);
+        });
+    });
+
+    describe('builder', () => {
+        let beacon: BLEAltBeacon;
+
+        before((done) => {
+            BLEAltBeaconBuilder.create()
+                .proximityUUID(BLEUUID.fromString("77f340db-ac0d-20e8-aa3a-f656a29f236c"))
+                .major(51243)
+                .minor(14124)
+                .calibratedRSSI(-56)
+                .build().then(b => {
+                    beacon = b;
+                    done();
+                }).catch(done);
         });
 
         it('should be valid', () => {

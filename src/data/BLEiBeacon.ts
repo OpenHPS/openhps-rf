@@ -103,8 +103,8 @@ export class BLEiBeaconBuilder extends BLEBeaconBuilder<BLEiBeacon> {
             for (let i = 2; i < 2 + 16; i++) {
                 manufacturerData.setUint8(i, proximityUUID.getUint8(i - 2));
             }
-            manufacturerData.setUint8(20, this.beacon.major);
-            manufacturerData.setUint8(21, this.beacon.minor);
+            manufacturerData.setUint16(18, this.beacon.major);
+            manufacturerData.setUint16(20, this.beacon.minor);
 
             manufacturerData.setInt8(22, this.beacon.calibratedRSSI); // Calibrated RSSI
 

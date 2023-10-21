@@ -105,16 +105,16 @@ export class BLEAltBeaconBuilder extends BLEBeaconBuilder<BLEAltBeacon> {
             } else if (this.identifier.uuid) {
                 // iBeacon
                 const uuid = new DataView(this.identifier.uuid.toBuffer().buffer, 0);
-                for (let i = 2; i < 2 + 18; i++) {
+                for (let i = 2; i < 2 + 16; i++) {
                     manufacturerData.setUint8(i, uuid.getUint8(i - 2));
                 }
-                manufacturerData.setUint8(20, this.identifier.major);
-                manufacturerData.setUint8(21, this.identifier.minor);
+                manufacturerData.setUint16(18, this.identifier.major);
+                manufacturerData.setUint16(20, this.identifier.minor);
             }
 
             manufacturerData.setInt8(22, this.beacon.calibratedRSSI); // Calibrated RSSI
             manufacturerData.setUint8(23, this.beacon.msb);
-
+            this.beacon.beaconId = BLEUUID.fromBuffer(new Uint8Array(manufacturerData.buffer.slice(2, 22)));
             this.beacon.manufacturerData.set(this.manufacturer, new Uint8Array(manufacturerData.buffer));
             resolve(this.beacon);
         });
