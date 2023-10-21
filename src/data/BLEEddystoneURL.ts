@@ -83,6 +83,7 @@ export class BLEEddystoneURLBuilder extends BLEBeaconBuilder<BLEEddystoneURL> {
     protected constructor() {
         super();
         this.beacon = new BLEEddystoneURL();
+        this.beacon.frame = 0x10;
     }
 
     static create(): BLEEddystoneURLBuilder {

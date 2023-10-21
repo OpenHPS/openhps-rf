@@ -49,6 +49,11 @@ export class BLEAltBeacon extends BLEBeaconObject {
  */
 export class BLEAltBeaconBuilder extends BLEBeaconBuilder<BLEAltBeacon> {
     protected manufacturer: number = 0xffff;
+    protected identifier: {
+        uuid?: BLEUUID;
+        major?: number;
+        minor?: number;
+    } = {};
 
     protected constructor() {
         super();
@@ -69,6 +74,21 @@ export class BLEAltBeaconBuilder extends BLEBeaconBuilder<BLEAltBeacon> {
         return this;
     }
 
+    proximityUUID(uuid: BLEUUID): this {
+        this.identifier.uuid = uuid;
+        return this;
+    }
+
+    major(major: number): this {
+        this.identifier.major = major;
+        return this;
+    }
+
+    minor(minor: number): this {
+        this.identifier.minor = minor;
+        return this;
+    }
+
     build(): Promise<BLEAltBeacon> {
         return new Promise((resolve) => {
             // Compute manufacturer data
@@ -76,10 +96,20 @@ export class BLEAltBeaconBuilder extends BLEBeaconBuilder<BLEAltBeacon> {
             // Advertisement data
             manufacturerData.setUint8(0, 0xbe); // Beacon code
             manufacturerData.setUint8(1, 0xac);
-            // Beacon ID
-            const beaconId = new DataView(this.beacon.beaconId.toBuffer().buffer, 0);
-            for (let i = 2; i < 2 + 20; i++) {
-                manufacturerData.setUint8(i, beaconId.getUint8(i - 2));
+            if (this.beacon.beaconId) {
+                // Beacon ID
+                const beaconId = new DataView(this.beacon.beaconId.toBuffer().buffer, 0);
+                for (let i = 2; i < 2 + 20; i++) {
+                    manufacturerData.setUint8(i, beaconId.getUint8(i - 2));
+                }
+            } else if (this.identifier.uuid) {
+                // iBeacon
+                const uuid = new DataView(this.identifier.uuid.toBuffer().buffer, 0);
+                for (let i = 2; i < 2 + 18; i++) {
+                    manufacturerData.setUint8(i, uuid.getUint8(i - 2));
+                }
+                manufacturerData.setUint8(20, this.identifier.major);
+                manufacturerData.setUint8(21, this.identifier.minor);
             }
 
             manufacturerData.setInt8(22, this.beacon.calibratedRSSI); // Calibrated RSSI

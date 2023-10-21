@@ -3,6 +3,7 @@ import { expect } from 'chai';
 import 'mocha';
 import {
     BLEEddystoneTLM,
+    BLEEddystoneTLMBuilder,
     BLEEddystoneUID,
     BLEEddystoneURL,
     BLEObject,
@@ -144,7 +145,7 @@ describe('BLEEddystoneTLM', () => {
             });
     
             it('should have 2 sec as the uptime', () => {
-                expect(beacon.uptime).to.eql(2);
+                expect(beacon.uptime.valueOf()).to.eql(2);
             });
     
             it('should have adv count of 10', () => {
@@ -199,7 +200,7 @@ describe('BLEEddystoneTLM', () => {
             });
     
             it('should have 2 sec as the uptime', () => {
-                expect(beacon.uptime).to.eql(2);
+                expect(beacon.uptime.valueOf()).to.eql(2);
             });
     
             it('should have adv count of 10', () => {
@@ -209,6 +210,50 @@ describe('BLEEddystoneTLM', () => {
             it('should have 3215mV', () => {
                 expect(beacon.voltage).to.eql(3215);
             });
+        });
+    });
+    describe('builder', () => {
+        let beacon: BLEEddystoneTLM;
+
+        before((done) => {
+            BLEEddystoneTLMBuilder.create()
+                .advertiseCount(1000)
+                .calibratedRSSI(-36)
+                .voltage(3784)
+                .uptime(1956)
+                .temperature(255.19)
+                .build().then(b => {
+                    beacon = b;
+                    done();
+                }).catch(done);
+        });
+
+        it('should be valid', () => {
+            expect(beacon.isValid()).to.be.true;
+        });
+
+        it('should have 0x20 as the frame', () => {
+            expect(beacon.frame).to.eql(0x20);
+        });
+
+        it('should have 0x00 as the version', () => {
+            expect(beacon.version).to.eql(0x00);
+        });
+
+        it('should have 255.19 deg C as the temperature', () => {
+            expect(beacon.temperature.value).to.eql(255.19);
+        });
+
+        it('should have 1956 sec as the uptime', () => {
+            expect(beacon.uptime.valueOf()).to.eql(1956);
+        });
+
+        it('should have adv count of 10', () => {
+            expect(beacon.advertiseCount).to.eql(1000);
+        });
+
+        it('should have 3784mV', () => {
+            expect(beacon.voltage).to.eql(3784);
         });
     });
 });

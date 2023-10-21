@@ -55,6 +55,7 @@ export class BLEEddystoneUIDBuilder extends BLEBeaconBuilder<BLEEddystoneUID> {
     protected constructor() {
         super();
         this.beacon = new BLEEddystoneUID();
+        this.beacon.frame = 0x00;
     }
 
     static create(): BLEEddystoneUIDBuilder {
