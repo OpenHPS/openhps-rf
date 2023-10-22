@@ -26,7 +26,7 @@
 <ul class="tsd-hierarchy">
 <li><span class="target">BLEAltBeaconBuilder</span></li></ul></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/92b2bb3/src/data/BLEAltBeacon.ts#L50">src/data/BLEAltBeacon.ts:50</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/d8148f7/src/data/BLEAltBeacon.ts#L103">src/data/BLEAltBeacon.ts:103</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -39,7 +39,6 @@
 <section class="tsd-index-section">
 <h3 class="tsd-index-heading">Properties</h3>
 <div class="tsd-index-list"><a href="BLEAltBeaconBuilder.html#beacon" class="tsd-index-link tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>beacon</span></a>
-<a href="BLEAltBeaconBuilder.html#identifier" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>identifier</span></a>
 <a href="BLEAltBeaconBuilder.html#manufacturer" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>manufacturer</span></a>
 </div></section>
 <section class="tsd-index-section">
@@ -49,11 +48,12 @@
 <a href="BLEAltBeaconBuilder.html#calibratedRSSI" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>calibratedRSSI</span></a>
 <a href="BLEAltBeaconBuilder.html#displayName" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>display<wbr/>Name</span></a>
 <a href="BLEAltBeaconBuilder.html#macAddress" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>mac<wbr/>Address</span></a>
-<a href="BLEAltBeaconBuilder.html#major-1" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>major</span></a>
+<a href="BLEAltBeaconBuilder.html#major" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>major</span></a>
 <a href="BLEAltBeaconBuilder.html#manufacturerId" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>manufacturer<wbr/>Id</span></a>
-<a href="BLEAltBeaconBuilder.html#minor-1" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>minor</span></a>
+<a href="BLEAltBeaconBuilder.html#minor" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>minor</span></a>
 <a href="BLEAltBeaconBuilder.html#proximityUUID" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>proximityUUID</span></a>
 <a href="BLEAltBeaconBuilder.html#create" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>create</span></a>
+<a href="BLEAltBeaconBuilder.html#fromBeacon" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>from<wbr/>Beacon</span></a>
 </div></section></div></details></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Constructors</h2>
@@ -65,7 +65,7 @@
 <h4 class="tsd-returns-title">Returns <a href="BLEAltBeaconBuilder.html" class="tsd-signature-type tsd-kind-class">BLEAltBeaconBuilder</a></h4><aside class="tsd-sources">
 <p>Overrides <a href="BLEBeaconBuilder.html">BLEBeaconBuilder</a>.<a href="BLEBeaconBuilder.html#constructor">constructor</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/92b2bb3/src/data/BLEAltBeacon.ts#L58">src/data/BLEAltBeacon.ts:58</a></li></ul></aside></li></ul></section></section>
+<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/d8148f7/src/data/BLEAltBeacon.ts#L106">src/data/BLEAltBeacon.ts:106</a></li></ul></aside></li></ul></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Properties</h2>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited"><a id="beacon" class="tsd-anchor"></a>
@@ -73,26 +73,12 @@
 <div class="tsd-signature"><span class="tsd-kind-property">beacon</span><span class="tsd-signature-symbol">:</span> <a href="BLEAltBeacon.html" class="tsd-signature-type tsd-kind-class">BLEAltBeacon</a></div><aside class="tsd-sources">
 <p>Inherited from <a href="BLEBeaconBuilder.html">BLEBeaconBuilder</a>.<a href="BLEBeaconBuilder.html#beacon">beacon</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/92b2bb3/src/data/BLEBeaconObject.ts#L28">src/data/BLEBeaconObject.ts:28</a></li></ul></aside></section>
-<section class="tsd-panel tsd-member tsd-is-protected"><a id="identifier" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>identifier</span><a href="#identifier" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">identifier</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span><br/><span>    </span><span class="tsd-kind-property">major</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">minor</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">uuid</span><span class="tsd-signature-symbol">?: </span><a href="BLEUUID.html" class="tsd-signature-type tsd-kind-class">BLEUUID</a><span class="tsd-signature-symbol">; </span><br/><span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol"> = {}</span></div>
-<div class="tsd-type-declaration">
-<h4>Type declaration</h4>
-<ul class="tsd-parameters">
-<li class="tsd-parameter">
-<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-property">major</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5></li>
-<li class="tsd-parameter">
-<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-property">minor</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5></li>
-<li class="tsd-parameter">
-<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-property">uuid</span><span class="tsd-signature-symbol">?: </span><a href="BLEUUID.html" class="tsd-signature-type tsd-kind-class">BLEUUID</a></h5></li></ul></div><aside class="tsd-sources">
-<ul>
-<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/92b2bb3/src/data/BLEAltBeacon.ts#L52">src/data/BLEAltBeacon.ts:52</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/d8148f7/src/data/BLEBeaconObject.ts#L28">src/data/BLEBeaconObject.ts:28</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="manufacturer" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>manufacturer</span><a href="#manufacturer" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">manufacturer</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 0xffff</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/92b2bb3/src/data/BLEAltBeacon.ts#L51">src/data/BLEAltBeacon.ts:51</a></li></ul></aside></section></section>
+<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/d8148f7/src/data/BLEAltBeacon.ts#L104">src/data/BLEAltBeacon.ts:104</a></li></ul></aside></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Methods</h2>
 <section class="tsd-panel tsd-member"><a id="beaconId" class="tsd-anchor"></a>
@@ -107,7 +93,7 @@
 <h5><span class="tsd-kind-parameter">beaconId</span>: <a href="BLEUUID.html" class="tsd-signature-type tsd-kind-class">BLEUUID</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="BLEAltBeaconBuilder.html" class="tsd-signature-type tsd-kind-class">BLEAltBeaconBuilder</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/92b2bb3/src/data/BLEAltBeacon.ts#L72">src/data/BLEAltBeacon.ts:72</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/d8148f7/src/data/BLEAltBeacon.ts#L127">src/data/BLEAltBeacon.ts:127</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="build" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>build</span><a href="#build" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -116,7 +102,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="BLEAltBeacon.html" class="tsd-signature-type tsd-kind-class">BLEAltBeacon</a><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <p>Overrides <a href="BLEBeaconBuilder.html">BLEBeaconBuilder</a>.<a href="BLEBeaconBuilder.html#build">build</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/92b2bb3/src/data/BLEAltBeacon.ts#L92">src/data/BLEAltBeacon.ts:92</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/d8148f7/src/data/BLEAltBeacon.ts#L147">src/data/BLEAltBeacon.ts:147</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited"><a id="calibratedRSSI" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>calibratedRSSI</span><a href="#calibratedRSSI" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited">
@@ -130,7 +116,7 @@
 <h4 class="tsd-returns-title">Returns <a href="BLEAltBeaconBuilder.html" class="tsd-signature-type tsd-kind-class">BLEAltBeaconBuilder</a></h4><aside class="tsd-sources">
 <p>Inherited from <a href="BLEBeaconBuilder.html">BLEBeaconBuilder</a>.<a href="BLEBeaconBuilder.html#calibratedRSSI">calibratedRSSI</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/92b2bb3/src/data/BLEBeaconObject.ts#L46">src/data/BLEBeaconObject.ts:46</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/d8148f7/src/data/BLEBeaconObject.ts#L46">src/data/BLEBeaconObject.ts:46</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited"><a id="displayName" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>display<wbr/>Name</span><a href="#displayName" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited">
@@ -144,7 +130,7 @@
 <h4 class="tsd-returns-title">Returns <a href="BLEAltBeaconBuilder.html" class="tsd-signature-type tsd-kind-class">BLEAltBeaconBuilder</a></h4><aside class="tsd-sources">
 <p>Inherited from <a href="BLEBeaconBuilder.html">BLEBeaconBuilder</a>.<a href="BLEBeaconBuilder.html#displayName">displayName</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/92b2bb3/src/data/BLEBeaconObject.ts#L30">src/data/BLEBeaconObject.ts:30</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/d8148f7/src/data/BLEBeaconObject.ts#L30">src/data/BLEBeaconObject.ts:30</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited"><a id="macAddress" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>mac<wbr/>Address</span><a href="#macAddress" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited">
@@ -158,7 +144,7 @@
 <h4 class="tsd-returns-title">Returns <a href="BLEAltBeaconBuilder.html" class="tsd-signature-type tsd-kind-class">BLEAltBeaconBuilder</a></h4><aside class="tsd-sources">
 <p>Inherited from <a href="BLEBeaconBuilder.html">BLEBeaconBuilder</a>.<a href="BLEBeaconBuilder.html#macAddress">macAddress</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/92b2bb3/src/data/BLEBeaconObject.ts#L35">src/data/BLEBeaconObject.ts:35</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/d8148f7/src/data/BLEBeaconObject.ts#L35">src/data/BLEBeaconObject.ts:35</a></li></ul></aside></li>
 <li class="tsd-signature tsd-anchor-link" id="macAddress.macAddress-2"><span class="tsd-kind-call-signature">mac<wbr/>Address</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">address</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="BLEAltBeaconBuilder.html" class="tsd-signature-type tsd-kind-class">BLEAltBeaconBuilder</a><a href="#macAddress.macAddress-2" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-parameters">
@@ -169,11 +155,11 @@
 <h4 class="tsd-returns-title">Returns <a href="BLEAltBeaconBuilder.html" class="tsd-signature-type tsd-kind-class">BLEAltBeaconBuilder</a></h4><aside class="tsd-sources">
 <p>Inherited from <a href="BLEBeaconBuilder.html">BLEBeaconBuilder</a>.<a href="BLEBeaconBuilder.html#macAddress">macAddress</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/92b2bb3/src/data/BLEBeaconObject.ts#L36">src/data/BLEBeaconObject.ts:36</a></li></ul></aside></li></ul></section>
-<section class="tsd-panel tsd-member"><a id="major-1" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><span>major</span><a href="#major-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/d8148f7/src/data/BLEBeaconObject.ts#L36">src/data/BLEBeaconObject.ts:36</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member"><a id="major" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>major</span><a href="#major" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
-<li class="tsd-signature tsd-anchor-link" id="major-1.major-2"><span class="tsd-kind-call-signature">major</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">major</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="BLEAltBeaconBuilder.html" class="tsd-signature-type tsd-kind-class">BLEAltBeaconBuilder</a><a href="#major-1.major-2" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="major.major-1"><span class="tsd-kind-call-signature">major</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">major</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="BLEAltBeaconBuilder.html" class="tsd-signature-type tsd-kind-class">BLEAltBeaconBuilder</a><a href="#major.major-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
@@ -182,7 +168,7 @@
 <h5><span class="tsd-kind-parameter">major</span>: <span class="tsd-signature-type">number</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="BLEAltBeaconBuilder.html" class="tsd-signature-type tsd-kind-class">BLEAltBeaconBuilder</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/92b2bb3/src/data/BLEAltBeacon.ts#L82">src/data/BLEAltBeacon.ts:82</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/d8148f7/src/data/BLEAltBeacon.ts#L137">src/data/BLEAltBeacon.ts:137</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="manufacturerId" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>manufacturer<wbr/>Id</span><a href="#manufacturerId" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -195,11 +181,11 @@
 <h5><span class="tsd-kind-parameter">manufacturer</span>: <span class="tsd-signature-type">number</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="BLEAltBeaconBuilder.html" class="tsd-signature-type tsd-kind-class">BLEAltBeaconBuilder</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/92b2bb3/src/data/BLEAltBeacon.ts#L67">src/data/BLEAltBeacon.ts:67</a></li></ul></aside></li></ul></section>
-<section class="tsd-panel tsd-member"><a id="minor-1" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><span>minor</span><a href="#minor-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/d8148f7/src/data/BLEAltBeacon.ts#L122">src/data/BLEAltBeacon.ts:122</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member"><a id="minor" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>minor</span><a href="#minor" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
-<li class="tsd-signature tsd-anchor-link" id="minor-1.minor-2"><span class="tsd-kind-call-signature">minor</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">minor</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="BLEAltBeaconBuilder.html" class="tsd-signature-type tsd-kind-class">BLEAltBeaconBuilder</a><a href="#minor-1.minor-2" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="minor.minor-1"><span class="tsd-kind-call-signature">minor</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">minor</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="BLEAltBeaconBuilder.html" class="tsd-signature-type tsd-kind-class">BLEAltBeaconBuilder</a><a href="#minor.minor-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
@@ -208,7 +194,7 @@
 <h5><span class="tsd-kind-parameter">minor</span>: <span class="tsd-signature-type">number</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="BLEAltBeaconBuilder.html" class="tsd-signature-type tsd-kind-class">BLEAltBeaconBuilder</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/92b2bb3/src/data/BLEAltBeacon.ts#L87">src/data/BLEAltBeacon.ts:87</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/d8148f7/src/data/BLEAltBeacon.ts#L142">src/data/BLEAltBeacon.ts:142</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="proximityUUID" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>proximityUUID</span><a href="#proximityUUID" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -221,7 +207,7 @@
 <h5><span class="tsd-kind-parameter">uuid</span>: <a href="BLEUUID.html" class="tsd-signature-type tsd-kind-class">BLEUUID</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="BLEAltBeaconBuilder.html" class="tsd-signature-type tsd-kind-class">BLEAltBeaconBuilder</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/92b2bb3/src/data/BLEAltBeacon.ts#L77">src/data/BLEAltBeacon.ts:77</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/d8148f7/src/data/BLEAltBeacon.ts#L132">src/data/BLEAltBeacon.ts:132</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="create" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagStatic">Static</code> <span>create</span><a href="#create" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -229,7 +215,20 @@
 <li class="tsd-description">
 <h4 class="tsd-returns-title">Returns <a href="BLEAltBeaconBuilder.html" class="tsd-signature-type tsd-kind-class">BLEAltBeaconBuilder</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/92b2bb3/src/data/BLEAltBeacon.ts#L63">src/data/BLEAltBeacon.ts:63</a></li></ul></aside></li></ul></section></section></div>
+<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/d8148f7/src/data/BLEAltBeacon.ts#L111">src/data/BLEAltBeacon.ts:111</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member"><a id="fromBeacon" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagStatic">Static</code> <span>from<wbr/>Beacon</span><a href="#fromBeacon" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures">
+<li class="tsd-signature tsd-anchor-link" id="fromBeacon.fromBeacon-1"><span class="tsd-kind-call-signature">from<wbr/>Beacon</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">beacon</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="BLEAltBeaconBuilder.html" class="tsd-signature-type tsd-kind-class">BLEAltBeaconBuilder</a><a href="#fromBeacon.fromBeacon-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">beacon</span>: <a href="BLEAltBeacon.html" class="tsd-signature-type tsd-kind-class">BLEAltBeacon</a></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <a href="BLEAltBeaconBuilder.html" class="tsd-signature-type tsd-kind-class">BLEAltBeaconBuilder</a></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/d8148f7/src/data/BLEAltBeacon.ts#L115">src/data/BLEAltBeacon.ts:115</a></li></ul></aside></li></ul></section></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
@@ -250,18 +249,18 @@
 <ul>
 <li><a href="#constructor" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-512"></use></svg><span>constructor</span></a></li>
 <li><a href="#beacon" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>beacon</span></a></li>
-<li><a href="#identifier" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>identifier</span></a></li>
 <li><a href="#manufacturer" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>manufacturer</span></a></li>
 <li><a href="#beaconId" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>beacon<wbr/>Id</span></a></li>
 <li><a href="#build" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>build</span></a></li>
 <li><a href="#calibratedRSSI" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>calibratedRSSI</span></a></li>
 <li><a href="#displayName" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>display<wbr/>Name</span></a></li>
 <li><a href="#macAddress" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>mac<wbr/>Address</span></a></li>
-<li><a href="#major-1" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>major</span></a></li>
+<li><a href="#major" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>major</span></a></li>
 <li><a href="#manufacturerId" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>manufacturer<wbr/>Id</span></a></li>
-<li><a href="#minor-1" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>minor</span></a></li>
+<li><a href="#minor" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>minor</span></a></li>
 <li><a href="#proximityUUID" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>proximityUUID</span></a></li>
-<li><a href="#create" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>create</span></a></li></ul></div></details></div>
+<li><a href="#create" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>create</span></a></li>
+<li><a href="#fromBeacon" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>from<wbr/>Beacon</span></a></li></ul></div></details></div>
 <div class="site-menu">
 <nav class="tsd-navigation"><a href="../modules.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1"></use></svg><span>@openhps/rf</span></a>
 <ul class="tsd-small-nested-navigation" id="tsd-nav-container" data-base="..">
