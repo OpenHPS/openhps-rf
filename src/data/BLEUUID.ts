@@ -53,12 +53,13 @@ export class BLEUUID {
         return BLEUUID.fromString(this.toString(8));
     }
 
-    toString(byteLength?: number): string {
+    toString(byteLength?: number, padding: boolean = true): string {
         byteLength = byteLength ?? this._raw.byteLength;
         const bytes = [];
         for (const [, value] of this._raw.entries()) {
             bytes.push(value);
         }
+        const UUID_PADDING = padding ? BLE_UUID_PADDING : '';
         if (byteLength === 2) {
             // 16 bit
             return (
@@ -68,7 +69,7 @@ export class BLEUUID {
                         return byte.toString(16).padStart(2, '0');
                     })
                     .join('') +
-                BLE_UUID_PADDING
+                UUID_PADDING
             );
         } else if (byteLength === 4) {
             // 32 bit
@@ -77,7 +78,7 @@ export class BLEUUID {
                     .map((byte: number) => {
                         return byte.toString(16).padStart(2, '0');
                     })
-                    .join('') + BLE_UUID_PADDING
+                    .join('') + UUID_PADDING
             );
         } else if (byteLength === 16) {
             // 128 bit
