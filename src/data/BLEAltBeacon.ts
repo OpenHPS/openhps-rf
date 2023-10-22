@@ -11,6 +11,59 @@ export class BLEAltBeacon extends BLEBeaconObject {
     @SerializableMember()
     msb: number;
 
+    get proximityUUID(): BLEUUID {
+        if (this.beaconId) {
+            return BLEUUID.fromBuffer(new Uint8Array(this.beaconId.toBuffer().buffer.slice(0, 16)));
+        } else {
+            return undefined;
+        }
+    }
+
+    set proximityUUID(uuid: BLEUUID) {
+        if (!this.beaconId) {
+            this.beaconId = BLEUUID.fromBuffer(new Uint8Array(20));
+        }
+        const uuidView = new DataView(uuid.toBuffer().buffer);
+        const view = new DataView(this.beaconId.toBuffer().buffer);
+        for (let i = 0; i < 16; i++) {
+            view.setUint8(i, uuidView.getUint8(i));
+        }
+    }
+
+    get major(): number {
+        if (this.beaconId) {
+            const view = new DataView(this.beaconId.toBuffer().buffer);
+            return view.getUint16(16);
+        } else {
+            return undefined;
+        }
+    }
+
+    set major(value: number) {
+        if (!this.beaconId) {
+            this.beaconId = BLEUUID.fromBuffer(new Uint8Array(20));
+        }
+        const view = new DataView(this.beaconId.toBuffer().buffer);
+        view.setUint16(16, value);
+    }
+
+    get minor(): number {
+        if (this.beaconId) {
+            const view = new DataView(this.beaconId.toBuffer().buffer);
+            return view.getUint16(18);
+        } else {
+            return undefined;
+        }
+    }
+
+    set minor(value: number) {
+        if (!this.beaconId) {
+            this.beaconId = BLEUUID.fromBuffer(new Uint8Array(20));
+        }
+        const view = new DataView(this.beaconId.toBuffer().buffer);
+        view.setUint16(18, value);
+    }
+
     isValid(): boolean {
         return this.beaconId !== undefined;
     }
@@ -34,7 +87,7 @@ export class BLEAltBeacon extends BLEBeaconObject {
         ) {
             return this;
         }
-        this.beaconId = BLEUUID.fromBuffer(manufacturerData.subarray(2, 22));
+        this.beaconId = BLEUUID.fromBuffer(manufacturerData.slice(2, 22));
         this.calibratedRSSI = view.getInt8(22);
         this.msb = view.getInt8(23);
         if (this.uid === undefined) {
@@ -49,11 +102,6 @@ export class BLEAltBeacon extends BLEBeaconObject {
  */
 export class BLEAltBeaconBuilder extends BLEBeaconBuilder<BLEAltBeacon> {
     protected manufacturer: number = 0xffff;
-    protected identifier: {
-        uuid?: BLEUUID;
-        major?: number;
-        minor?: number;
-    } = {};
 
     protected constructor() {
         super();
@@ -62,6 +110,13 @@ export class BLEAltBeaconBuilder extends BLEBeaconBuilder<BLEAltBeacon> {
 
     static create(): BLEAltBeaconBuilder {
         return new BLEAltBeaconBuilder();
+    }
+
+    static fromBeacon(beacon: BLEAltBeacon): BLEAltBeaconBuilder {
+        const builder = new BLEAltBeaconBuilder();
+        builder.beacon = beacon;
+        builder.manufacturer = beacon.manufacturerData.size > 0 ? beacon.manufacturerData.keys().next().value : 0xffff;
+        return builder;
     }
 
     manufacturerId(manufacturer: number): this {
@@ -75,17 +130,17 @@ export class BLEAltBeaconBuilder extends BLEBeaconBuilder<BLEAltBeacon> {
     }
 
     proximityUUID(uuid: BLEUUID): this {
-        this.identifier.uuid = uuid;
+        this.beacon.proximityUUID = uuid;
         return this;
     }
 
     major(major: number): this {
-        this.identifier.major = major;
+        this.beacon.major = major;
         return this;
     }
 
     minor(minor: number): this {
-        this.identifier.minor = minor;
+        this.beacon.minor = minor;
         return this;
     }
 
@@ -96,20 +151,10 @@ export class BLEAltBeaconBuilder extends BLEBeaconBuilder<BLEAltBeacon> {
             // Advertisement data
             manufacturerData.setUint8(0, 0xbe); // Beacon code
             manufacturerData.setUint8(1, 0xac);
-            if (this.beacon.beaconId) {
-                // Beacon ID
-                const beaconId = new DataView(this.beacon.beaconId.toBuffer().buffer, 0);
-                for (let i = 2; i < 2 + 20; i++) {
-                    manufacturerData.setUint8(i, beaconId.getUint8(i - 2));
-                }
-            } else if (this.identifier.uuid) {
-                // iBeacon
-                const uuid = new DataView(this.identifier.uuid.toBuffer().buffer, 0);
-                for (let i = 2; i < 2 + 16; i++) {
-                    manufacturerData.setUint8(i, uuid.getUint8(i - 2));
-                }
-                manufacturerData.setUint16(18, this.identifier.major);
-                manufacturerData.setUint16(20, this.identifier.minor);
+            // Beacon ID
+            const beaconId = new DataView(this.beacon.beaconId.toBuffer().buffer, 0);
+            for (let i = 2; i < 2 + 20; i++) {
+                manufacturerData.setUint8(i, beaconId.getUint8(i - 2));
             }
 
             manufacturerData.setInt8(22, this.beacon.calibratedRSSI); // Calibrated RSSI

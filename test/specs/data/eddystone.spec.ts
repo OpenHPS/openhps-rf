@@ -221,7 +221,7 @@ describe('BLEEddystoneTLM', () => {
                 .calibratedRSSI(-36)
                 .voltage(3784)
                 .uptime(1956)
-                .temperature(255.19)
+                .temperature(25.91)
                 .build().then(b => {
                     beacon = b;
                     done();
@@ -240,8 +240,8 @@ describe('BLEEddystoneTLM', () => {
             expect(beacon.version).to.eql(0x00);
         });
 
-        it('should have 255.19 deg C as the temperature', () => {
-            expect(beacon.temperature.value).to.eql(255.19);
+        it('should have 25.91 deg C as the temperature', () => {
+            expect(beacon.temperature.value).to.eql(25.91);
         });
 
         it('should have 1956 sec as the uptime', () => {
@@ -254,6 +254,43 @@ describe('BLEEddystoneTLM', () => {
 
         it('should have 3784mV', () => {
             expect(beacon.voltage).to.eql(3784);
+        });
+
+        describe('parsing', () => {
+            let parsedBeacon: BLEEddystoneTLM = new BLEEddystoneTLM();
+
+            before(() => {
+                const service = beacon.services[0];
+                parsedBeacon.parseServiceData(service.uuid, service.data);
+            });
+
+            it('should be valid', () => {
+                expect(parsedBeacon.isValid()).to.be.true;
+            });
+
+            it('should have 0x20 as the frame', () => {
+                expect(parsedBeacon.frame).to.eql(0x20);
+            });
+
+            it('should have 0x00 as the version', () => {
+                expect(parsedBeacon.version).to.eql(0x00);
+            });
+
+            it('should have 25.91 deg C as the temperature', () => {
+                expect(parsedBeacon.temperature.value).to.eql(25.91);
+            });
+
+            it('should have 1956 sec as the uptime', () => {
+                expect(parsedBeacon.uptime.valueOf()).to.eql(1956);
+            });
+
+            it('should have adv count of 10', () => {
+                expect(parsedBeacon.advertiseCount).to.eql(1000);
+            });
+
+            it('should have 3784mV', () => {
+                expect(parsedBeacon.voltage).to.eql(3784);
+            });
         });
     });
 });

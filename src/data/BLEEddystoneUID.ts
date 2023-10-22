@@ -39,8 +39,8 @@ export class BLEEddystoneUID extends BLEEddystone {
             return this; // Do not attempt to parse
         }
 
-        this.namespaceId = BLEUUID.fromBuffer(serviceData.subarray(2, 12));
-        this.instanceId = BLEUUID.fromBuffer(serviceData.subarray(12, 18));
+        this.namespaceId = BLEUUID.fromBuffer(serviceData.slice(2, 12));
+        this.instanceId = BLEUUID.fromBuffer(serviceData.slice(12, 18));
         if (this.uid === undefined) {
             this.uid = this.computeUID();
         }
@@ -60,6 +60,12 @@ export class BLEEddystoneUIDBuilder extends BLEBeaconBuilder<BLEEddystoneUID> {
 
     static create(): BLEEddystoneUIDBuilder {
         return new BLEEddystoneUIDBuilder();
+    }
+
+    static fromBeacon(beacon: BLEEddystoneUID): BLEEddystoneUIDBuilder {
+        const builder = new BLEEddystoneUIDBuilder();
+        builder.beacon = beacon;
+        return builder;
     }
 
     namespaceId(namespaceId: BLEUUID): this {

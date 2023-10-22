@@ -69,7 +69,7 @@ export class BLEEddystoneTLM extends BLEEddystone {
             if (temperatureRaw !== 0x8000) {
                 const temperatureSigned = (temperatureRaw & 0x8000) > 0 ? -1 : 1;
                 const temperature = (temperatureSigned * temperatureRaw) / Math.pow(2, 8);
-                this.temperature = new Temperature(temperature, TemperatureUnit.CELCIUS);
+                this.temperature = new Temperature(Math.round(temperature * 100) / 100, TemperatureUnit.CELCIUS);
             }
             this.advertiseCount = view.getUint32(6);
             this.uptime = new UnitValue(view.getUint32(10) * 0.1, TimeUnit.SECOND);
@@ -95,6 +95,12 @@ export class BLEEddystoneTLMBuilder extends BLEBeaconBuilder<BLEEddystoneTLM> {
 
     static create(): BLEEddystoneTLMBuilder {
         return new BLEEddystoneTLMBuilder();
+    }
+
+    static fromBeacon(beacon: BLEEddystoneTLM): BLEEddystoneTLMBuilder {
+        const builder = new BLEEddystoneTLMBuilder();
+        builder.beacon = beacon;
+        return builder;
     }
 
     calibratedRSSI(rssi: number): this {
@@ -130,9 +136,7 @@ export class BLEEddystoneTLMBuilder extends BLEBeaconBuilder<BLEEddystoneTLM> {
             serviceData.setInt8(1, 0x00); // Version
             serviceData.setUint16(2, this.beacon.voltage);
             if (this.beacon.temperature) {
-                const temperature = Math.floor(this.beacon.temperature.value);
-                const fval = Math.floor(100 * temperature + 0.5);
-                serviceData.setInt16(4, (temperature << 8) + fval);
+                serviceData.setInt16(4, Math.round(this.beacon.temperature.value * 256.0));
             } else {
                 serviceData.setInt16(4, 0x8000);
             }

@@ -90,6 +90,12 @@ export class BLEEddystoneURLBuilder extends BLEBeaconBuilder<BLEEddystoneURL> {
         return new BLEEddystoneURLBuilder();
     }
 
+    static fromBeacon(beacon: BLEEddystoneURL): BLEEddystoneURLBuilder {
+        const builder = new BLEEddystoneURLBuilder();
+        builder.beacon = beacon;
+        return builder;
+    }
+
     url(url: string): this {
         this.beacon.url = url;
         return this;
