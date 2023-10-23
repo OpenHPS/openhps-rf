@@ -97,6 +97,14 @@ describe('BLEEddystoneUID', () => {
             expect(beacon.getCalibratedRSSI(0, LengthUnit.METER)).to.eql(-8);
         });
 
+        it('should have a tx power at 0m', () => {
+            expect(beacon.getCalibratedRSSI(0, LengthUnit.METER)).to.eql(-8);
+        });
+
+        it('should have a tx power at 1m', () => {
+            expect(beacon.calibratedRSSI).to.eql(-8 - 41);
+        });
+
         it('should have a namespace id', () => {
             expect(beacon.namespaceId).to.not.be.undefined;
         });

@@ -44,24 +44,24 @@ export class RFTransmitterObject extends DataObject implements RFObject {
     /**
      * Get the calibrated RSSI at a specific distance
      * @param {number} distance Distance
-     * @param {LengthUnit} unit Length Unit
+     * @param {LengthUnit} [unit] Length Unit
      * @returns {number} RSSI at distance
      */
-    getCalibratedRSSI(distance: number, unit: LengthUnit): number {
-        const distanceInMeter = unit.convert(distance, LengthUnit.METER); // eslint-disable-line
-        return this.calibratedRSSI;
+    getCalibratedRSSI(distance: number, unit: LengthUnit = LengthUnit.METER): number {
+        const distanceInMeter = unit.convert(distance, LengthUnit.METER);
+        return Math.ceil(this.calibratedRSSI - (1 - distanceInMeter) * -41);
     }
 
     /**
      * Set the calibrated RSSI at a specific distance
      * @param {number} rssi Received signal strength indicator
      * @param {number} distance Distance
-     * @param {LengthUnit} unit Length Unit
+     * @param {LengthUnit} [unit] Length Unit
      * @returns {RFTransmitterObject} This instance
      */
-    setCalibratedRSSI(rssi: number, distance: number, unit: LengthUnit): this {
-        const distanceInMeter = unit.convert(distance, LengthUnit.METER); // eslint-disable-line
-        this.calibratedRSSI = rssi;
+    setCalibratedRSSI(rssi: number, distance: number, unit: LengthUnit = LengthUnit.METER): this {
+        const distanceInMeter = unit.convert(distance, LengthUnit.METER);
+        this.calibratedRSSI = Math.ceil(rssi + (1 - distanceInMeter) * -41);
         return this;
     }
 
