@@ -61,7 +61,8 @@
     "rf"
   ],
   "dependencies": {
-    "ml-levenberg-marquardt": "^4.1.3"
+    "ml-levenberg-marquardt": "^4.1.3",
+    "ts-md5": "^1.3.1"
   },
   "peerDependencies": {
     "@openhps/core": ">=0.4.18",

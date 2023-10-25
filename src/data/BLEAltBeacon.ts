@@ -161,6 +161,7 @@ export class BLEAltBeaconBuilder extends BLEBeaconBuilder<BLEAltBeacon> {
             manufacturerData.setUint8(23, this.beacon.msb);
             this.beacon.beaconId = BLEUUID.fromBuffer(new Uint8Array(manufacturerData.buffer.slice(2, 22)));
             this.beacon.manufacturerData.set(this.manufacturer, new Uint8Array(manufacturerData.buffer));
+            this.beacon.uid = this.beacon.computeUID();
             resolve(this.beacon);
         });
     }

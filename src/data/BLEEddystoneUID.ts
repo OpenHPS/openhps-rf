@@ -100,6 +100,7 @@ export class BLEEddystoneUIDBuilder extends BLEBeaconBuilder<BLEEddystoneUID> {
             }
 
             this.beacon.addService(new BLEService(BLEUUID.fromString('FEAA'), new Uint8Array(serviceData.buffer)));
+            this.beacon.uid = this.beacon.computeUID();
             resolve(this.beacon);
         });
     }

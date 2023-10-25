@@ -146,6 +146,7 @@ export class BLEEddystoneTLMBuilder extends BLEBeaconBuilder<BLEEddystoneTLM> {
                 serviceData.setUint32(10, this.beacon.uptime.to(TimeUnit.SECOND).valueOf() / 0.1);
             }
             this.beacon.addService(new BLEService(BLEUUID.fromString('FEAA'), new Uint8Array(serviceData.buffer)));
+            this.beacon.uid = this.beacon.computeUID();
             resolve(this.beacon);
         });
     }

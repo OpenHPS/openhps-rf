@@ -109,6 +109,7 @@ export class BLEiBeaconBuilder extends BLEBeaconBuilder<BLEiBeacon> {
             manufacturerData.setInt8(22, this.beacon.calibratedRSSI); // Calibrated RSSI
 
             this.beacon.manufacturerData.set(0x004c, new Uint8Array(manufacturerData.buffer));
+            this.beacon.uid = this.beacon.computeUID();
             resolve(this.beacon);
         });
     }

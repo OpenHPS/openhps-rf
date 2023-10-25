@@ -3,6 +3,7 @@ import { BLEEddystone } from './BLEEddystone';
 import { BLEUUID } from './BLEUUID';
 import { BLEBeaconBuilder } from './BLEBeaconObject';
 import { BLEService } from './BLEService';
+import { Md5 } from 'ts-md5';
 
 @SerializableObject()
 export class BLEEddystoneURL extends BLEEddystone {
@@ -32,7 +33,7 @@ export class BLEEddystoneURL extends BLEEddystone {
     }
 
     computeUID(): string {
-        return this.address ? this.address.toString() : this.url;
+        return this.address ? this.address.toString() : Md5.hashStr(this.url);
     }
 
     parseServiceData(uuid: BLEUUID, serviceData: Uint8Array): this {
@@ -147,6 +148,7 @@ export class BLEEddystoneURLBuilder extends BLEBeaconBuilder<BLEEddystoneURL> {
             }
 
             this.beacon.addService(new BLEService(BLEUUID.fromString('FEAA'), new Uint8Array(serviceData.buffer)));
+            this.beacon.uid = this.beacon.computeUID();
             resolve(this.beacon);
         });
     }
