@@ -79,6 +79,12 @@ export class BLEiBeaconBuilder extends BLEBeaconBuilder<BLEiBeacon> {
         return new BLEiBeaconBuilder();
     }
 
+    static fromBeacon(beacon: BLEiBeacon): BLEiBeaconBuilder {
+        const builder = new BLEiBeaconBuilder();
+        builder.beacon = beacon;
+        return builder;
+    }
+
     proximityUUID(uuid: BLEUUID): this {
         this.beacon.proximityUUID = uuid;
         return this;
