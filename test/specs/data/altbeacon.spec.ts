@@ -87,6 +87,10 @@ describe('BLEAltBeacon', () => {
                 }).catch(done);
         });
 
+        it('should support an empty builder', (done) => {
+            BLEAltBeaconBuilder.create().build().then(() => done()).catch(done);
+        });
+
         it('should be valid', () => {
             expect(beacon.isValid()).to.be.true;
         });

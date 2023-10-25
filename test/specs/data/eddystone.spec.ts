@@ -5,7 +5,9 @@ import {
     BLEEddystoneTLM,
     BLEEddystoneTLMBuilder,
     BLEEddystoneUID,
+    BLEEddystoneUIDBuilder,
     BLEEddystoneURL,
+    BLEEddystoneURLBuilder,
     BLEObject,
     MACAddress,
 } from '../../../src';
@@ -64,6 +66,10 @@ describe('BLEEddystoneURL', () => {
             beacon.parseAdvertisement(newPayload);
             expect(beacon.url).to.eql("https://goo.gl/a0mnsS");
         });
+
+        it('should support an empty builder', (done) => {
+            BLEEddystoneURLBuilder.create().build().then(() => done()).catch(done);
+        });
     });
 });
 
@@ -111,6 +117,10 @@ describe('BLEEddystoneUID', () => {
 
         it('should have an instance id', () => {
             expect(beacon.instanceId).to.not.be.undefined;
+        });
+
+        it('should support an empty builder', (done) => {
+            BLEEddystoneUIDBuilder.create().build().then(() => done()).catch(done);
         });
     });
 });
@@ -234,6 +244,10 @@ describe('BLEEddystoneTLM', () => {
                     beacon = b;
                     done();
                 }).catch(done);
+        });
+
+        it('should support an empty builder', (done) => {
+            BLEEddystoneTLMBuilder.create().build().then(() => done()).catch(done);
         });
 
         it('should be valid', () => {

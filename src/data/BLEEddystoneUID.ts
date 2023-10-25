@@ -1,4 +1,4 @@
-import { LengthUnit, SerializableMember, SerializableObject } from '@openhps/core';
+import { LengthUnit, SerializableMember, SerializableObject, UUID } from '@openhps/core';
 import { concatBuffer, toHexString } from '../utils/BufferUtils';
 import { BLEEddystone } from './BLEEddystone';
 import { BLEUUID } from './BLEUUID';
@@ -56,6 +56,18 @@ export class BLEEddystoneUIDBuilder extends BLEBeaconBuilder<BLEEddystoneUID> {
         super();
         this.beacon = new BLEEddystoneUID();
         this.beacon.frame = 0x00;
+        this.beacon.namespaceId = BLEUUID.fromString(
+            UUID.generate()
+                .toString()
+                .replace('-', '')
+                .slice(0, 10 * 2 + 1),
+        );
+        this.beacon.instanceId = BLEUUID.fromString(
+            UUID.generate()
+                .toString()
+                .replace('-', '')
+                .slice(0, 6 * 2 + 1),
+        );
     }
 
     static create(): BLEEddystoneUIDBuilder {
@@ -86,7 +98,7 @@ export class BLEEddystoneUIDBuilder extends BLEBeaconBuilder<BLEEddystoneUID> {
     build(): Promise<BLEEddystoneUID> {
         return new Promise((resolve) => {
             // Eddystone Service
-            const serviceData = new DataView(new ArrayBuffer(19 - (17 - length)), 0);
+            const serviceData = new DataView(new ArrayBuffer(18), 0);
             serviceData.setUint8(0, 0x00); // Eddystone-UID frame
             serviceData.setInt8(1, this.beacon.getCalibratedRSSI(0, LengthUnit.METER));
             // Namespace ID
@@ -96,7 +108,7 @@ export class BLEEddystoneUIDBuilder extends BLEBeaconBuilder<BLEEddystoneUID> {
             }
             const instanceId = new DataView(this.beacon.instanceId.toBuffer().buffer, 0);
             for (let i = 12; i < 12 + 6; i++) {
-                serviceData.setUint8(i, instanceId.getUint8(i - 2));
+                serviceData.setUint8(i, instanceId.getUint8(i - 12));
             }
 
             this.beacon.addService(new BLEService(BLEUUID.fromString('FEAA'), new Uint8Array(serviceData.buffer)));

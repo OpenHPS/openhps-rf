@@ -1,4 +1,4 @@
-import { SerializableMember, SerializableObject } from '@openhps/core';
+import { SerializableMember, SerializableObject, UUID } from '@openhps/core';
 import { BLEUUID } from './BLEUUID';
 import { MACAddress } from './MACAddress';
 import { BLEBeaconBuilder, BLEBeaconObject } from './BLEBeaconObject';
@@ -70,6 +70,9 @@ export class BLEiBeaconBuilder extends BLEBeaconBuilder<BLEiBeacon> {
     protected constructor() {
         super();
         this.beacon = new BLEiBeacon();
+        this.beacon.proximityUUID = BLEUUID.fromString(UUID.generate().toString());
+        this.beacon.major = 0;
+        this.beacon.minor = 0;
     }
 
     static create(): BLEiBeaconBuilder {

@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import 'mocha';
 import {
-    BLEiBeacon
+    BLEiBeacon, BLEiBeaconBuilder
 } from '../../../src';
 
 describe('BLEiBeacon', () => {
@@ -33,6 +33,10 @@ describe('BLEiBeacon', () => {
 
         it('should extract the calibrated rssi', () => {
             expect(beacon.calibratedRSSI).to.equal(-75);
+        });
+
+        it('should support an empty builder', (done) => {
+            BLEiBeaconBuilder.create().build().then(() => done()).catch(done);
         });
     });
 });
