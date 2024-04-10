@@ -19,6 +19,29 @@ export abstract class BLEBeaconObject extends BLEObject {
     computeUID(): string {
         return this.uid;
     }
+
+    /**
+     * Get the manufacturer identifier
+     * @returns {number} Manufacturer identifier
+     */
+    get manufacturerId(): number {
+        return this.manufacturerData.size > 0 ? this.manufacturerData.keys().next().value : 0xffff;
+    }
+
+    /**
+     * Set the manufacturer identifier
+     * @param {number} value Manufacturer identifier
+     */
+    set manufacturerId(value: number) {
+        // Get the current identifier
+        const currentId = this.manufacturerId;
+        // Get the current manufacturer data
+        const currentData = this.manufacturerData.get(currentId);
+        // Remove the current manufacturer
+        this.manufacturerData.delete(currentId);
+        // Set the new manufacturer
+        this.manufacturerData.set(value, currentData);
+    }
 }
 
 /**
