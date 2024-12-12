@@ -1,5 +1,6 @@
 import { SerializableMember, SerializableObject, RelativePosition } from '@openhps/core';
 import { RFTransmitterObject } from '../RFTransmitterObject';
+import { PowerUnit } from '../units';
 
 /**
  * @category Position
@@ -8,6 +9,7 @@ import { RFTransmitterObject } from '../RFTransmitterObject';
 export class RelativeRSSI extends RelativePosition<number> {
     constructor(referenceObject?: RFTransmitterObject | string, rssi?: number) {
         super(referenceObject, rssi);
+        this.unit = PowerUnit.dBm;
     }
 
     @SerializableMember()

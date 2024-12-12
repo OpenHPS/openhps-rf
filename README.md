@@ -6,12 +6,6 @@
     <a href="https://github.com/OpenHPS/openhps-rf/actions/workflows/main.yml" target="_blank">
         <img alt="Build Status" src="https://github.com/OpenHPS/openhps-rf/actions/workflows/main.yml/badge.svg">
     </a>
-    <a href="https://codecov.io/gh/OpenHPS/openhps-rf">
-        <img src="https://codecov.io/gh/OpenHPS/openhps-rf/branch/master/graph/badge.svg"/>
-    </a>
-    <a href="https://codeclimate.com/github/OpenHPS/openhps-rf/" target="_blank">
-        <img alt="Maintainability" src="https://img.shields.io/codeclimate/maintainability/OpenHPS/openhps-rf">
-    </a>
     <a href="https://badge.fury.io/js/@openhps%2Frf">
         <img src="https://badge.fury.io/js/@openhps%2Frf.svg" alt="npm version" height="18">
     </a>
@@ -24,7 +18,7 @@
 <br />
 
 ## Getting Started
-If you have [npm installed](https://www.npmjs.com/get-npm), start using @openhps/video with the following command.
+If you have [npm installed](https://www.npmjs.com/get-npm), start using @openhps/rf with the following command.
 ```bash
 npm install @openhps/rf --save
 ```
@@ -33,13 +27,13 @@ npm install @openhps/rf --save
 The RF module offers data objects and data frames for RF based data.
 
 ## Contributors
-The framework is open source and is mainly developed by PhD Student Maxim Van de Wynckel as part of his research towards *Hybrid Positioning and Implicit Human-Computer Interaction* under the supervision of Prof. Dr. Beat Signer.
+The framework is open source and is mainly developed by PhD Student Maxim Van de Wynckel as part of his research towards *Hybrid Positioning and Interoperable Positioning Systems* under the supervision of Prof. Dr. Beat Signer.
 
 ## Contributing
 Use of OpenHPS, contributions and feedback is highly appreciated. Please read our [contributing guidelines](CONTRIBUTING.md) for more information.
 
 ## License
-Copyright (C) 2019-2023 Maxim Van de Wynckel & Vrije Universiteit Brussel
+Copyright (C) 2019-2024 Maxim Van de Wynckel & Vrije Universiteit Brussel
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 

@@ -23,3 +23,4 @@ export * from './BLEEddystone';
 export * from './BLEEddystoneUID';
 export * from './BLEEddystoneURL';
 export * from './BLEEddystoneTLM';
+export * from './units';
