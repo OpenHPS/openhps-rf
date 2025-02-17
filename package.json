@@ -65,13 +65,13 @@
     "ts-md5": "^1.3.1"
   },
   "peerDependencies": {
-    "@openhps/core": ">=0.7.13",
+    "@openhps/core": ">=1.0.1",
     "reflect-metadata": ">=0.1.13"
   },
   "devDependencies": {
     "@commitlint/cli": "^18.0.0",
     "@commitlint/config-conventional": "^18.0.0",
-    "@openhps/core": "^0.7.13",
+    "@openhps/core": "^1.0.1",
     "@openhps/csv": "0.1.11",
     "@openhps/rdf": "^0.4.96",
     "@types/chai": "^4.3.9",
