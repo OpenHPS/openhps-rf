@@ -29,7 +29,9 @@
   "es2015": "./dist/esm/index.js",
   "files": [
     "dist/**/*",
-    "src/**/*"
+    "src/**/*",
+    "*.js",
+    "*.d.ts"
   ],
   "scripts": {
     "test": "mocha --config test/.mocharc.json",
