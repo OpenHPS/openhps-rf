@@ -7,14 +7,9 @@ import {
     ModelBuilder,
     DataObject,
     Absolute3DPosition,
-    MultilaterationNode
+    MultilaterationNode,
 } from '@openhps/core';
-import {
-    RelativeRSSI,
-    RFTransmitterObject,
-    RelativeRSSIProcessing,
-    PropagationModel,
-} from '../../../src';
+import { RelativeRSSI, RFTransmitterObject, RelativeRSSIProcessing, PropagationModel } from '../../../src';
 import { CSVDataSource } from '@openhps/csv';
 import { EvaluationDataFrame } from '../../mock/EvaluationDataFrame';
 
@@ -35,15 +30,21 @@ describe('dataset openhps-2020-04 (ble only)', function () {
         // Calibration model to set-up or train the model
         ModelBuilder.create()
             .from(
-                new CSVDataSource('test/data/OpenHPS-2020-04/beacons.csv', (row: any) => {
-                    const dataFrame = new DataFrame();
-                    const object = new RFTransmitterObject(row['BEACON']);
-                    object.calibratedRSSI = -68;
-                    object.environmentFactor = 2.2;
-                    object.setPosition(new Absolute3DPosition(parseInt(row['X']), parseInt(row['Y']), parseInt(row['Z'])))
-                    dataFrame.addObject(object);
-                    return dataFrame;
-                }, { uid: "beacons" })
+                new CSVDataSource(
+                    'test/data/OpenHPS-2020-04/beacons.csv',
+                    (row: any) => {
+                        const dataFrame = new DataFrame();
+                        const object = new RFTransmitterObject(row['BEACON']);
+                        object.calibratedRSSI = -68;
+                        object.environmentFactor = 2.2;
+                        object.setPosition(
+                            new Absolute3DPosition(parseInt(row['X']), parseInt(row['Y']), parseInt(row['Z'])),
+                        );
+                        dataFrame.addObject(object);
+                        return dataFrame;
+                    },
+                    { uid: 'beacons' },
+                ),
             )
             .to(new CallbackSinkNode())
             .build()
@@ -51,12 +52,14 @@ describe('dataset openhps-2020-04 (ble only)', function () {
                 calibrationModel = model;
                 callbackNode = new CallbackSinkNode<EvaluationDataFrame>();
 
-                model.pull({
-                    count: 4,
-                    sourceNode: "beacons",
-                }).then(() => {
-                    done();
-                });
+                model
+                    .pull({
+                        count: 4,
+                        sourceNode: 'beacons',
+                    })
+                    .then(() => {
+                        done();
+                    });
             });
     });
 
@@ -76,7 +79,9 @@ describe('dataset openhps-2020-04 (ble only)', function () {
                             if (prop.indexOf('BEACON_') !== -1) {
                                 const value = parseFloat(row[prop]);
                                 if (value !== 100) {
-                                    phoneObject.addRelativePosition(new RelativeRSSI(new RFTransmitterObject(prop), value));
+                                    phoneObject.addRelativePosition(
+                                        new RelativeRSSI(new RFTransmitterObject(prop), value),
+                                    );
                                 }
                             }
                         }
@@ -91,14 +96,16 @@ describe('dataset openhps-2020-04 (ble only)', function () {
                         return dataFrame;
                     }),
                 )
-                .via(new RelativeRSSIProcessing({
-                    propagationModel: PropagationModel.LOG_DISTANCE
-                }))
+                .via(
+                    new RelativeRSSIProcessing({
+                        propagationModel: PropagationModel.LOG_DISTANCE,
+                    }),
+                )
                 .via(
                     new MultilaterationNode({
                         incrementStep: 0.1,
-                        maxIterations: 1000
-                    })
+                        maxIterations: 1000,
+                    }),
                 )
                 .to(callbackNode)
                 .build()
@@ -116,8 +123,7 @@ describe('dataset openhps-2020-04 (ble only)', function () {
             let totalError = 0;
             let totalValues = 0;
             callbackNode.callback = (data: EvaluationDataFrame) => {
-                const calculatedLocation: Absolute3DPosition = data.source
-                    .position as Absolute3DPosition;
+                const calculatedLocation: Absolute3DPosition = data.source.position as Absolute3DPosition;
                 // Accurate control location
                 const expectedLocation: Absolute3DPosition = data.evaluationObjects.get('phone')
                     .position as Absolute3DPosition;
@@ -126,16 +132,17 @@ describe('dataset openhps-2020-04 (ble only)', function () {
             };
 
             // Perform a pull
-            trackingModel.pull({
-                count: 120,
-            }).then(() => {
-                expect(totalError / totalValues).to.be.lessThan(161);
-                done();
-            })
-            .catch((ex) => {
-                done(ex);
-            });
+            trackingModel
+                .pull({
+                    count: 120,
+                })
+                .then(() => {
+                    expect(totalError / totalValues).to.be.lessThan(161);
+                    done();
+                })
+                .catch((ex) => {
+                    done(ex);
+                });
         }).timeout(50000);
     });
-    
 });
