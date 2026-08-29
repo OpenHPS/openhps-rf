@@ -18,21 +18,27 @@
 <br />
 
 ## Getting Started
+
 If you have [npm installed](https://www.npmjs.com/get-npm), start using @openhps/rf with the following command.
+
 ```bash
 npm install @openhps/rf --save
 ```
 
 ## Usage
+
 The RF module offers data objects and data frames for RF based data.
 
 ## Contributors
-The framework is open source and is mainly developed by PhD Student Maxim Van de Wynckel as part of his research towards *Hybrid Positioning and Interoperable Positioning Systems* under the supervision of Prof. Dr. Beat Signer.
+
+The framework is open source and is mainly developed by PhD Student Maxim Van de Wynckel as part of his research towards _Hybrid Positioning and Interoperable Positioning Systems_ under the supervision of Prof. Dr. Beat Signer.
 
 ## Contributing
-Use of OpenHPS, contributions and feedback is highly appreciated. Please read our [contributing guidelines](https://github.com/OpenHPS/.github/blob/master/CONTRIBUTING.md) for more information.
+
+Use of OpenHPS, contributions and feedback is highly appreciated. Please read our [contributing guidelines](https://github.com/OpenHPS/.github/blob/HEAD/CONTRIBUTING.md) for more information.
 
 ## License
+
 Copyright (C) 2019-2025 Maxim Van de Wynckel & Vrije Universiteit Brussel
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
