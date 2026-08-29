@@ -1,14 +1,9 @@
 import { expect } from 'chai';
 import 'mocha';
-import {
-    DataSerializer,
-} from '@openhps/core';
-import {
-    RFTransmitterObject,
-} from '../../../src';
+import { DataSerializer } from '@openhps/core';
+import { RFTransmitterObject } from '../../../src';
 
 describe('RFObject', () => {
-
     it('should serialize rf objects', (done) => {
         const dataObject = new RFTransmitterObject();
         dataObject.txPower = -10;
@@ -19,5 +14,4 @@ describe('RFObject', () => {
         expect(dataObject.txPower).to.equal(-10);
         done();
     });
-    
 });

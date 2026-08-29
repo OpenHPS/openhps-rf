@@ -16,7 +16,7 @@ export class BLEUUID {
 
     static fromBuffer(buffer: Uint8Array, littleEndian?: boolean): BLEUUID {
         if (littleEndian) {
-            let swappedBuffer = new Uint8Array();
+            let swappedBuffer: Uint8Array = new Uint8Array();
             for (let i = buffer.length - 1; i >= 0; i--) {
                 swappedBuffer = BufferUtils.concatBuffer(swappedBuffer, new Uint8Array([buffer[i]]));
             }

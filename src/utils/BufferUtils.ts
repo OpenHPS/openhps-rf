@@ -27,7 +27,7 @@ export function fromHexString(bufferString: string): Uint8Array {
  * @param {ArrayBuffer} b Array buffer to compare
  * @returns {boolean} Equals
  */
-export function arrayBuffersAreEqual(a: ArrayBuffer, b: ArrayBuffer): boolean {
+export function arrayBuffersAreEqual(a: ArrayBufferLike, b: ArrayBufferLike): boolean {
     return dataViewsAreEqual(new DataView(a), new DataView(b));
 }
 
