@@ -33,6 +33,8 @@ The RF module offers data objects and data frames for RF based data.
 
 The framework is open source and is mainly developed by PhD Student Maxim Van de Wynckel as part of his research towards _Hybrid Positioning and Interoperable Positioning Systems_ under the supervision of Prof. Dr. Beat Signer.
 
+Maintained by [MVdW-Software](https://mvdw-software.com).
+
 ## Contributing
 
 Use of OpenHPS, contributions and feedback is highly appreciated. Please read our [contributing guidelines](https://github.com/OpenHPS/.github/blob/HEAD/CONTRIBUTING.md) for more information.
