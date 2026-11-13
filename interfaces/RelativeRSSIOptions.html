@@ -11,14 +11,14 @@
 <li><a href="" aria-current="page">RelativeRSSIOptions</a></li></ul>
 <h1>Interface RelativeRSSIOptions</h1></div>
 <div class="tsd-signature"><span class="tsd-signature-keyword">interface</span> <span class="tsd-kind-interface">RelativeRSSIOptions</span> <span class="tsd-signature-symbol">{</span><br/>    <a class="tsd-kind-property" href="#defaultcalibratedrssi">defaultCalibratedRSSI</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#distanceunit">distanceUnit</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">LengthUnit</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#environmentfactor">environmentFactor</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#framefilter">frameFilter</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">frame</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DataFrame</span><span class="tsd-signature-symbol">)</span> <span class="tsd-signature-symbol">=&gt;</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#name">name</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#objectfilter">objectFilter</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">object</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DataObject</span><span class="tsd-signature-symbol">,</span> <span class="tsd-kind-parameter">frame</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">DataFrame</span><span class="tsd-signature-symbol">)</span> <span class="tsd-signature-symbol">=&gt;</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#propagationmodel">propagationModel</a><span class="tsd-signature-symbol">?:</span> <a href="../enums/PropagationModel.html#log_distance" class="tsd-signature-type tsd-kind-enum-member">LOG_DISTANCE</a><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#uid">uid</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/><span class="tsd-signature-symbol">}</span></div>
-<section class="tsd-panel tsd-hierarchy" data-refl="1911">
+<section class="tsd-panel tsd-hierarchy" data-refl="2008">
 <h4>Hierarchy</h4>
 <ul class="tsd-hierarchy">
 <li class="tsd-hierarchy-item"><span class="tsd-signature-type">ObjectProcessingNodeOptions</span>
 <ul class="tsd-hierarchy">
 <li class="tsd-hierarchy-item"><span class="tsd-hierarchy-target">RelativeRSSIOptions</span></li></ul></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/06ed8b0eecac760cb1651514938a62854d78e920/src/nodes/RelativeRSSIProcessing.ts#L77">src/nodes/RelativeRSSIProcessing.ts:77</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/ad751c52811c84aa5e58f106274ed0d30b9fc22a/src/nodes/RelativeRSSIProcessing.ts#L79">src/nodes/RelativeRSSIProcessing.ts:79</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-accordion" open><summary class="tsd-accordion-summary tsd-index-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
@@ -50,7 +50,7 @@
 
 </div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/06ed8b0eecac760cb1651514938a62854d78e920/src/nodes/RelativeRSSIProcessing.ts#L91">src/nodes/RelativeRSSIProcessing.ts:91</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/ad751c52811c84aa5e58f106274ed0d30b9fc22a/src/nodes/RelativeRSSIProcessing.ts#L93">src/nodes/RelativeRSSIProcessing.ts:93</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="distanceunit"><code class="tsd-tag">Optional</code><span>distance<wbr/>Unit</span><a href="#distanceunit" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">distanceUnit</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">LengthUnit</span></div>
@@ -58,19 +58,19 @@
 </div>
 <div class="tsd-comment tsd-typography">
 <div class="tsd-tag-default">
-<h4 class="tsd-anchor-link" id="default-1">Default<a href="#default-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><pre><code class="ts"><span class="hl-5">LengthUnit</span><span class="hl-1">.</span><span class="hl-6">CENTIMETER</span>
+<h4 class="tsd-anchor-link" id="default-1">Default<a href="#default-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><pre><code class="ts"><span class="hl-5">LengthUnit</span><span class="hl-1">.</span><span class="hl-8">CENTIMETER</span>
 </code><button type="button">Copy</button></pre>
 
 </div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/06ed8b0eecac760cb1651514938a62854d78e920/src/nodes/RelativeRSSIProcessing.ts#L96">src/nodes/RelativeRSSIProcessing.ts:96</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/ad751c52811c84aa5e58f106274ed0d30b9fc22a/src/nodes/RelativeRSSIProcessing.ts#L98">src/nodes/RelativeRSSIProcessing.ts:98</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="environmentfactor"><code class="tsd-tag">Optional</code><span>environment<wbr/>Factor</span><a href="#environmentfactor" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">environmentFactor</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span></div>
 <div class="tsd-comment tsd-typography"><p>Environment factor to override transmitter environment factor</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/06ed8b0eecac760cb1651514938a62854d78e920/src/nodes/RelativeRSSIProcessing.ts#L86">src/nodes/RelativeRSSIProcessing.ts:86</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/ad751c52811c84aa5e58f106274ed0d30b9fc22a/src/nodes/RelativeRSSIProcessing.ts#L88">src/nodes/RelativeRSSIProcessing.ts:88</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
 <h3 class="tsd-anchor-link" id="framefilter"><code class="tsd-tag">Optional</code><span>frame<wbr/>Filter</span><a href="#framefilter" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">frameFilter</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">frame</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DataFrame</span><span class="tsd-signature-symbol">)</span> <span class="tsd-signature-symbol">=&gt;</span> <span class="tsd-signature-type">boolean</span></div>
@@ -103,12 +103,12 @@ Used for querying a node by its name.</p>
 </div>
 <div class="tsd-comment tsd-typography">
 <div class="tsd-tag-default">
-<h4 class="tsd-anchor-link" id="default-2">Default<a href="#default-2" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><pre><code class="ts"><span class="hl-5">PropagationModel</span><span class="hl-1">.</span><span class="hl-6">LOG_DISTANCE</span>
+<h4 class="tsd-anchor-link" id="default-2">Default<a href="#default-2" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><pre><code class="ts"><span class="hl-5">PropagationModel</span><span class="hl-1">.</span><span class="hl-8">LOG_DISTANCE</span>
 </code><button type="button">Copy</button></pre>
 
 </div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/06ed8b0eecac760cb1651514938a62854d78e920/src/nodes/RelativeRSSIProcessing.ts#L82">src/nodes/RelativeRSSIProcessing.ts:82</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/OpenHPS/openhps-rf/blob/ad751c52811c84aa5e58f106274ed0d30b9fc22a/src/nodes/RelativeRSSIProcessing.ts#L84">src/nodes/RelativeRSSIProcessing.ts:84</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
 <h3 class="tsd-anchor-link" id="uid"><code class="tsd-tag">Optional</code><span>uid</span><a href="#uid" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">uid</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
