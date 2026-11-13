@@ -3,11 +3,14 @@
  * @param {Uint8Array} buffer Buffer
  * @returns {string} Hex string
  */
-export function toHexString(buffer: Uint8Array): string {
+export function toHexString(buffer: Uint8Array | ArrayBuffer): string {
     if (!buffer) {
         return undefined;
     }
-    return buffer.reduce((str, byte) => str + byte.toString(16).padStart(2, '0'), '');
+    // BLE stacks (Web Bluetooth, Capacitor, React Native) often hand back a raw
+    // ArrayBuffer rather than a Uint8Array; ArrayBuffer has no `reduce`.
+    const bytes = buffer instanceof Uint8Array ? buffer : new Uint8Array(buffer as ArrayBuffer);
+    return bytes.reduce((str, byte) => str + byte.toString(16).padStart(2, '0'), '');
 }
 
 /**
