@@ -24,10 +24,10 @@ export class BLEEddystoneUID extends BLEEddystone {
     }
 
     parseServiceData(uuid: BLEUUID, serviceData: Uint8Array): this {
-        super.parseServiceData(uuid, serviceData);
         if (uuid === undefined || serviceData === undefined) {
             return this;
         }
+        super.parseServiceData(uuid, serviceData);
 
         if (!this.service) {
             return this;
@@ -58,13 +58,13 @@ export class BLEEddystoneUIDBuilder extends BLEBeaconBuilder<BLEEddystoneUID> {
             UUID.generate()
                 .toString()
                 .replace(/-/g, '')
-                .slice(0, 10 * 2 + 1),
+                .slice(0, 10 * 2),
         );
         this.beacon.instanceId = BLEUUID.fromString(
             UUID.generate()
                 .toString()
                 .replace(/-/g, '')
-                .slice(0, 6 * 2 + 1),
+                .slice(0, 6 * 2),
         );
     }
 

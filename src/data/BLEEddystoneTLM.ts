@@ -44,10 +44,10 @@ export class BLEEddystoneTLM extends BLEEddystone {
     }
 
     parseServiceData(uuid: BLEUUID, serviceData: Uint8Array): this {
-        super.parseServiceData(uuid, serviceData);
         if (uuid === undefined || serviceData === undefined) {
             return this;
         }
+        super.parseServiceData(uuid, serviceData);
 
         if (!this.service) {
             return this;
