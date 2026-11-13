@@ -20,14 +20,12 @@ export class BLEEddystoneUID extends BLEEddystone {
     }
 
     computeUID(): string {
-        let uid = new TextDecoder().decode(this.namespaceId.toBuffer());
-        uid = toHexString(concatBuffer(this.namespaceId.toBuffer(), this.instanceId.toBuffer()));
-        return uid;
+        return toHexString(concatBuffer(this.namespaceId.toBuffer(), this.instanceId.toBuffer()));
     }
 
     parseServiceData(uuid: BLEUUID, serviceData: Uint8Array): this {
         super.parseServiceData(uuid, serviceData);
-        if (uuid === undefined && serviceData === undefined) {
+        if (uuid === undefined || serviceData === undefined) {
             return this;
         }
 
@@ -59,13 +57,13 @@ export class BLEEddystoneUIDBuilder extends BLEBeaconBuilder<BLEEddystoneUID> {
         this.beacon.namespaceId = BLEUUID.fromString(
             UUID.generate()
                 .toString()
-                .replace('-', '')
+                .replace(/-/g, '')
                 .slice(0, 10 * 2 + 1),
         );
         this.beacon.instanceId = BLEUUID.fromString(
             UUID.generate()
                 .toString()
-                .replace('-', '')
+                .replace(/-/g, '')
                 .slice(0, 6 * 2 + 1),
         );
     }

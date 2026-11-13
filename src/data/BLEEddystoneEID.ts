@@ -17,7 +17,7 @@ export class BLEEddystoneEID extends BLEEddystone {
 
     parseServiceData(uuid: BLEUUID, serviceData: Uint8Array): this {
         super.parseServiceData(uuid, serviceData);
-        if (uuid === undefined && serviceData === undefined) {
+        if (uuid === undefined || serviceData === undefined) {
             return this;
         }
 

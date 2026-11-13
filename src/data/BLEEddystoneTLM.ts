@@ -45,7 +45,7 @@ export class BLEEddystoneTLM extends BLEEddystone {
 
     parseServiceData(uuid: BLEUUID, serviceData: Uint8Array): this {
         super.parseServiceData(uuid, serviceData);
-        if (uuid === undefined && serviceData === undefined) {
+        if (uuid === undefined || serviceData === undefined) {
             return this;
         }
 
@@ -66,9 +66,8 @@ export class BLEEddystoneTLM extends BLEEddystone {
             // Unencrypted
             this.voltage = view.getUint16(2);
             const temperatureRaw = view.getInt16(4);
-            if (temperatureRaw !== 0x8000) {
-                const temperatureSigned = (temperatureRaw & 0x8000) > 0 ? -1 : 1;
-                const temperature = (temperatureSigned * temperatureRaw) / Math.pow(2, 8);
+            if (temperatureRaw !== -0x8000) {
+                const temperature = temperatureRaw / Math.pow(2, 8);
                 this.temperature = new Temperature(Math.round(temperature * 100) / 100, TemperatureUnit.CELCIUS);
             }
             this.advertiseCount = view.getUint32(6);

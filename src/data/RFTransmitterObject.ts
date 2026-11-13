@@ -33,12 +33,10 @@ export class RFTransmitterObject extends DataObject implements RFObject {
 
     /**
      * Set the calibrated rssi at 1 meter
-     * @param {number} calibratedRSSI Calibrated RSSI > 0
+     * @param {number} calibratedRSSI Calibrated RSSI
      */
     set calibratedRSSI(calibratedRSSI: number) {
-        if (calibratedRSSI < 0) {
-            this._calibratedRSSI = calibratedRSSI;
-        }
+        this._calibratedRSSI = calibratedRSSI;
     }
 
     /**

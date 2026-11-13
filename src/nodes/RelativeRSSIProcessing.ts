@@ -70,6 +70,8 @@ export class RelativeRSSIProcessing<InOut extends DataFrame> extends RelativePos
                 } else {
                     return undefined;
                 }
+            default:
+                return undefined;
         }
     }
 }

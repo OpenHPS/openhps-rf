@@ -38,7 +38,7 @@ export class BLEEddystoneURL extends BLEEddystone {
 
     parseServiceData(uuid: BLEUUID, serviceData: Uint8Array): this {
         super.parseServiceData(uuid, serviceData);
-        if (uuid === undefined && serviceData === undefined) {
+        if (uuid === undefined || serviceData === undefined) {
             return this;
         }
 
@@ -53,12 +53,12 @@ export class BLEEddystoneURL extends BLEEddystone {
         const urlData = new Uint8Array(serviceData.slice(2, serviceData.byteLength));
         const view = new DataView(urlData.buffer, 0);
 
-        if (view.buffer.byteLength === 0) {
+        if (view.byteLength === 0) {
             return this;
         }
 
         const prefix = view.getUint8(0);
-        if (prefix > BLEEddystoneURL.PREFIXES.length) {
+        if (prefix >= BLEEddystoneURL.PREFIXES.length) {
             return this;
         }
 
@@ -112,13 +112,14 @@ export class BLEEddystoneURLBuilder extends BLEBeaconBuilder<BLEEddystoneURL> {
         let index = 0;
         let url_index = 0;
         const url = this.beacon.url;
-        BLEEddystoneURL.PREFIXES.forEach((prefix) => {
+        for (const prefix of BLEEddystoneURL.PREFIXES) {
             if (url.toLowerCase().startsWith(prefix)) {
                 // Encode using this prefix
                 view.setUint8(index, BLEEddystoneURL.PREFIXES.indexOf(prefix));
                 url_index += prefix.length;
+                break;
             }
-        });
+        }
         index += 1;
         for (let i = url_index; i < url.length; i++) {
             if (index > 17) {

@@ -52,8 +52,10 @@ export function dataViewsAreEqual(a: DataView, b: DataView) {
  */
 export function concatBuffer(...buffers: Uint8Array[]): Uint8Array {
     const result = new Uint8Array(buffers.map((b) => b.byteLength).reduce((a, b) => a + b));
-    buffers.forEach((buffer, idx) => {
-        result.set(buffer, idx > 0 ? buffers[idx - 1].byteLength : 0);
+    let offset = 0;
+    buffers.forEach((buffer) => {
+        result.set(buffer, offset);
+        offset += buffer.byteLength;
     });
     return result;
 }

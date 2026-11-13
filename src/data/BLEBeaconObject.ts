@@ -37,6 +37,10 @@ export abstract class BLEBeaconObject extends BLEObject {
         const currentId = this.manufacturerId;
         // Get the current manufacturer data
         const currentData = this.manufacturerData.get(currentId);
+        if (currentData === undefined) {
+            // No manufacturer data to move
+            return;
+        }
         // Remove the current manufacturer
         this.manufacturerData.delete(currentId);
         // Set the new manufacturer

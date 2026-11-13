@@ -27,11 +27,11 @@ export class BLEiBeacon extends BLEBeaconObject {
     }
 
     computeUID(): string {
-        let uid = new TextDecoder().decode(this.proximityUUID.toBuffer());
-        uid = toHexString(
-            concatBuffer(this.proximityUUID.toBuffer(), Uint8Array.from([this.major]), Uint8Array.from([this.minor])),
-        );
-        return uid;
+        // Major and minor are 16-bit values, stored big endian to match the advertisement layout
+        const majorMinor = new DataView(new ArrayBuffer(4));
+        majorMinor.setUint16(0, this.major, false);
+        majorMinor.setUint16(2, this.minor, false);
+        return toHexString(concatBuffer(this.proximityUUID.toBuffer(), new Uint8Array(majorMinor.buffer)));
     }
 
     isValid(): boolean {

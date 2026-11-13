@@ -143,15 +143,18 @@ export class BLEObject extends RFTransmitterObject {
             return this;
         }
         this.rawAdvertisement = payload;
-        const view = new DataView(payload.buffer, 0);
+        const view = new DataView(payload.buffer, payload.byteOffset, payload.byteLength);
         for (let i = 0; i < payload.byteLength; i++) {
             let length = view.getUint8(i++); // Data length
             if (length != 0) {
+                if (i + length > payload.byteLength) {
+                    break; // Truncated advertisement data
+                }
                 const ad_type = view.getUint8(i++); // Data type
                 length--;
                 switch (ad_type) {
                     case AdvertisementType.BLE_AD_TYPE_NAME_CMPL:
-                        this.displayName = new TextDecoder().decode(payload.buffer.slice(i, i + length));
+                        this.displayName = new TextDecoder().decode(payload.subarray(i, i + length));
                         break;
                     case AdvertisementType.BLE_AD_TYPE_TX_PWR:
                         this.txPower = view.getInt8(i);
@@ -177,24 +180,24 @@ export class BLEObject extends RFTransmitterObject {
                     // See CSS Part A 1.4 Manufacturer Specific Data
                     case AdvertisementType.BLE_AD_MANUFACTURER_SPECIFIC_TYPE: {
                         // Get the manufacturer
-                        const data = new Uint8Array(payload.buffer.slice(i + 2, i + 2 + length));
+                        const data = new Uint8Array(payload.subarray(i + 2, i + 2 + length));
                         const manufacturer = view.getUint16(i, true);
                         this.parseManufacturerData(manufacturer, data);
                         break;
                     }
                     case AdvertisementType.BLE_AD_TYPE_SERVICE_DATA: {
-                        const uuid: BLEUUID = BLEUUID.fromBuffer(new Uint8Array(payload.buffer.slice(i, i + 2)), true);
-                        this.parseServiceData(uuid, new Uint8Array(payload.buffer.slice(i + 2, i + length)));
+                        const uuid: BLEUUID = BLEUUID.fromBuffer(new Uint8Array(payload.subarray(i, i + 2)), true);
+                        this.parseServiceData(uuid, new Uint8Array(payload.subarray(i + 2, i + length)));
                         break;
                     }
                     case AdvertisementType.BLE_AD_TYPE_32SERVICE_DATA: {
-                        const uuid: BLEUUID = BLEUUID.fromBuffer(new Uint8Array(payload.buffer.slice(i, i + 4)), true);
-                        this.parseServiceData(uuid, new Uint8Array(payload.buffer.slice(i + 4, i + length)));
+                        const uuid: BLEUUID = BLEUUID.fromBuffer(new Uint8Array(payload.subarray(i, i + 4)), true);
+                        this.parseServiceData(uuid, new Uint8Array(payload.subarray(i + 4, i + length)));
                         break;
                     }
                     case AdvertisementType.BLE_AD_TYPE_128SERVICE_DATA: {
-                        const uuid: BLEUUID = BLEUUID.fromBuffer(new Uint8Array(payload.buffer.slice(i, i + 16)), true);
-                        this.parseServiceData(uuid, new Uint8Array(payload.buffer.slice(i + 16, i + length)));
+                        const uuid: BLEUUID = BLEUUID.fromBuffer(new Uint8Array(payload.subarray(i, i + 16)), true);
+                        this.parseServiceData(uuid, new Uint8Array(payload.subarray(i + 16, i + length)));
                         break;
                     }
                     default:

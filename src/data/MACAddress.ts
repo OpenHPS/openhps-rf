@@ -34,6 +34,9 @@ export class MACAddress {
     }
 
     toString(): string {
+        if (!this._raw) {
+            return undefined;
+        }
         const bytes = [];
         for (const [, value] of this._raw.entries()) {
             bytes.push(value);

@@ -13,7 +13,7 @@ export class BLEAltBeacon extends BLEBeaconObject {
 
     get proximityUUID(): BLEUUID {
         if (this.beaconId) {
-            return BLEUUID.fromBuffer(new Uint8Array(this.beaconId.toBuffer().buffer.slice(0, 16)));
+            return BLEUUID.fromBuffer(this.beaconId.toBuffer().slice(0, 16));
         } else {
             return undefined;
         }
@@ -23,8 +23,10 @@ export class BLEAltBeacon extends BLEBeaconObject {
         if (!this.beaconId) {
             this.beaconId = BLEUUID.fromBuffer(new Uint8Array(20));
         }
-        const uuidView = new DataView(uuid.toBuffer().buffer);
-        const view = new DataView(this.beaconId.toBuffer().buffer);
+        const uuidBuffer = uuid.toBuffer();
+        const uuidView = new DataView(uuidBuffer.buffer, uuidBuffer.byteOffset, uuidBuffer.byteLength);
+        const beaconIdBuffer = this.beaconId.toBuffer();
+        const view = new DataView(beaconIdBuffer.buffer, beaconIdBuffer.byteOffset, beaconIdBuffer.byteLength);
         for (let i = 0; i < 16; i++) {
             view.setUint8(i, uuidView.getUint8(i));
         }
@@ -32,7 +34,8 @@ export class BLEAltBeacon extends BLEBeaconObject {
 
     get major(): number {
         if (this.beaconId) {
-            const view = new DataView(this.beaconId.toBuffer().buffer);
+            const buffer = this.beaconId.toBuffer();
+            const view = new DataView(buffer.buffer, buffer.byteOffset, buffer.byteLength);
             return view.getUint16(16);
         } else {
             return undefined;
@@ -43,13 +46,15 @@ export class BLEAltBeacon extends BLEBeaconObject {
         if (!this.beaconId) {
             this.beaconId = BLEUUID.fromBuffer(new Uint8Array(20));
         }
-        const view = new DataView(this.beaconId.toBuffer().buffer);
+        const buffer = this.beaconId.toBuffer();
+        const view = new DataView(buffer.buffer, buffer.byteOffset, buffer.byteLength);
         view.setUint16(16, value);
     }
 
     get minor(): number {
         if (this.beaconId) {
-            const view = new DataView(this.beaconId.toBuffer().buffer);
+            const buffer = this.beaconId.toBuffer();
+            const view = new DataView(buffer.buffer, buffer.byteOffset, buffer.byteLength);
             return view.getUint16(18);
         } else {
             return undefined;
@@ -60,7 +65,8 @@ export class BLEAltBeacon extends BLEBeaconObject {
         if (!this.beaconId) {
             this.beaconId = BLEUUID.fromBuffer(new Uint8Array(20));
         }
-        const view = new DataView(this.beaconId.toBuffer().buffer);
+        const buffer = this.beaconId.toBuffer();
+        const view = new DataView(buffer.buffer, buffer.byteOffset, buffer.byteLength);
         view.setUint16(18, value);
     }
 
@@ -69,9 +75,7 @@ export class BLEAltBeacon extends BLEBeaconObject {
     }
 
     computeUID(): string {
-        let uid = new TextDecoder().decode(this.beaconId.toBuffer());
-        uid = toHexString(this.beaconId.toBuffer());
-        return uid;
+        return toHexString(this.beaconId.toBuffer());
     }
 
     parseManufacturerData(_: number, manufacturerData: Uint8Array): this {

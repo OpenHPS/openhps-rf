@@ -24,8 +24,8 @@ export class BLEEddystone extends BLEBeaconObject {
     parseAdvertisement(payload: Uint8Array): this {
         super.parseAdvertisement(payload);
         const service = this.service;
-        if (service) {
-            const view = new DataView(service.data.buffer, 0);
+        if (service && service.data) {
+            const view = new DataView(service.data.buffer, service.data.byteOffset, service.data.byteLength);
             this.frame = view.getInt8(0);
             this.txPower = view.getInt8(1);
         }
